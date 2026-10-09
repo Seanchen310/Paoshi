@@ -749,7 +749,12 @@
     a.href = `https://buymeacoffee.com/${encodeURIComponent(BMC_SLUG)}`;
     a.target = '_blank'; a.rel = 'noopener';
     a.setAttribute('aria-label', '支持跑事：請跑事喝杯咖啡');
-    a.innerHTML = `${ICON.coffee}<span>支持跑事</span>`;
+    // 圓鈕：上面大咖啡杯，下面「支持跑事」沿著圓的下緣排成弧形
+    a.innerHTML = `<svg viewBox="0 0 64 64" aria-hidden="true">
+      <svg x="18" y="6" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 01-5 5H9a5 5 0 01-5-5V9zM17 10h1.5a2.5 2.5 0 010 5H17M8 3v3M12 3v3"/></svg>
+      <path id="fab-arc" d="M 7 32 A 25 25 0 0 0 57 32" fill="none"/>
+      <text font-size="9.5" font-weight="700" letter-spacing="1" fill="currentColor"><textPath href="#fab-arc" startOffset="50%" text-anchor="middle">支持跑事</textPath></text>
+    </svg>`;
     document.body.appendChild(a);
     // 往下捲時藏起來（不擋內容），往上捲或回到頂端時再出現
     let lastY = window.scrollY;

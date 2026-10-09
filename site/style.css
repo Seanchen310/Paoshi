@@ -135,8 +135,7 @@ button { cursor: pointer; }
   transition: transform .25s ease, opacity .25s ease;
 }
 .fab-bmc.fab-hide { transform: translateY(24px) scale(.9); opacity: 0; pointer-events: none; }
-.fab-bmc svg { width: 22px; height: 22px; flex: none; }
-.fab-bmc span { font-size: 11px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
+.fab-bmc > svg { width: 64px; height: 64px; flex: none; font-family: 'Noto Sans TC', -apple-system, 'PingFang TC', sans-serif; }
 .fab-bmc:hover { filter: brightness(.96); }
 body[data-page="detail"] .fab-bmc { bottom: calc(92px + env(safe-area-inset-bottom)); }   /* 讓開底部的報名按鈕 */
 
