@@ -7,6 +7,9 @@
 (function () {
   'use strict';
 
+  // Buy Me a Coffee 帳號（buymeacoffee.com/ 後面那段）；空白就不顯示按鈕
+  const BMC_SLUG = '';
+
   // ---------- 小工具 ----------
   const $ = (sel) => document.querySelector(sel);
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
@@ -46,6 +49,7 @@
     list: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg>',
     prev: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
     next: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
+    coffee: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 01-5 5H9a5 5 0 01-5-5V9zM17 10h1.5a2.5 2.5 0 010 5H17M8 3v3M12 3v3"/></svg>',
     out: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>',
   };
 
@@ -243,7 +247,7 @@
     const dayHead = CAL.day
       ? `<h3 class="day-head">${md(CAL.day)}（週${weekday(CAL.day)}）${byDeadline ? '報名截止' : ''} · ${picked.length} 場</h3>${picked.map(card).join('')}`
       : `<div class="notice">這個月沒有符合條件的${byDeadline ? '報名截止' : '比賽'}。</div>`;
-    return `<section class="cal box">
+    return `<div class="cal-wrap"><section class="cal box">
         <div class="cal-top">
           <button type="button" class="icon-btn" data-cal="-1" aria-label="上個月" ${ym <= minYm ? 'disabled' : ''}>${ICON.prev}</button>
           <h2>${ym.slice(0, 4)} 年 ${Number(ym.slice(5))} 月<small>${inMonth.length ? `${inMonth.reduce((n, d) => n + byDay[d].length, 0)} 場` : ''}</small></h2>
@@ -256,10 +260,50 @@
         <div class="cal-grid">${WD.map((w) => `<span class="cal-wd">${w}</span>`).join('')}${cells}</div>
         <div class="legend"><span><i class="dot-open"></i>報名中</span><span><i class="dot-closing_soon"></i>快截止</span><span><i class="dot-upcoming"></i>即將開報</span><span><i class="dot-closed"></i>已截止／未公布</span></div>
       </section>
-      ${dayHead}`;
+      <div class="day-list">${dayHead}</div></div>`;
   }
 
   // ---------- 畫面：列表 ----------
+  // 桌機（≥1024px）篩選常駐在左側欄；手機、iPad 用底部面板
+  const wideMQ = window.matchMedia('(min-width: 1024px)');
+  const isWide = () => wideMQ.matches;
+
+  function filterGroups() {
+    const counties = DATA ? Array.from(new Set(DATA.races
+      .filter((r) => r.county && (!F.regions.length || F.regions.indexOf(r.region) >= 0)).map((r) => r.county))) : [];
+    const opt = (on, attrs, label) => `<button type="button" class="opt" aria-pressed="${on}" ${attrs}>${label}</button>`;
+    return `
+      <section class="group"><h2>報名狀態</h2><div class="opts">
+        ${TABS.map(([k, label]) => opt(F.tab === k, `data-tab="${k}"`, label === '全部' ? '含已截止' : label)).join('')}
+      </div></section>
+      <section class="group"><h2>距離<small>可多選</small></h2><div class="opts">
+        ${CAT_CHIPS.map(([k, label]) => opt(F.dists.indexOf(k) >= 0, `data-dist="${k}"`, label)).join('')}
+      </div></section>
+      <section class="group"><h2>比賽日期</h2><div class="opts">
+        ${DATES.map(([k, label]) => opt(F.date === k, `data-date="${k}"`, label)).join('')}
+      </div></section>
+      <section class="group"><h2>地區<small>可多選</small></h2><div class="opts">
+        ${REGIONS.map((k) => opt(F.regions.indexOf(k) >= 0, `data-region="${k}"`, k)).join('')}
+      </div></section>
+      <label class="field">縣市
+        <select id="county"><option value="">${F.regions.length ? F.regions.join('、') + '全部' : '全部縣市'}</option>
+          ${counties.map((c) => `<option value="${esc(c)}" ${F.county === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}
+        </select>
+      </label>
+      <div class="switch-row">
+        <div><b>只看認證賽道</b><small>AIMS／IAAF 認證或經丈量，適合追 PB</small></div>
+        <button type="button" class="switch" role="switch" aria-checked="${F.cert}" aria-label="只看認證賽道" data-act="cert"></button>
+      </div>`;
+  }
+
+  const bmcButton = () => BMC_SLUG
+    ? `<a class="bmc" href="https://buymeacoffee.com/${encodeURIComponent(BMC_SLUG)}" target="_blank" rel="noopener">${ICON.coffee}<span>請跑事喝杯咖啡</span></a>`
+    : '';
+  const footerHtml = () => `<footer class="foot">
+      ${bmcButton()}
+      <p>資料來源：<a href="http://www.taipeimarathon.org.tw/contest.aspx" target="_blank" rel="noopener">跑者廣場</a>、<a href="https://running.biji.co/index.php?q=competition" target="_blank" rel="noopener">運動筆記</a>。<br>報名與最新內容以主辦單位官網為準。</p>
+    </footer>`;
+
   function renderList(onlyResults) {
     const mode = currentMode();
     const today = taipeiNow().date;
@@ -271,7 +315,7 @@
     if (failed) body = `<div class="notice">賽事資料載入失敗，請檢查網路後再試。<br><button type="button" data-act="reload">重新載入</button></div>`;
     else if (!DATA) body = `<div class="notice">載入賽事中…</div>`;
     else if (!rows.length) body = `<div class="notice">沒有符合條件的比賽。<br><button type="button" data-act="clear">清除所有篩選</button></div>`;
-    else body = F.view === 'cal' ? calendarHtml(rows, today) : rows.map(card).join('');
+    else body = F.view === 'cal' ? calendarHtml(rows, today) : `<div class="cards">${rows.map(card).join('')}</div>`;
 
     const tabsHtml = TABS.map(([k, label]) => `<button type="button" role="tab" aria-selected="${F.tab === k}" data-tab="${k}">${label}<span class="num">${DATA ? base.filter((r) => inTab(r, k)).length : ''}</span></button>`).join('');
     // 列表／日曆切換：有文字、看得出目前在哪一種，放在內容正上方
@@ -283,70 +327,64 @@
     if (onlyResults && $('#q')) {        // 打字搜尋時只換結果，不動搜尋框（注音輸入才不會被打斷）
       $('.tabs').innerHTML = tabsHtml;
       $('.list').innerHTML = listHtml;
+      if ($('#side-count')) $('#side-count').textContent = rows.length;
       return;
     }
+
+    const side = isWide() ? `<aside class="side" aria-label="篩選">
+        <div class="sheet-head"><h2 class="side-title">篩選 <small>共 <span id="side-count">${rows.length}</span> 場</small></h2><button type="button" class="text-btn" data-act="clear">全部清除</button></div>
+        ${filterGroups()}
+      </aside>` : '';
+    const prevSide = $('.side') ? $('.side').scrollTop : 0;
 
     $('#app').innerHTML = `
       <header class="top">
         <div class="brand-row">
-          <div class="brand"><b>跑事</b><small>${mode === 'night' ? '玄門夜色 · 夜晚' : '靈氣仙境 · 白天'}</small></div>
+          <b class="brand">跑事</b>
           <div class="icon-row">
             <button type="button" class="round accent" data-act="theme" aria-label="${mode === 'night' ? '切換為白天主題' : '切換為夜晚主題'}">${mode === 'night' ? ICON.moon : ICON.sun}</button>
-            <button type="button" class="round" data-act="filter" aria-label="篩選${extra ? `（已套用 ${extra} 項）` : ''}">${ICON.filter}${extra ? '<span class="dot"></span>' : ''}</button>
+            <button type="button" class="round only-narrow" data-act="filter" aria-label="篩選${extra ? `（已套用 ${extra} 項）` : ''}">${ICON.filter}${extra ? '<span class="dot"></span>' : ''}</button>
           </div>
         </div>
-        <label class="search">${ICON.search}<input id="q" type="search" placeholder="搜尋賽名、縣市" aria-label="搜尋賽事" value="${esc(F.q)}" enterkeyhint="search"></label>
-        <div class="tabs" role="tablist">${tabsHtml}</div>
-        <div class="chips">
+        <div class="controls">
+          <label class="search">${ICON.search}<input id="q" type="search" placeholder="搜尋賽名、縣市" aria-label="搜尋賽事" value="${esc(F.q)}" enterkeyhint="search"></label>
+          <div class="tabs" role="tablist">${tabsHtml}</div>
+        </div>
+        <div class="chips only-narrow">
           ${CAT_CHIPS.map(([k, label]) => `<button type="button" class="chip" aria-pressed="${F.dists.indexOf(k) >= 0}" data-dist="${k}">${label}</button>`).join('')}
         </div>
       </header>
-      <main class="list">${listHtml}</main>
-      <footer class="foot">資料來源：<a href="http://www.taipeimarathon.org.tw/contest.aspx" target="_blank" rel="noopener">跑者廣場</a>、<a href="https://running.biji.co/index.php?q=competition" target="_blank" rel="noopener">運動筆記</a>。<br>報名與最新內容以主辦單位官網為準。</footer>`;
+      <div class="layout">
+        ${side}
+        <div class="content">
+          <main class="list">${listHtml}</main>
+          ${footerHtml()}
+        </div>
+      </div>`;
+    if ($('.side')) $('.side').scrollTop = prevSide;
   }
 
-  // ---------- 畫面：篩選面板 ----------
+  // ---------- 畫面：篩選面板（手機、iPad） ----------
   let sheetOpen = false;
   function renderSheet() {
+    if (isWide()) sheetOpen = false;
     document.body.style.overflow = sheetOpen ? 'hidden' : '';
     if (!sheetOpen) { $('#sheet').innerHTML = ''; return; }
     const prevScroll = $('.sheet') ? $('.sheet').scrollTop : 0;
     const today = taipeiNow().date;
     const n = DATA ? DATA.races.filter((r) => matches(r, today) && inTab(r, F.tab)).length : 0;
-    const counties = DATA ? Array.from(new Set(DATA.races
-      .filter((r) => r.county && (!F.regions.length || F.regions.indexOf(r.region) >= 0)).map((r) => r.county))) : [];
-    const opt = (on, attrs, label) => `<button type="button" class="opt" aria-pressed="${on}" ${attrs}>${label}</button>`;
     $('#sheet').innerHTML = `
       <div class="sheet-wrap" data-act="close">
         <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
           <div class="grip"></div>
           <div class="sheet-head"><h1 id="sheet-title">篩選</h1><button type="button" class="text-btn" data-act="clear">全部清除</button></div>
-          <section class="group"><h2>報名狀態</h2><div class="opts">
-            ${TABS.map(([k, label]) => opt(F.tab === k, `data-tab="${k}"`, label === '全部' ? '含已截止' : label)).join('')}
-          </div></section>
-          <section class="group"><h2>距離<small>可多選</small></h2><div class="opts">
-            ${CAT_CHIPS.map(([k, label]) => opt(F.dists.indexOf(k) >= 0, `data-dist="${k}"`, label)).join('')}
-          </div></section>
-          <section class="group"><h2>比賽日期</h2><div class="opts">
-            ${DATES.map(([k, label]) => opt(F.date === k, `data-date="${k}"`, label)).join('')}
-          </div></section>
-          <section class="group"><h2>地區<small>可多選</small></h2><div class="opts">
-            ${REGIONS.map((k) => opt(F.regions.indexOf(k) >= 0, `data-region="${k}"`, k)).join('')}
-          </div></section>
-          <label class="field">縣市
-            <select id="county"><option value="">${F.regions.length ? F.regions.join('、') + '全部' : '全部縣市'}</option>
-              ${counties.map((c) => `<option value="${esc(c)}" ${F.county === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}
-            </select>
-          </label>
-          <div class="switch-row">
-            <div><b>只看認證賽道</b><small>AIMS／IAAF 認證或經丈量，適合追 PB</small></div>
-            <button type="button" class="switch" role="switch" aria-checked="${F.cert}" aria-label="只看認證賽道" data-act="cert"></button>
-          </div>
+          ${filterGroups()}
           <button type="button" class="cta" data-act="close">顯示 <span class="num">${n}</span> 場比賽</button>
         </div>
       </div>`;
     $('.sheet').scrollTop = prevScroll;
   }
+  wideMQ.addEventListener('change', () => render());
 
   // ---------- 畫面：詳情 ----------
   function renderDetail(id) {
@@ -406,6 +444,7 @@
         </div>${hasFee ? '' : '<p class="fine">報名費與名額請見主辦單位簡章。</p>'}</section>` : ''}
         ${conflict ? '<div class="warn">兩個資料來源的日期不一致，報名前請以主辦單位官網為準。</div>' : ''}
         <p class="fine">賽事資訊整理自${src}，報名與最新內容以主辦單位官網為準。</p>
+        ${bmcButton()}
       </main>
       <div class="actions">
         <button type="button" class="sq" data-act="ics-race" aria-label="比賽日加到行事曆">${ICON.cal}</button>
@@ -499,6 +538,7 @@
   }
   function render() {
     const rt = route();
+    $('#app').className = 'app ' + (rt.page === 'detail' ? 'is-detail' : 'is-list');
     if (rt.page === 'detail') { sheetOpen = false; renderSheet(); renderDetail(rt.id); }
     else { renderList(); renderSheet(); }
   }
