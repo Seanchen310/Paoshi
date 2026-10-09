@@ -742,14 +742,14 @@
     if (e.key === 'Escape' && (sheetOpen || calSheet)) { sheetOpen = false; calSheet = null; render(); }
   });
 
-  // 「請跑事喝杯咖啡」：手機＝右下角懸浮膠囊（圖示＋文字）；電腦＝頁尾資料來源上方的圓鈕（bmcInline，滑鼠移過去展開文字）
+  // 「請跑事喝杯咖啡」：手機＝右下角懸浮圓鈕（咖啡圖示＋「支持跑事」）；電腦＝頁尾資料來源上方的圓鈕（bmcInline，滑鼠移過去展開文字）
   if (BMC_SLUG && !$('.fab-bmc')) {
     const a = document.createElement('a');
     a.className = 'fab-bmc';
     a.href = `https://buymeacoffee.com/${encodeURIComponent(BMC_SLUG)}`;
     a.target = '_blank'; a.rel = 'noopener';
-    a.setAttribute('aria-label', '請跑事喝杯咖啡');
-    a.innerHTML = `${ICON.coffee}<span>請跑事喝杯咖啡</span>`;
+    a.setAttribute('aria-label', '支持跑事：請跑事喝杯咖啡');
+    a.innerHTML = `${ICON.coffee}<span>支持跑事</span>`;
     document.body.appendChild(a);
     // 往下捲時藏起來（不擋內容），往上捲或回到頂端時再出現
     let lastY = window.scrollY;
