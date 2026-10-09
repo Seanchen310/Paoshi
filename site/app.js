@@ -763,11 +763,12 @@
     a.target = '_blank'; a.rel = 'noopener';
     a.setAttribute('aria-label', '支持跑事：請跑事喝杯咖啡');
     // 手機：圓鈕，大咖啡杯、「支持跑事」沿圓的下緣排成弧形（尺寸位置照 Sean 在設計畫布「支持跑事圓鈕」畫板調的，除以 4）
+    // 四個字各自放在弧線上、左右對稱（字級 10.5、字距 5.5 → 相鄰兩字中心距 16）；不用 letter-spacing，Safari 和 Chrome 才會一樣正
     // 電腦：咖啡圖示，滑鼠移過去向左展開「請跑事喝杯咖啡」
     a.innerHTML = `<svg class="fab-round" viewBox="0 0 64 64" aria-hidden="true">
       <svg x="11.75" y="7.25" width="45.75" height="45.75" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 01-5 5H9a5 5 0 01-5-5V9zM17 10h1.5a2.5 2.5 0 010 5H17M8 3v3M12 3v3"/></svg>
-      <path id="fab-arc" d="M 5.5 32 A 27 27 0 0 0 59.5 32" fill="none"/>
-      <text font-size="8.5" font-weight="700" letter-spacing="1" fill="currentColor"><textPath href="#fab-arc" startOffset="50%" text-anchor="middle">支持跑事</textPath></text>
+      <path id="fab-arc" d="M 5 32.5 A 27 27 0 0 0 59 32.5" fill="none"/>
+      <g font-size="10.5" font-weight="700" fill="currentColor"><text><textPath href="#fab-arc" startOffset="18.41" text-anchor="middle">支</textPath></text><text><textPath href="#fab-arc" startOffset="34.41" text-anchor="middle">持</textPath></text><text><textPath href="#fab-arc" startOffset="50.41" text-anchor="middle">跑</textPath></text><text><textPath href="#fab-arc" startOffset="66.41" text-anchor="middle">事</textPath></text></g>
     </svg><span class="fab-wide" aria-hidden="true">${ICON.coffee}<em>請跑事喝杯咖啡</em></span>`;
     document.body.appendChild(a);
     placeFab();
