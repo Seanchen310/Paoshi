@@ -19,6 +19,13 @@
 - `biji.py`：運動筆記 `running.biji.co/index.php?q=competition`，一頁就有本月起所有賽事（約 200 場，1 個請求）。
 - `merge.py`：比對同一場比賽並合併欄位。
 - `.github/workflows/scrape.yml`：GitHub Actions 每天台灣時間 06:07、18:07 執行 `run.py`，結果 commit 回 `output/`。
+- `site/`：網站（純 HTML/CSS/JS，沒有框架、不用建置工具）。`index.html`、`style.css`、`app.js`。讀同一層的 `races.json`。
+  - 部署：Cloudflare Pages 連 GitHub repo，Build command `cp output/races.json site/races.json`、output `site`。排程每次存回資料就會自動重新部署。
+  - 本機預覽：`cp output/races.json site/races.json` 後用 `.claude/launch.json` 的 `paoshi-site`（port 8787）。`site/races.json` 在 .gitignore。
+  - 路由用網址 hash：`#/` 列表、`#/race/<id>` 詳情。篩選是列表上的底部面板，篩選條件存在 localStorage。
+  - 報名狀態、剩幾天在瀏覽器依台灣時間的今天重算；比賽日已過的不顯示。
+  - 「截止前提醒我／開報時提醒我」＝下載 .ics 行事曆檔（含提醒），不需要帳號或伺服器。
+  - 搜尋只重畫結果、不重畫搜尋框，避免打斷注音選字。
 - `tests/`：`python -m unittest discover tests`（35 個），用真實頁面片段當測試資料。改解析邏輯前後都要跑。
 - 2026-10-09 合併結果：跑者廣場 193、運動筆記 199（不含海外）→ 237 場（兩邊都有 155、只有運動筆記 44、只有跑者廣場 38）；報名中 70、快截止 13、即將開報 4、未知 30、已截止 120。
 
@@ -81,6 +88,6 @@
 
 ## 下一步（依優先序）
 
-1. 把設計稿做成真正的網站（可用 GitHub Pages），讀 `output/races.json`。
-2. 開報名提醒、加到行事曆（`start_at` 有開報時間可用）。
+1. 網站上線到 Cloudflare Pages（Sean 不想讓 GitHub ID 出現在網址，所以不用 GitHub Pages）。
+2. 設計稿上還沒做的：收藏／我的賽季、底部導覽列、路線海拔。
 3. 賽事詳情補關門時間、報名費（只有運動筆記才有的 44 場）、路線、海拔：運動筆記詳情頁有，但一場一個請求，要限量（例如只抓報名中、且每天只抓新出現的）。

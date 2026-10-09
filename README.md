@@ -16,6 +16,15 @@
 
 只用 Python 內建功能，不用另外安裝套件。
 
+## 網站（site 資料夾）
+
+`site/` 是給大家看的網頁，讀 `races.json` 畫出賽事列表、篩選、詳情。部署在 Cloudflare Pages：
+
+- Build command：`cp output/races.json site/races.json`
+- Build output directory：`site`
+
+每次排程把新資料存回 repo，Cloudflare 就會自動重新部署。
+
 ## 在 Mac 上執行
 
 1. 把整個 `paoshi` 資料夾放到「文件」裡，例如 `文件/GitHub/paoshi`。

@@ -1,0 +1,496 @@
+/* 跑事｜網頁程式
+ * 讀 races.json（每天兩次由 GitHub Actions 更新），畫出三個畫面：
+ *   #/            賽事列表
+ *   （篩選是列表上的底部面板）
+ *   #/race/<id>   賽事詳情
+ */
+(function () {
+  'use strict';
+
+  // ---------- 小工具 ----------
+  const $ = (sel) => document.querySelector(sel);
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const WD = ['日', '一', '二', '三', '四', '五', '六'];
+  const DAY = 86400000;
+
+  function store(key, val) {
+    try {
+      if (val === undefined) return JSON.parse(localStorage.getItem(key) || 'null');
+      localStorage.setItem(key, JSON.stringify(val));
+    } catch (e) { return null; }
+  }
+
+  // 台灣時間的今天 'YYYY-MM-DD' 與現在幾點
+  function taipeiNow() {
+    const parts = {};
+    new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit',
+      day: '2-digit', hour: '2-digit', hour12: false }).formatToParts(new Date())
+      .forEach((p) => { parts[p.type] = p.value; });
+    return { date: `${parts.year}-${parts.month}-${parts.day}`, hour: Number(parts.hour) % 24 };
+  }
+  const toDate = (iso) => new Date(iso + 'T00:00:00Z');           // 只比日期，用 UTC 避免時區偏移
+  const daysBetween = (a, b) => Math.round((toDate(b) - toDate(a)) / DAY);
+  const md = (iso) => `${Number(iso.slice(5, 7))}/${Number(iso.slice(8, 10))}`;
+  const weekday = (iso) => WD[toDate(iso).getUTCDay()];
+
+  const ICON = {
+    sun: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+    moon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/></svg>',
+    filter: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>',
+    search: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>',
+    back: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+    share: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M8 8l4-4 4 4M5 13v6h14v-6"/></svg>',
+    cal: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4M12 13v4M10 15h4"/></svg>',
+    out: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>',
+  };
+
+  // ---------- 日夜主題 ----------
+  // 06:00–18:00 白天、其他時間夜晚；手動切換只維持到下一個 6 點或 18 點
+  function autoMode() { const h = taipeiNow().hour; return h >= 6 && h < 18 ? 'day' : 'night'; }
+  function currentMode() {
+    const o = store('paoshi-theme');
+    return o && o.until > Date.now() ? o.mode : autoMode();
+  }
+  function applyTheme() {
+    const mode = currentMode();
+    document.documentElement.setAttribute('data-theme', mode);
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', mode === 'night' ? '#1A1C23' : '#E8F1F8');
+    return mode;
+  }
+  function toggleTheme() {
+    const next = currentMode() === 'night' ? 'day' : 'night';
+    const now = new Date();
+    const h = taipeiNow().hour;
+    const hoursLeft = h < 6 ? 6 - h : h < 18 ? 18 - h : 30 - h;    // 到下一個切換點
+    const until = now.getTime() + hoursLeft * 3600000 - now.getMinutes() * 60000;
+    store('paoshi-theme', { mode: next, until: until });
+    applyTheme();
+    render();
+  }
+  setInterval(() => { const before = document.documentElement.getAttribute('data-theme');
+    if (applyTheme() !== before) render(); }, 60000);
+
+  // ---------- 資料 ----------
+  const CAT_CHIPS = [['full', '全馬'], ['half', '半馬'], ['10k', '10K'], ['short', '10K 以下'], ['ultra', '超馬'], ['triathlon', '鐵人']];
+  const REGIONS = ['北部', '中部', '南部', '東部', '離島'];
+  const DATES = [['any', '不限'], ['month', '本月'], ['3m', '未來 3 個月'], ['weekend', '只看週末']];
+  const TABS = [['open', '可報名'], ['upcoming', '即將開報'], ['all', '全部']];
+  const CERT_LABEL = { AIMS: 'AIMS', IAAF: 'IAAF', measured: '丈量認證' };
+
+  let DATA = null;          // { races, updated }
+  let failed = false;
+  const saved = store('paoshi-filters') || {};
+  const F = {
+    tab: 'open', q: '',
+    dists: saved.dists || [], regions: saved.regions || [], county: saved.county || '',
+    date: saved.date || 'any', cert: !!saved.cert,
+  };
+  function saveFilters() {
+    store('paoshi-filters', { dists: F.dists, regions: F.regions, county: F.county, date: F.date, cert: F.cert });
+  }
+
+  // 報名狀態依「今天」重新計算，資料一天只更新兩次，剩幾天才不會差一天
+  function liveStatus(reg, today) {
+    if (reg.status === 'closed' || reg.status === 'unknown') return { status: reg.status, left: null };
+    const end = reg.end, start = reg.start;
+    if (end && today > end) return { status: 'closed', left: null };
+    if (start && today < start) return { status: 'upcoming', left: null };
+    if (end) { const left = daysBetween(today, end); return { status: left <= 7 ? 'closing_soon' : 'open', left: left }; }
+    return { status: 'open', left: null };
+  }
+
+  function prepare(json) {
+    const today = taipeiNow().date;
+    const races = json.races.filter((r) => r.date && r.date >= today).map((r) => {
+      const st = liveStatus(r.registration, today);
+      const fees = r.distances.map((d) => d.fee).filter((f) => f != null);
+      const shortLoc = (r.location || r.address || '').replace(r.county || '', '').replace(/^台(北|中|南)市|^臺(北|中|南)市/, '');
+      return Object.assign({}, r, {
+        st: st.status, left: st.left,
+        minFee: fees.length ? Math.min.apply(null, fees) : null,
+        cert: r.certifications.find((c) => CERT_LABEL[c]) || null,
+        place: [r.county, shortLoc].filter(Boolean).join(' · '),
+        hay: [r.name].concat(r.alt_names || [], [r.county, r.location, r.address]).join(' ').toLowerCase().replace(/台/g, '臺'),
+      });
+    });
+    const stamps = json.races.map((r) => r.sources[0] && r.sources[0].scraped_at).filter(Boolean).sort();
+    return { races: races, updated: stamps[stamps.length - 1] || '' };
+  }
+
+  function load() {
+    failed = false;
+    fetch('races.json', { cache: 'no-cache' })
+      .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then((j) => { DATA = prepare(j); render(); })
+      .catch(() => { failed = true; render(); });
+  }
+
+  // ---------- 篩選 ----------
+  function inTab(r, tab) {
+    if (tab === 'all') return true;
+    if (tab === 'open') return r.st === 'open' || r.st === 'closing_soon';
+    return r.st === 'upcoming';
+  }
+  function inDate(r, today) {
+    if (F.date === 'month') return r.date.slice(0, 7) === today.slice(0, 7);
+    if (F.date === '3m') return daysBetween(today, r.date) <= 92;
+    if (F.date === 'weekend') { const d = toDate(r.date).getUTCDay(); return d === 0 || d === 6; }
+    return true;
+  }
+  function matches(r, today, opts) {
+    if (F.dists.length && !F.dists.some((c) => r.categories.indexOf(c) >= 0)) return false;
+    if (F.regions.length && F.regions.indexOf(r.region) < 0) return false;
+    if (F.county && r.county !== F.county) return false;
+    if (F.cert && !r.cert) return false;
+    if (!inDate(r, today)) return false;
+    if (!(opts && opts.ignoreSearch) && F.q) {
+      const words = F.q.toLowerCase().replace(/台/g, '臺').split(/\s+/).filter(Boolean);
+      if (!words.every((w) => r.hay.indexOf(w) >= 0)) return false;
+    }
+    return true;
+  }
+  const extraFilterCount = () => F.regions.length + (F.county ? 1 : 0) + (F.cert ? 1 : 0) + (F.date !== 'any' ? 1 : 0);
+
+  // ---------- 畫面：共用片段 ----------
+  function distPills(r, max) {
+    const seen = new Set();
+    const ds = r.distances.filter((d) => !seen.has(d.label) && seen.add(d.label));
+    const shown = max ? ds.slice(0, max) : ds;
+    let html = shown.map((d) => `<span class="d ${d.category === 'full' || d.category === 'half' ? d.category : ''}">${esc(d.label)}</span>`).join('');
+    if (shown.length < ds.length) html += `<span class="d">+${ds.length - shown.length}</span>`;
+    return html;
+  }
+  function statusText(r) {
+    const reg = r.registration;
+    if (r.st === 'open') return '報名中 · ' + (r.left != null ? (r.left === 0 ? '今天截止' : `剩 ${r.left} 天`) : '截止日未公布');
+    if (r.st === 'closing_soon') return '快截止 · ' + (r.left === 0 ? '今天截止' : `剩 ${r.left} 天`);
+    if (r.st === 'upcoming') {
+      const t = reg.start_at ? ' ' + reg.start_at.slice(11, 16) : '';
+      return '即將開報 · ' + (reg.start ? `${md(reg.start)}${t} 開報` : '開報日未公布');
+    }
+    if (r.st === 'closed') return '已截止';
+    return '報名資訊未公布';
+  }
+  const feeText = (f) => f === 0 ? '免費' : 'NT$' + f.toLocaleString();
+
+  function card(r) {
+    return `<a class="card" href="#/race/${encodeURIComponent(r.id)}">
+      <div class="date"><span class="mon">${Number(r.date.slice(5, 7))} 月</span><span class="day">${Number(r.date.slice(8, 10))}</span><span>週${weekday(r.date)}</span></div>
+      <div class="card-body">
+        <div class="title-row"><span class="name">${esc(r.name)}</span>${r.cert ? `<span class="cert">${CERT_LABEL[r.cert]}</span>` : ''}</div>
+        <div class="place-row"><span class="place">${esc(r.place)}</span>${r.minFee != null ? `<span class="fee">${feeText(r.minFee)}${r.minFee ? ' 起' : ''}</span>` : ''}</div>
+        <div class="dists">${distPills(r, 6)}</div>
+        <span class="status ${r.st}">${statusText(r)}</span>
+      </div>
+    </a>`;
+  }
+
+  function updatedText() {
+    const u = DATA && DATA.updated;
+    return u ? `${md(u.slice(0, 10))} ${u.slice(11, 16)} 更新` : '';
+  }
+
+  // ---------- 畫面：列表 ----------
+  function renderList(onlyResults) {
+    const mode = currentMode();
+    const today = taipeiNow().date;
+    const base = DATA ? DATA.races.filter((r) => matches(r, today)) : [];
+    const rows = base.filter((r) => inTab(r, F.tab));
+    const extra = extraFilterCount();
+
+    let body;
+    if (failed) body = `<div class="notice">賽事資料載入失敗，請檢查網路後再試。<br><button type="button" data-act="reload">重新載入</button></div>`;
+    else if (!DATA) body = `<div class="notice">載入賽事中…</div>`;
+    else if (!rows.length) body = `<div class="notice">沒有符合條件的比賽。<br><button type="button" data-act="clear">清除所有篩選</button></div>`;
+    else body = rows.map(card).join('');
+
+    const tabsHtml = TABS.map(([k, label]) => `<button type="button" role="tab" aria-selected="${F.tab === k}" data-tab="${k}">${label}<span class="num">${DATA ? base.filter((r) => inTab(r, k)).length : ''}</span></button>`).join('');
+    const listHtml = `<div class="meta"><span>依比賽日期排序</span><span>${updatedText()}</span></div>${body}`;
+    if (onlyResults && $('#q')) {        // 打字搜尋時只換結果，不動搜尋框（注音輸入才不會被打斷）
+      $('.tabs').innerHTML = tabsHtml;
+      $('.list').innerHTML = listHtml;
+      return;
+    }
+
+    $('#app').innerHTML = `
+      <header class="top">
+        <div class="brand-row">
+          <div class="brand"><b>跑事</b><small>${mode === 'night' ? '玄門夜色 · 夜晚' : '靈氣仙境 · 白天'}</small></div>
+          <div class="icon-row">
+            <button type="button" class="round accent" data-act="theme" aria-label="${mode === 'night' ? '切換為白天主題' : '切換為夜晚主題'}">${mode === 'night' ? ICON.moon : ICON.sun}</button>
+            <button type="button" class="round" data-act="filter" aria-label="篩選${extra ? `（已套用 ${extra} 項）` : ''}">${ICON.filter}${extra ? '<span class="dot"></span>' : ''}</button>
+          </div>
+        </div>
+        <label class="search">${ICON.search}<input id="q" type="search" placeholder="搜尋賽名、縣市" aria-label="搜尋賽事" value="${esc(F.q)}" enterkeyhint="search"></label>
+        <div class="tabs" role="tablist">${tabsHtml}</div>
+        <div class="chips">
+          ${CAT_CHIPS.map(([k, label]) => `<button type="button" class="chip" aria-pressed="${F.dists.indexOf(k) >= 0}" data-dist="${k}">${label}</button>`).join('')}
+        </div>
+      </header>
+      <main class="list">${listHtml}</main>
+      <footer class="foot">資料來源：<a href="http://www.taipeimarathon.org.tw/contest.aspx" target="_blank" rel="noopener">跑者廣場</a>、<a href="https://running.biji.co/index.php?q=competition" target="_blank" rel="noopener">運動筆記</a>。<br>報名與最新內容以主辦單位官網為準。</footer>`;
+  }
+
+  // ---------- 畫面：篩選面板 ----------
+  let sheetOpen = false;
+  function renderSheet() {
+    document.body.style.overflow = sheetOpen ? 'hidden' : '';
+    if (!sheetOpen) { $('#sheet').innerHTML = ''; return; }
+    const prevScroll = $('.sheet') ? $('.sheet').scrollTop : 0;
+    const today = taipeiNow().date;
+    const n = DATA ? DATA.races.filter((r) => matches(r, today) && inTab(r, F.tab)).length : 0;
+    const counties = DATA ? Array.from(new Set(DATA.races
+      .filter((r) => r.county && (!F.regions.length || F.regions.indexOf(r.region) >= 0)).map((r) => r.county))) : [];
+    const opt = (on, attrs, label) => `<button type="button" class="opt" aria-pressed="${on}" ${attrs}>${label}</button>`;
+    $('#sheet').innerHTML = `
+      <div class="sheet-wrap" data-act="close">
+        <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+          <div class="grip"></div>
+          <div class="sheet-head"><h1 id="sheet-title">篩選</h1><button type="button" class="text-btn" data-act="clear">全部清除</button></div>
+          <section class="group"><h2>報名狀態</h2><div class="opts">
+            ${TABS.map(([k, label]) => opt(F.tab === k, `data-tab="${k}"`, label === '全部' ? '含已截止' : label)).join('')}
+          </div></section>
+          <section class="group"><h2>距離<small>可多選</small></h2><div class="opts">
+            ${CAT_CHIPS.map(([k, label]) => opt(F.dists.indexOf(k) >= 0, `data-dist="${k}"`, label)).join('')}
+          </div></section>
+          <section class="group"><h2>比賽日期</h2><div class="opts">
+            ${DATES.map(([k, label]) => opt(F.date === k, `data-date="${k}"`, label)).join('')}
+          </div></section>
+          <section class="group"><h2>地區<small>可多選</small></h2><div class="opts">
+            ${REGIONS.map((k) => opt(F.regions.indexOf(k) >= 0, `data-region="${k}"`, k)).join('')}
+          </div></section>
+          <label class="field">縣市
+            <select id="county"><option value="">${F.regions.length ? F.regions.join('、') + '全部' : '全部縣市'}</option>
+              ${counties.map((c) => `<option value="${esc(c)}" ${F.county === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}
+            </select>
+          </label>
+          <div class="switch-row">
+            <div><b>只看認證賽道</b><small>AIMS／IAAF 認證或經丈量，適合追 PB</small></div>
+            <button type="button" class="switch" role="switch" aria-checked="${F.cert}" aria-label="只看認證賽道" data-act="cert"></button>
+          </div>
+          <button type="button" class="cta" data-act="close">顯示 <span class="num">${n}</span> 場比賽</button>
+        </div>
+      </div>`;
+    $('.sheet').scrollTop = prevScroll;
+  }
+
+  // ---------- 畫面：詳情 ----------
+  function renderDetail(id) {
+    if (!DATA) { $('#app').innerHTML = `<div class="list"><div class="notice">${failed ? '賽事資料載入失敗。' : '載入賽事中…'}</div></div>`; return; }
+    const r = DATA.races.find((x) => x.id === id);
+    if (!r) {
+      $('#app').innerHTML = `<div class="bar"><a class="icon-btn" href="#/" aria-label="返回列表">${ICON.back}</a></div>
+        <div class="detail"><div class="notice">找不到這場比賽，可能已經結束或改了名稱。<br><button type="button" data-act="home">回到賽事列表</button></div></div>`;
+      return;
+    }
+    const reg = r.registration;
+    const period = reg.start || reg.end
+      ? `${reg.start ? reg.start.replace(/-/g, '/') + (reg.start_at ? ' ' + reg.start_at.slice(11, 16) : '') : '未公布'} – ${reg.end ? md(reg.end) + (reg.end_at ? ' ' + reg.end_at.slice(11, 16) : '') : '未公布'}`
+      : (reg.raw && reg.raw !== '已截止' && reg.raw !== '已截止報名' ? reg.raw : '未公布');
+    const info = [
+      ['地點', esc(r.location || r.address || '未公布') + (r.location && r.address ? `<small>${esc(r.address)}</small>` : '')],
+      ['報名期間', esc(period)],
+    ];
+    if (r.organizer) info.push(['承辦單位', esc(r.organizer)]);
+    if (r.postponed_from) info.push(['延期', `原訂 ${esc(r.postponed_from.replace(/-/g, '/'))}`]);
+
+    const seen = new Set();
+    const groups = r.distances.filter((d) => !seen.has(d.label) && seen.add(d.label));
+    const hasFee = groups.some((d) => d.fee != null || d.quota != null);
+    // 只提醒會影響報名的不一致：截止日、可能額滿、比賽改期；開報日不同只在還沒開報時才重要
+    const conflict = r.issues.some((i) => /截止日兩邊不同|可能額滿|舊日期/.test(i) ||
+      (r.st === 'upcoming' && i.indexOf('開始日兩邊不同') >= 0));
+    const certs = r.certifications.filter((c) => CERT_LABEL[c])
+      .map((c) => `<span class="cert">${CERT_LABEL[c]}${c === 'measured' ? '' : ' 認證'}</span>`).join('');
+    const src = r.sources.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join('、');
+
+    let remind = '';
+    if (r.st === 'open' || r.st === 'closing_soon') remind = reg.end ? '截止前提醒我' : '';
+    else if (r.st === 'upcoming') remind = reg.start ? '開報時提醒我' : '';
+    const signup = r.url
+      ? `<a class="cta" href="${esc(r.url)}" target="_blank" rel="noopener">前往報名 ${ICON.out}</a>`
+      : `<a class="cta" href="${esc(r.sources[r.sources.length - 1].url)}" target="_blank" rel="noopener">看賽事資訊 ${ICON.out}</a>`;
+
+    $('#app').innerHTML = `
+      <div class="bar">
+        <a class="icon-btn" href="#/" data-act="back" aria-label="返回列表">${ICON.back}</a>
+        <button type="button" class="icon-btn" data-act="share" aria-label="分享">${ICON.share}</button>
+      </div>
+      <main class="detail">
+        <section class="hero">
+          <div class="badges">${certs}<span class="status ${r.st}">${statusText(r)}</span></div>
+          <h1>${esc(r.name)}</h1>
+          ${r.alt_names && r.alt_names.length ? `<div class="aka">也稱：${r.alt_names.map(esc).join('、')}</div>` : ''}
+          <div class="when"><span class="big">${r.date.slice(5, 7)}.${r.date.slice(8, 10)}</span>
+            <span>${r.date.slice(0, 4)} · 週${weekday(r.date)}${r.start_time ? ' ' + esc(r.start_time) + ' 起跑' : ''}</span></div>
+        </section>
+        <dl class="box info">${info.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
+        ${groups.length ? `<section class="sec"><h2>組別</h2><div class="box groups">
+          ${groups.map((d) => `<div class="grp"><span class="d ${d.category === 'full' || d.category === 'half' ? d.category : ''}">${esc(d.label)}</span>
+            <span class="q">${hasFee ? (d.quota != null ? `名額 ${d.quota.toLocaleString()}${d.quota_shared ? '（共用）' : ''}` : '名額未公布') : ''}</span>
+            <span class="f">${d.fee != null ? feeText(d.fee) : ''}</span></div>`).join('')}
+        </div>${hasFee ? '' : '<p class="fine">報名費與名額請見主辦單位簡章。</p>'}</section>` : ''}
+        ${conflict ? '<div class="warn">兩個資料來源的日期不一致，報名前請以主辦單位官網為準。</div>' : ''}
+        <p class="fine">賽事資訊整理自${src}，報名與最新內容以主辦單位官網為準。</p>
+      </main>
+      <div class="actions">
+        <button type="button" class="sq" data-act="ics-race" aria-label="比賽日加到行事曆">${ICON.cal}</button>
+        ${remind ? `<button type="button" class="ghost" data-act="ics-remind">${remind}</button>` : ''}
+        ${signup}
+      </div>`;
+    window.scrollTo(0, 0);
+  }
+
+  // ---------- 加到行事曆（.ics 檔，iPhone／Google／Outlook 都能開） ----------
+  function icsText(s) { return String(s || '').replace(/\\/g, '\\\\').replace(/[,;]/g, (c) => '\\' + c).replace(/\n/g, '\\n'); }
+  const ymd = (iso) => iso.replace(/-/g, '');
+  function utcStamp(isoLocal) {   // '2026-10-01T12:00'（台灣時間）→ '20261001T040000Z'
+    const d = new Date(isoLocal + ':00+08:00');
+    return d.toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+  }
+  function nextDay(iso) { return new Date(toDate(iso).getTime() + DAY).toISOString().slice(0, 10); }
+  function makeIcs(ev) {
+    const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Paoshi//跑事//ZH', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT',
+      'UID:' + ev.uid + '@paoshi', 'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '')];
+    if (ev.at) {
+      lines.push('DTSTART:' + utcStamp(ev.at));
+      lines.push('DTEND:' + utcStamp(ev.endAt || ev.at));
+    } else {
+      lines.push('DTSTART;VALUE=DATE:' + ymd(ev.date), 'DTEND;VALUE=DATE:' + ymd(nextDay(ev.date)));
+    }
+    lines.push('SUMMARY:' + icsText(ev.title));
+    if (ev.location) lines.push('LOCATION:' + icsText(ev.location));
+    if (ev.url) lines.push('URL:' + ev.url);
+    lines.push('DESCRIPTION:' + icsText(ev.desc));
+    (ev.alarms || []).forEach((t) => lines.push('BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsText(ev.title), 'TRIGGER:' + t, 'END:VALARM'));
+    lines.push('END:VEVENT', 'END:VCALENDAR');
+    return lines.join('\r\n');
+  }
+  function download(name, text) {
+    const blob = new Blob([text], { type: 'text/calendar;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name.replace(/[\\/:*?"<>|]/g, '') + '.ics';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  function addRaceToCalendar(r) {
+    const page = location.href;
+    const ev = { uid: r.id, title: r.name, location: r.address || r.location, url: r.url || page,
+      desc: `${r.distances.map((d) => d.label).join(' / ')}\n跑事：${page}`, alarms: ['-PT15H'] };
+    if (r.start_time) { ev.at = `${r.date}T${r.start_time}`; ev.endAt = `${r.date}T${String(Number(r.start_time.slice(0, 2)) + 5).padStart(2, '0')}${r.start_time.slice(2)}`; ev.alarms = ['-P1D', '-PT2H']; }
+    else ev.date = r.date;
+    download(r.name, makeIcs(ev));
+    toast('已下載行事曆檔，打開它就能加入行事曆');
+  }
+  function addReminder(r) {
+    const reg = r.registration, page = location.href;
+    const ev = { url: r.url || page, location: r.address || r.location };
+    if (r.st === 'upcoming') {
+      Object.assign(ev, { uid: r.id + '-open', title: `開放報名：${r.name}`, desc: `比賽日 ${r.date}\n報名：${r.url || page}` });
+      if (reg.start_at) { ev.at = reg.start_at; ev.endAt = reg.start_at; ev.alarms = ['-P1D', '-PT10M']; }
+      else { ev.date = reg.start; ev.alarms = ['-PT15H']; }                      // 前一天 09:00
+    } else {
+      Object.assign(ev, { uid: r.id + '-close', title: `報名截止：${r.name}`, desc: `比賽日 ${r.date}\n報名：${r.url || page}` });
+      if (reg.end_at && reg.end_at.slice(11) !== '00:00') { ev.at = reg.end_at; ev.endAt = reg.end_at; ev.alarms = ['-P3D', '-P1D', '-PT3H']; }
+      else { ev.date = reg.end; ev.alarms = ['-P2DT15H', '-PT15H']; }           // 三天前、前一天 09:00
+    }
+    download(ev.title, makeIcs(ev));
+    toast('已下載提醒，打開它加入行事曆，時間到會通知你');
+  }
+
+  // ---------- 提示訊息、分享 ----------
+  let toastTimer;
+  function toast(msg) {
+    const el = $('#toast');
+    el.textContent = msg;
+    el.classList.remove('hidden');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.add('hidden'), 3200);
+  }
+  function share(r) {
+    const data = { title: r.name + '｜跑事', text: `${r.name}（${r.date}）`, url: location.href };
+    if (navigator.share) { navigator.share(data).catch(() => {}); return; }
+    if (navigator.clipboard) navigator.clipboard.writeText(location.href).then(() => toast('已複製連結'), () => toast(location.href));
+    else toast(location.href);
+  }
+
+  // ---------- 路由與事件 ----------
+  let listScroll = 0;
+  let cameFromList = false;
+  function route() {
+    const m = location.hash.match(/^#\/race\/(.+)$/);
+    return m ? { page: 'detail', id: decodeURIComponent(m[1]) } : { page: 'list' };
+  }
+  function render() {
+    const rt = route();
+    if (rt.page === 'detail') { sheetOpen = false; renderSheet(); renderDetail(rt.id); }
+    else { renderList(); renderSheet(); }
+  }
+  window.addEventListener('hashchange', () => {
+    const rt = route();
+    render();
+    if (rt.page === 'list') { window.scrollTo(0, listScroll); cameFromList = false; }
+  });
+
+  function toggleIn(arr, v) { return arr.indexOf(v) >= 0 ? arr.filter((x) => x !== v) : arr.concat([v]); }
+  function refresh() { saveFilters(); render(); }
+
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-act],[data-tab],[data-dist],[data-date],[data-region]');
+    if (!t) {
+      if (e.target.closest('a.card')) { listScroll = window.scrollY; cameFromList = true; }
+      return;
+    }
+    const d = t.dataset;
+    if (d.tab) { F.tab = d.tab; return refresh(); }
+    if (d.dist) { F.dists = toggleIn(F.dists, d.dist); return refresh(); }
+    if (d.date) { F.date = d.date; return refresh(); }
+    if (d.region) {
+      F.regions = toggleIn(F.regions, d.region);
+      if (F.county && DATA && F.regions.length && !DATA.races.some((r) => r.county === F.county && F.regions.indexOf(r.region) >= 0)) F.county = '';
+      return refresh();
+    }
+    const rt = route();
+    const race = rt.page === 'detail' && DATA ? DATA.races.find((x) => x.id === rt.id) : null;
+    switch (d.act) {
+      case 'theme': return toggleTheme();
+      case 'filter': sheetOpen = true; return renderSheet();
+      case 'close':
+        if (t.classList.contains('sheet-wrap') && e.target !== t) return;   // 點面板內部不關
+        sheetOpen = false; return render();
+      case 'clear':
+        Object.assign(F, { tab: 'open', q: '', dists: [], regions: [], county: '', date: 'any', cert: false });
+        return refresh();
+      case 'cert': F.cert = !F.cert; return refresh();
+      case 'reload': return load();
+      case 'home': location.hash = '#/'; return;
+      case 'back':
+        if (cameFromList) { e.preventDefault(); history.back(); }     // 回到列表原本捲到的位置
+        return;
+      case 'share': return race && share(race);
+      case 'ics-race': return race && addRaceToCalendar(race);
+      case 'ics-remind': return race && addReminder(race);
+    }
+  });
+  function onSearch(e) {
+    if (e.target.id !== 'q' || e.isComposing) return;   // 注音還在選字時先不搜尋
+    F.q = e.target.value;
+    renderList(true);
+  }
+  document.addEventListener('input', onSearch);
+  document.addEventListener('compositionend', onSearch);
+  document.addEventListener('change', (e) => {
+    if (e.target.id === 'county') { F.county = e.target.value; refresh(); }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sheetOpen) { sheetOpen = false; render(); }
+  });
+
+  applyTheme();
+  render();
+  load();
+})();

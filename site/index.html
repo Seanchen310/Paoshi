@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="day">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>跑事｜台灣路跑賽事，現在還能報名哪些</title>
+<meta name="description" content="整理跑者廣場、運動筆記的台灣路跑賽事：現在還能報名的比賽、快截止提醒、加到行事曆。">
+<meta name="theme-color" content="#E8F1F8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+  // 先決定日夜主題再畫面，避免閃一下
+  (function () {
+    var h = Number(new Date().toLocaleString('en-US', { timeZone: 'Asia/Taipei', hour: 'numeric', hour12: false })) % 24;
+    var mode = h >= 6 && h < 18 ? 'day' : 'night';
+    try {
+      var o = JSON.parse(localStorage.getItem('paoshi-theme') || 'null');
+      if (o && o.until > Date.now()) mode = o.mode;
+    } catch (e) {}
+    document.documentElement.setAttribute('data-theme', mode);
+  })();
+</script>
+</head>
+<body>
+<div class="app" id="app"></div>
+<div id="sheet"></div>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
