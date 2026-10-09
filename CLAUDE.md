@@ -47,6 +47,7 @@
 - `site/`：網站（純 HTML/CSS/JS，沒有框架、不用建置工具）。`index.html`、`style.css`、`app.js`。讀同一層的 `races.json`。
   - 部署：Cloudflare Pages 連 GitHub repo，Build command `python3 build_site.py`、output `site`。排程每次存回資料就會自動重新部署。
   - `build_site.py`：複製 races.json，並為每場比賽產生靜態網頁 `site/race/<key>/index.html`（title、description、canonical、og、schema.org SportsEvent JSON-LD、預先寫好的詳情內容），加上 sitemap.xml、robots.txt。這些產生的檔案都在 .gitignore。
+  - 流量統計：Cloudflare Web Analytics（2026-10-10 在 Pages 專案「指標」頁啟用，部署時自動在每個 HTML 加入統計程式，不用改程式碼）。不用 cookie、不記錄個人資料，不需要同意視窗。報表在 Cloudflare 後台 → Web Analytics。
   - Google Search Console：2026-10-10 以「網址前置字元」https://paoshi.pages.dev/ 驗證（帳號 molimora@gmail.com），已送出 sitemap.xml 並要求首頁建立索引。
     驗證靠 `site/googlec7ef7df34be6e497.html`，**不能刪**（刪了會失去驗證）。Cloudflare 會把 .html 轉址到無副檔名版本，Google 接受。
   - 本機預覽：`python3 build_site.py` 後用 `.claude/launch.json` 的 `paoshi-site`（port 8787）。
@@ -146,7 +147,7 @@
 ## 下一步（依優先序，與策略書一致）
 
 1. 寫信給跑者廣場、運動筆記，徵求使用資料的同意。
-2. 選定流量統計工具（不記錄姓名、Email、精確位置）。
+2. ~~選定流量統計工具~~ → 已用 Cloudflare Web Analytics（2026-10-10）。
 3. 收藏、比較、底部導覽、篩選條件寫進網址。
 4. 開報提醒（LINE 或 Email）。
 5. 路線、海拔（運動筆記詳情頁的簡介裡是圖片，不好結構化）。
