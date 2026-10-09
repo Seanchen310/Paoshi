@@ -81,6 +81,13 @@ button { cursor: pointer; }
 .list { flex: 1; padding: 4px 16px 32px; display: flex; flex-direction: column; gap: 10px; }
 .cards, .day-list { display: flex; flex-direction: column; gap: 10px; }
 .cal-wrap { display: flex; flex-direction: column; gap: 10px; }
+.month-group { display: flex; flex-direction: column; gap: 10px; }
+.month-head {
+  position: sticky; top: 0; z-index: 3; margin: 6px -2px 0; padding: 8px 2px;
+  background: var(--bg); font-size: 15px; font-weight: 700; color: var(--strong);
+  display: flex; align-items: baseline; gap: 8px;
+}
+.month-head small { font-size: 12px; font-weight: 500; color: var(--muted); }
 .meta { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--muted); padding: 0 2px; }
 .list > .meta { align-items: center; }
 .view-switch { display: inline-flex; gap: 2px; padding: 3px; background: var(--seg); border-radius: 10px; }
@@ -269,8 +276,12 @@ button { cursor: pointer; }
   .app { max-width: 1200px; }
   .app.is-detail { max-width: 760px; }
   .only-narrow { display: none !important; }
-  .top { padding: 32px 32px 16px; }
-  .brand { font-size: 28px; }
+  /* 頁首併成一排：品牌｜搜尋＋分頁｜主題 */
+  .top { padding: 28px 32px 20px; flex-direction: row; align-items: center; gap: 24px; }
+  .brand-row { display: contents; }
+  .brand { font-size: 28px; order: 0; flex: none; }
+  .controls { order: 1; flex: 1; }
+  .icon-row { order: 2; }
   .layout { flex-direction: row; align-items: flex-start; gap: 24px; padding: 0 32px; }
   .side {
     flex: none; width: 300px; position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto;

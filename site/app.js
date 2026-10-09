@@ -309,6 +309,23 @@
       <div class="day-list">${dayHead}</div></div>`;
   }
 
+  // 列表依月份分段，每段一個小標題（「2026 年 11 月 · 30 場」），長列表比較好掃
+  function monthGroups(rows, today) {
+    const groups = [];
+    rows.forEach((r) => {
+      const ym = ymOf(r.date);
+      if (!groups.length || groups[groups.length - 1].ym !== ym) groups.push({ ym: ym, rows: [] });
+      groups[groups.length - 1].rows.push(r);
+    });
+    return groups.map((g) => {
+      const label = (g.ym.slice(0, 4) !== today.slice(0, 4) ? `${g.ym.slice(0, 4)} 年 ` : '') + `${Number(g.ym.slice(5))} 月`;
+      return `<section class="month-group" aria-label="${label}">
+        <h3 class="month-head">${label}<small>${g.rows.length} 場</small></h3>
+        <div class="cards">${g.rows.map(card).join('')}</div>
+      </section>`;
+    }).join('');
+  }
+
   // ---------- 畫面：列表 ----------
   // 桌機（≥1024px）篩選常駐在左側欄；手機、iPad 用底部面板
   const wideMQ = window.matchMedia('(min-width: 1024px)');
@@ -361,7 +378,7 @@
     if (failed) body = `<div class="notice">賽事資料載入失敗，請檢查網路後再試。<br><button type="button" data-act="reload">重新載入</button></div>`;
     else if (!DATA) body = `<div class="notice">載入賽事中…</div>`;
     else if (!rows.length) body = `<div class="notice">沒有符合條件的比賽。<br><button type="button" data-act="clear">清除所有篩選</button></div>`;
-    else body = F.view === 'cal' ? calendarHtml(rows, today) : `<div class="cards">${rows.map(card).join('')}</div>`;
+    else body = F.view === 'cal' ? calendarHtml(rows, today) : monthGroups(rows, today);
 
     const tabsHtml = TABS.map(([k, label]) => `<button type="button" role="tab" aria-selected="${F.tab === k}" data-tab="${k}">${label}<span class="num">${DATA ? base.filter((r) => inTab(r, k)).length : ''}</span></button>`).join('');
     // 列表／日曆切換：有文字、看得出目前在哪一種，放在內容正上方
