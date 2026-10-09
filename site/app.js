@@ -274,7 +274,12 @@
     else body = F.view === 'cal' ? calendarHtml(rows, today) : rows.map(card).join('');
 
     const tabsHtml = TABS.map(([k, label]) => `<button type="button" role="tab" aria-selected="${F.tab === k}" data-tab="${k}">${label}<span class="num">${DATA ? base.filter((r) => inTab(r, k)).length : ''}</span></button>`).join('');
-    const listHtml = `<div class="meta"><span>${F.view === 'cal' ? '點日期看當天的比賽' : '依比賽日期排序'}</span><span>${updatedText()}</span></div>${body}`;
+    // 列表／日曆切換：有文字、看得出目前在哪一種，放在內容正上方
+    const viewSwitch = `<div class="view-switch" role="radiogroup" aria-label="瀏覽方式">
+        <button type="button" role="radio" aria-checked="${F.view === 'list'}" data-view="list">${ICON.list}列表</button>
+        <button type="button" role="radio" aria-checked="${F.view === 'cal'}" data-view="cal">${ICON.calendar}日曆</button>
+      </div>`;
+    const listHtml = `<div class="meta">${viewSwitch}<span>${updatedText()}</span></div>${body}`;
     if (onlyResults && $('#q')) {        // 打字搜尋時只換結果，不動搜尋框（注音輸入才不會被打斷）
       $('.tabs').innerHTML = tabsHtml;
       $('.list').innerHTML = listHtml;
@@ -287,7 +292,6 @@
           <div class="brand"><b>跑事</b><small>${mode === 'night' ? '玄門夜色 · 夜晚' : '靈氣仙境 · 白天'}</small></div>
           <div class="icon-row">
             <button type="button" class="round accent" data-act="theme" aria-label="${mode === 'night' ? '切換為白天主題' : '切換為夜晚主題'}">${mode === 'night' ? ICON.moon : ICON.sun}</button>
-            <button type="button" class="round" data-act="view" aria-label="${F.view === 'cal' ? '切換為列表' : '切換為日曆'}">${F.view === 'cal' ? ICON.list : ICON.calendar}</button>
             <button type="button" class="round" data-act="filter" aria-label="篩選${extra ? `（已套用 ${extra} 項）` : ''}">${ICON.filter}${extra ? '<span class="dot"></span>' : ''}</button>
           </div>
         </div>
@@ -508,13 +512,14 @@
   function refresh() { saveFilters(); render(); }
 
   document.addEventListener('click', (e) => {
-    const t = e.target.closest('[data-act],[data-tab],[data-dist],[data-date],[data-region],[data-day],[data-cal],[data-calby]');
+    const t = e.target.closest('[data-act],[data-tab],[data-dist],[data-date],[data-region],[data-day],[data-cal],[data-calby],[data-view]');
     if (!t) {
       if (e.target.closest('a.card')) { listScroll = window.scrollY; cameFromList = true; }
       return;
     }
     const d = t.dataset;
     if (d.tab) { F.tab = d.tab; return refresh(); }
+    if (d.view) { F.view = d.view; saveFilters(); return renderList(true); }
     if (d.day) { CAL.day = d.day; return renderList(true); }
     if (d.cal) { CAL.month = addMonths(CAL.month, Number(d.cal)); CAL.day = null; return renderList(true); }
     if (d.calby) { F.calBy = d.calby; CAL.day = null; return renderList(true); }
@@ -529,7 +534,6 @@
     const race = rt.page === 'detail' && DATA ? DATA.races.find((x) => x.id === rt.id) : null;
     switch (d.act) {
       case 'theme': return toggleTheme();
-      case 'view': F.view = F.view === 'cal' ? 'list' : 'cal'; return refresh();
       case 'filter': sheetOpen = true; return renderSheet();
       case 'close':
         if (t.classList.contains('sheet-wrap') && e.target !== t) return;   // 點面板內部不關
