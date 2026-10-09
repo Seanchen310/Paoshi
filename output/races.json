@@ -1,324 +1,6 @@
 {
-  "count": 237,
+  "count": 232,
   "races": [
-    {
-      "id": "2026-10-03-403f6067",
-      "name": "2026 LAVAKIDS 花蓮太平洋小鐵人賽",
-      "alt_names": [],
-      "date": "2026-10-03",
-      "start_time": null,
-      "location": null,
-      "address": "花蓮縣壽豐鄉鯉魚潭",
-      "county": "花蓮縣",
-      "region": "東部",
-      "distances": [
-        {
-          "label": "8.2K",
-          "km": 8.2,
-          "category": "short",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        },
-        {
-          "label": "5.3K",
-          "km": 5.3,
-          "category": "short",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        }
-      ],
-      "categories": [
-        "short"
-      ],
-      "organizer": null,
-      "registration": {
-        "raw": "已截止報名",
-        "start": "2026-06-30",
-        "end": "2026-08-15",
-        "start_at": "2026-06-30T12:00",
-        "end_at": "2026-08-15T23:59",
-        "status": "closed",
-        "days_left": null
-      },
-      "url": null,
-      "certifications": [],
-      "flag": null,
-      "postponed_from": null,
-      "issues": [],
-      "sources": [
-        {
-          "name": "運動筆記",
-          "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13080",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
-        }
-      ]
-    },
-    {
-      "id": "2026-10-03-182cb844",
-      "name": "2026 吧哩嘓越野",
-      "alt_names": [],
-      "date": "2026-10-03",
-      "start_time": null,
-      "location": null,
-      "address": "新竹縣新埔鎮國校街160號",
-      "county": "新竹縣",
-      "region": "北部",
-      "distances": [
-        {
-          "label": "26K",
-          "km": 26.0,
-          "category": "long",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        },
-        {
-          "label": "17K",
-          "km": 17.0,
-          "category": "10k",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        },
-        {
-          "label": "10K",
-          "km": 10.0,
-          "category": "10k",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        }
-      ],
-      "categories": [
-        "10k",
-        "long",
-        "trail"
-      ],
-      "organizer": null,
-      "registration": {
-        "raw": "已截止報名",
-        "start": "2026-04-01",
-        "end": "2026-07-31",
-        "start_at": "2026-04-01T09:00",
-        "end_at": "2026-07-31T23:59",
-        "status": "closed",
-        "days_left": null
-      },
-      "url": null,
-      "certifications": [],
-      "flag": null,
-      "postponed_from": null,
-      "issues": [],
-      "sources": [
-        {
-          "name": "運動筆記",
-          "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12980",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
-        }
-      ]
-    },
-    {
-      "id": "2026-10-03-9028d5b1",
-      "name": "2026 山城星光馬拉松",
-      "alt_names": [],
-      "date": "2026-10-03",
-      "start_time": null,
-      "location": null,
-      "address": "苗栗市經國路四段79號",
-      "county": "苗栗縣",
-      "region": "中部",
-      "distances": [
-        {
-          "label": "42K",
-          "km": 42.0,
-          "category": "full",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        },
-        {
-          "label": "21K",
-          "km": 21.0,
-          "category": "half",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        },
-        {
-          "label": "9K",
-          "km": 9.0,
-          "category": "10k",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        },
-        {
-          "label": "3K",
-          "km": 3.0,
-          "category": "short",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        }
-      ],
-      "categories": [
-        "10k",
-        "full",
-        "half",
-        "short"
-      ],
-      "organizer": null,
-      "registration": {
-        "raw": "已截止報名",
-        "start": "2026-03-16",
-        "end": "2026-07-26",
-        "start_at": "2026-03-16T00:00",
-        "end_at": "2026-07-26T23:59",
-        "status": "closed",
-        "days_left": null
-      },
-      "url": null,
-      "certifications": [],
-      "flag": null,
-      "postponed_from": null,
-      "issues": [],
-      "sources": [
-        {
-          "name": "運動筆記",
-          "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12954",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
-        }
-      ]
-    },
-    {
-      "id": "2026-10-03-8c7125a3",
-      "name": "2026 跑若飛天公盃路跑X健走大賽",
-      "alt_names": [],
-      "date": "2026-10-03",
-      "start_time": null,
-      "location": null,
-      "address": "嘉義縣朴子市四維路一段551號",
-      "county": "嘉義縣",
-      "region": "南部",
-      "distances": [
-        {
-          "label": "15K",
-          "km": 15.0,
-          "category": "10k",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        },
-        {
-          "label": "10K",
-          "km": 10.0,
-          "category": "10k",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        },
-        {
-          "label": "5K",
-          "km": 5.0,
-          "category": "short",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        }
-      ],
-      "categories": [
-        "10k",
-        "short"
-      ],
-      "organizer": null,
-      "registration": {
-        "raw": "已截止報名",
-        "start": "2026-05-01",
-        "end": "2026-08-31",
-        "start_at": "2026-05-01T06:00",
-        "end_at": "2026-08-31T23:59",
-        "status": "closed",
-        "days_left": null
-      },
-      "url": null,
-      "certifications": [],
-      "flag": null,
-      "postponed_from": null,
-      "issues": [],
-      "sources": [
-        {
-          "name": "運動筆記",
-          "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13022",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
-        }
-      ]
-    },
-    {
-      "id": "2026-10-03-07ff2d9f",
-      "name": "2026池上星夜慢城路跑",
-      "alt_names": [],
-      "date": "2026-10-03",
-      "start_time": null,
-      "location": null,
-      "address": "台東縣池上鄉中山路通水巷",
-      "county": "臺東縣",
-      "region": "東部",
-      "distances": [
-        {
-          "label": "21K",
-          "km": 21.0,
-          "category": "half",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        },
-        {
-          "label": "11K",
-          "km": 11.0,
-          "category": "10k",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        },
-        {
-          "label": "6K",
-          "km": 6.0,
-          "category": "short",
-          "fee": null,
-          "quota": null,
-          "quota_shared": false
-        }
-      ],
-      "categories": [
-        "10k",
-        "half",
-        "short"
-      ],
-      "organizer": null,
-      "registration": {
-        "raw": "已截止報名",
-        "start": "2026-05-21",
-        "end": "2026-08-30",
-        "start_at": "2026-05-21T12:00",
-        "end_at": "2026-08-30T23:59",
-        "status": "closed",
-        "days_left": null
-      },
-      "url": null,
-      "certifications": [],
-      "flag": null,
-      "postponed_from": null,
-      "issues": [],
-      "sources": [
-        {
-          "name": "運動筆記",
-          "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12986",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
-        }
-      ]
-    },
     {
       "id": "2026-10-04-489e9598",
       "name": "2026 LAVA花蓮太平洋鐵人賽",
@@ -378,7 +60,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13081",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -442,7 +124,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12993",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -515,7 +197,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13026",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -578,7 +260,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12955",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -650,7 +332,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12905",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -713,7 +395,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13043",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -775,7 +457,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12043",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -829,7 +511,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12732",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -875,7 +557,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13042",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -954,7 +636,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13114",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1027,7 +709,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12939",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1100,7 +782,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13083",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1164,7 +846,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12876",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1210,7 +892,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13193",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1266,12 +948,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12966",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1344,7 +1026,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1401,12 +1083,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13117",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1483,12 +1165,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13071",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1554,12 +1236,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13149",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1627,12 +1309,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12888",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1707,12 +1389,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12887",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1775,12 +1457,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13082",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1872,12 +1554,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13150",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1933,12 +1615,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12811",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -1993,7 +1675,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2039,7 +1721,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13050",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2105,12 +1787,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12981",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2175,12 +1857,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13040",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2226,7 +1908,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13185",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2301,12 +1983,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13008",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2370,12 +2052,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13060",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2440,12 +2122,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13056",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2515,7 +2197,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 9
+        "days_left": 8
       },
       "url": "https://sportaiwan.com/activity/activity_desc.php?activity=191",
       "certifications": [],
@@ -2526,7 +2208,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2603,12 +2285,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13034",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2663,7 +2345,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2727,12 +2409,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13078",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2789,12 +2471,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12899",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2840,12 +2522,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13178",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2911,12 +2593,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13037",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -2982,12 +2664,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13044",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3051,12 +2733,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13136",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3102,7 +2784,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13112",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3177,12 +2859,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12926",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3228,7 +2910,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13066",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3294,12 +2976,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13132",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3373,12 +3055,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12859",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3453,12 +3135,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13016",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3533,12 +3215,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12942",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3584,7 +3266,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13075",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3656,12 +3338,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12890",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3715,12 +3397,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12836",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3766,7 +3448,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13128",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3832,12 +3514,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13108",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3894,12 +3576,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13102",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -3961,7 +3643,7 @@
         "start_at": "2026-05-04T12:00",
         "end_at": "2026-10-31T23:59",
         "status": "open",
-        "days_left": 22
+        "days_left": 21
       },
       "url": null,
       "certifications": [],
@@ -3972,7 +3654,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13028",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4047,12 +3729,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13087",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4118,12 +3800,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12999",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4197,12 +3879,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13148",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4273,7 +3955,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4339,12 +4021,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12924",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4390,12 +4072,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12837",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4441,7 +4123,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13010",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4497,12 +4179,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12733",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4559,12 +4241,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12875",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4632,12 +4314,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12897",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4683,7 +4365,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13067",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4758,12 +4440,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13120",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4811,12 +4493,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13159",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4882,12 +4564,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13018",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -4962,12 +4644,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12844",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5042,12 +4724,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12894",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5120,12 +4802,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12901",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5200,12 +4882,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13086",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5259,12 +4941,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13015",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5320,12 +5002,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13119",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5398,7 +5080,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5433,7 +5115,7 @@
         "start_at": "2026-08-01T10:00",
         "end_at": "2026-10-18T10:00",
         "status": "open",
-        "days_left": 9
+        "days_left": 8
       },
       "url": null,
       "certifications": [],
@@ -5444,7 +5126,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13161",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5510,12 +5192,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13100",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5590,12 +5272,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13062",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5679,7 +5361,7 @@
         "start_at": "2026-06-29T00:00",
         "end_at": "2026-10-15T23:59",
         "status": "closing_soon",
-        "days_left": 6
+        "days_left": 5
       },
       "url": null,
       "certifications": [],
@@ -5690,7 +5372,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13115",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5756,12 +5438,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13021",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5838,12 +5520,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12929",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5916,12 +5598,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12812",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -5967,7 +5649,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13068",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6042,12 +5724,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12882",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6104,12 +5786,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13096",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6144,7 +5826,7 @@
         "start_at": null,
         "end_at": null,
         "status": "closing_soon",
-        "days_left": 6
+        "days_left": 5
       },
       "url": "https://www.focusline.com.tw/261108HP?promo=lihi",
       "certifications": [],
@@ -6155,7 +5837,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6225,7 +5907,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13163",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6292,12 +5974,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12900",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6332,7 +6014,7 @@
         "start_at": "2026-07-21T17:00",
         "end_at": "2026-10-31T23:59",
         "status": "open",
-        "days_left": 22
+        "days_left": 21
       },
       "url": null,
       "certifications": [],
@@ -6343,7 +6025,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13160",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6409,12 +6091,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13084",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6495,7 +6177,7 @@
         "start_at": "2026-08-19T00:00",
         "end_at": "2026-10-24T23:59",
         "status": "open",
-        "days_left": 15
+        "days_left": 14
       },
       "url": "https://bao-ming.com/eb/content/7180#33684",
       "certifications": [],
@@ -6506,12 +6188,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13151",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6575,12 +6257,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13166",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6636,13 +6318,13 @@
       ],
       "organizer": "影流文創 SporTaiwan",
       "registration": {
-        "raw": "~ 10月10日 (最後二天)",
+        "raw": "~ 10月10日 (最後一天)",
         "start": "2026-01-30",
         "end": "2026-10-10",
         "start_at": "2026-01-30T11:00",
         "end_at": "2026-10-10T23:59",
         "status": "closing_soon",
-        "days_left": 1
+        "days_left": 0
       },
       "url": "https://sportaiwan.com/activity/activity_desc.php?activity=180",
       "certifications": [],
@@ -6653,12 +6335,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12988",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6732,12 +6414,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13130",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6803,12 +6485,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13001",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6867,12 +6549,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13045",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -6947,12 +6629,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12838",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7005,7 +6687,7 @@
         "start_at": "2026-06-10T11:00",
         "end_at": "2026-10-15T23:59",
         "status": "closing_soon",
-        "days_left": 6
+        "days_left": 5
       },
       "url": "https://lohasnet.tw/Dianqi2026/",
       "certifications": [],
@@ -7016,12 +6698,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13049",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7094,12 +6776,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12885",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7174,12 +6856,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12934",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7225,12 +6907,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13179",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7315,7 +6997,7 @@
         "start_at": "2026-04-23T12:00",
         "end_at": null,
         "status": "open",
-        "days_left": 10
+        "days_left": 9
       },
       "url": "https://www.ctau.org.tw/news/2026-11-20-21-%e5%ae%9c%e8%98%ad%e5%86%ac%e5%b1%b1%e6%b2%b3%e8%b6%85%e7%b4%9a%e9%a6%ac%e6%8b%89%e6%9d%be/",
       "certifications": [
@@ -7330,12 +7012,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13003",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7401,12 +7083,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13144",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7479,7 +7161,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7543,7 +7225,7 @@
         "start_at": "2026-02-01T00:00",
         "end_at": "2026-10-20T23:59",
         "status": "open",
-        "days_left": 11
+        "days_left": 10
       },
       "url": "https://bao-ming.com/eb/content/6898#32425",
       "certifications": [],
@@ -7554,12 +7236,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12813",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7615,7 +7297,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7659,7 +7341,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 14
+        "days_left": 13
       },
       "url": "https://bao-ming.com/eb/content/7016#32884",
       "certifications": [],
@@ -7670,7 +7352,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7738,12 +7420,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13019",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7818,12 +7500,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12862",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7898,12 +7580,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12880",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -7958,12 +7640,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12883",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8027,7 +7709,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13073",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8091,7 +7773,7 @@
         "start_at": "2026-04-24T17:00",
         "end_at": "2026-10-15T23:59",
         "status": "closing_soon",
-        "days_left": 6
+        "days_left": 5
       },
       "url": "https://bao-ming.com/eb/content/6989#32821",
       "certifications": [],
@@ -8102,12 +7784,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12923",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8163,12 +7845,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12845",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8222,7 +7904,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8275,7 +7957,7 @@
         "start_at": "2025-10-01T00:00",
         "end_at": "2026-11-05T23:59",
         "status": "open",
-        "days_left": 27
+        "days_left": 26
       },
       "url": "https://www.beclass.com/rid=305011768b783100e0a5",
       "certifications": [],
@@ -8288,12 +7970,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12734",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8381,7 +8063,7 @@
         "start_at": "2026-06-01T00:00",
         "end_at": "2026-11-07T23:59",
         "status": "open",
-        "days_left": 29
+        "days_left": 28
       },
       "url": "https://www.focusline.com.tw/261205LG",
       "certifications": [],
@@ -8392,12 +8074,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13152",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8472,12 +8154,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12893",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8541,12 +8223,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12846",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8605,12 +8287,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13076",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8676,12 +8358,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13099",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8739,13 +8421,13 @@
       ],
       "organizer": "三星鄉公所",
       "registration": {
-        "raw": "5月28日 ~ 10月11日 (最後三天)",
+        "raw": "5月28日 ~ 10月11日 (最後二天)",
         "start": "2026-05-28",
         "end": "2026-10-11",
         "start_at": "2026-05-28T12:00",
         "end_at": "2026-10-11T23:59",
         "status": "closing_soon",
-        "days_left": 2
+        "days_left": 1
       },
       "url": "https://bao-ming.com/eb/content/7051#33010",
       "certifications": [],
@@ -8756,12 +8438,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12987",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8809,12 +8491,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13046",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8891,12 +8573,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12932",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -8962,12 +8644,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12971",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9042,12 +8724,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12814",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9130,12 +8812,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12864",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9201,7 +8883,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9256,7 +8938,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13063",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9318,7 +9000,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 22
+        "days_left": 21
       },
       "url": "https://lohasnet.tw/QingshuiCarnaval2026/",
       "certifications": [],
@@ -9329,7 +9011,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9404,12 +9086,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13077",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9457,13 +9139,13 @@
       ],
       "organizer": "嘉義縣義竹修緣禪寺",
       "registration": {
-        "raw": "9月11日 ~ 10月11日 (最後三天)",
+        "raw": "9月11日 ~ 10月11日 (最後二天)",
         "start": "2026-09-11",
         "end": "2026-10-11",
         "start_at": "2026-09-11T10:00",
         "end_at": "2026-10-11T23:59",
         "status": "closing_soon",
-        "days_left": 2
+        "days_left": 1
       },
       "url": "https://lohasnet.tw/YizhuJiGongRun2026/",
       "certifications": [],
@@ -9474,12 +9156,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13175",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9532,7 +9214,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 42
+        "days_left": 41
       },
       "url": "https://actionasiaevents.com/zh/2026-taiwan-action-asia-50-shihmen-reservoir/",
       "certifications": [],
@@ -9543,7 +9225,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9605,7 +9287,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 37
+        "days_left": 36
       },
       "url": "https://sportaiwan.com/activity/activity_desc.php?activity=185",
       "certifications": [],
@@ -9616,7 +9298,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9674,13 +9356,13 @@
       ],
       "organizer": "德成鞋業集團",
       "registration": {
-        "raw": "6月05日 ~ 10月11日 (最後三天)",
+        "raw": "6月05日 ~ 10月11日 (最後二天)",
         "start": "2026-06-05",
         "end": "2026-10-11",
         "start_at": "2026-06-05T11:00",
         "end_at": "2026-10-11T23:59",
         "status": "closing_soon",
-        "days_left": 2
+        "days_left": 1
       },
       "url": "https://lohasnet.tw/BNM40thMarathon2026/",
       "certifications": [],
@@ -9691,12 +9373,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12997",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9760,12 +9442,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13124",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9842,12 +9524,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13088",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9891,7 +9573,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 35
+        "days_left": 34
       },
       "url": "https://bao-ming.com/eb/content/7207#33858",
       "certifications": [],
@@ -9902,7 +9584,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -9977,12 +9659,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13079",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10046,12 +9728,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13098",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10097,12 +9779,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12945",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10166,7 +9848,7 @@
         "start_at": "2026-09-04T10:00",
         "end_at": "2026-10-31T23:59",
         "status": "open",
-        "days_left": 22
+        "days_left": 21
       },
       "url": "https://irunner.biji.co/2026Guomatathon",
       "certifications": [],
@@ -10177,12 +9859,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13174",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10228,12 +9910,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13180",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10268,7 +9950,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 55
+        "days_left": 54
       },
       "url": "https://docs.google.com/document/d/1SGoC2ZeKTGgzPZVbL6aTQAXk7dQbZn7T/edit?usp=sharing&ouid=110764794774391593445&rtpof=true&sd=true",
       "certifications": [],
@@ -10279,7 +9961,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10324,7 +10006,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 30
+        "days_left": 29
       },
       "url": "https://bao-ming.com/eb/content/7204#reg",
       "certifications": [],
@@ -10335,7 +10017,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10388,7 +10070,7 @@
         "start_at": "2026-04-17T13:30",
         "end_at": "2026-11-18T23:59",
         "status": "open",
-        "days_left": 40
+        "days_left": 39
       },
       "url": "https://www.ctau.org.tw/news/2026-12-19-%e5%8c%97%e5%ae%9c%e5%85%ac%e8%b7%af%e8%b6%85%e7%b4%9a%e9%a6%ac%e6%8b%89%e6%9d%be/",
       "certifications": [],
@@ -10399,12 +10081,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12995",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10462,13 +10144,13 @@
       ],
       "organizer": "埔鹽順澤宮",
       "registration": {
-        "raw": "6月18日 ~ 10月11日 (最後三天)",
+        "raw": "6月18日 ~ 10月11日 (最後二天)",
         "start": "2026-06-18",
         "end": "2026-10-11",
         "start_at": "2026-06-18T11:00",
         "end_at": "2026-10-11T23:59",
         "status": "closing_soon",
-        "days_left": 2
+        "days_left": 1
       },
       "url": "https://lohasnet.tw/ShunzeRun2026/",
       "certifications": [],
@@ -10479,12 +10161,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13031",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10559,12 +10241,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12994",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10610,7 +10292,7 @@
         "start_at": "2026-06-22T17:00",
         "end_at": "2026-10-19T23:59",
         "status": "open",
-        "days_left": 10
+        "days_left": 9
       },
       "url": "https://www.taipeicitymarathon.com/breakfastrun.php",
       "certifications": [],
@@ -10621,12 +10303,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13129",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10698,7 +10380,7 @@
         "start_at": "2026-08-31T11:00",
         "end_at": "2026-10-20T23:59",
         "status": "open",
-        "days_left": 11
+        "days_left": 10
       },
       "url": "https://lohasnet.tw/NanhuaMarathon2026/",
       "certifications": [],
@@ -10711,12 +10393,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12992",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10780,7 +10462,7 @@
         "start_at": "2026-05-06T17:00",
         "end_at": "2026-11-08T23:59",
         "status": "open",
-        "days_left": 30
+        "days_left": 29
       },
       "url": "https://bao-ming.com/eb/content/7025#32878",
       "certifications": [],
@@ -10791,12 +10473,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13032",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10859,12 +10541,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13020",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10930,12 +10612,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13101",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -10970,7 +10652,7 @@
         "start_at": "2026-07-01T14:00",
         "end_at": "2026-11-22T23:59",
         "status": "open",
-        "days_left": 44
+        "days_left": 43
       },
       "url": null,
       "certifications": [],
@@ -10981,7 +10663,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13109",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11062,7 +10744,7 @@
         "start_at": "2026-08-06T00:00",
         "end_at": "2026-12-05T23:59",
         "status": "open",
-        "days_left": 57
+        "days_left": 56
       },
       "url": "https://www.focusline.com.tw/261226IA",
       "certifications": [],
@@ -11073,12 +10755,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13153",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11132,7 +10814,7 @@
         "start_at": "2026-10-02T00:00",
         "end_at": "2026-10-31T23:59",
         "status": "open",
-        "days_left": 22
+        "days_left": 21
       },
       "url": "https://www.joinnow.com.tw/2026Mikanrun#b9-1",
       "certifications": [],
@@ -11143,12 +10825,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13190",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11185,7 +10867,7 @@
         "start_at": "2026-07-28T12:00",
         "end_at": "2026-10-30T23:59",
         "status": "open",
-        "days_left": 21
+        "days_left": 20
       },
       "url": "https://bao-ming.com/eb/content/7151#33426",
       "certifications": [],
@@ -11196,12 +10878,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13113",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11262,7 +10944,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 37
+        "days_left": 36
       },
       "url": "https://irunner.biji.co/2026JustRun",
       "certifications": [],
@@ -11273,7 +10955,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11328,7 +11010,7 @@
         "start_at": "2026-07-10T18:00",
         "end_at": "2026-11-08T23:59",
         "status": "open",
-        "days_left": 30
+        "days_left": 29
       },
       "url": "https://bao-ming.com/eb/content/7078#33324",
       "certifications": [],
@@ -11339,12 +11021,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13025",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11393,13 +11075,13 @@
       ],
       "organizer": "新營太子宮太子爺廟管理委員會",
       "registration": {
-        "raw": "7月08日 ~ 10月11日 (最後三天)",
+        "raw": "7月08日 ~ 10月11日 (最後二天)",
         "start": "2026-07-08",
         "end": "2026-10-11",
         "start_at": "2026-07-08T11:00",
         "end_at": "2026-10-11T23:59",
         "status": "closing_soon",
-        "days_left": 2
+        "days_left": 1
       },
       "url": "https://lohasnet.tw/TaizikunRun2026/",
       "certifications": [],
@@ -11410,12 +11092,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13074",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11477,7 +11159,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 24
+        "days_left": 23
       },
       "url": "https://bao-ming.com/eb/content/7188#33768",
       "certifications": [],
@@ -11488,7 +11170,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11541,7 +11223,7 @@
         "start_at": "2026-08-14T17:00",
         "end_at": "2026-11-21T23:59",
         "status": "open",
-        "days_left": 43
+        "days_left": 42
       },
       "url": "https://bao-ming.com/eb/content/7165#33608",
       "certifications": [],
@@ -11552,12 +11234,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13053",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11622,7 +11304,7 @@
         "start_at": "2026-08-04T12:00",
         "end_at": "2026-11-26T23:59",
         "status": "open",
-        "days_left": 48
+        "days_left": 47
       },
       "url": "https://bao-ming.com/eb/content/7163#33484",
       "certifications": [],
@@ -11633,12 +11315,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13167",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11693,7 +11375,7 @@
         "start_at": "2026-09-22T00:00",
         "end_at": "2026-10-15T23:59",
         "status": "closing_soon",
-        "days_left": 6
+        "days_left": 5
       },
       "url": "https://ctrun.tw/MZ270103",
       "certifications": [],
@@ -11704,12 +11386,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13182",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11763,7 +11445,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13035",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11856,12 +11538,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13033",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11898,7 +11580,7 @@
         "start_at": "2026-07-10T00:00",
         "end_at": "2026-11-30T23:59",
         "status": "open",
-        "days_left": 52
+        "days_left": 51
       },
       "url": "https://www.focusline.com.tw/270110KW?promo=taipeimarathon",
       "certifications": [],
@@ -11909,12 +11591,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13069",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -11978,7 +11660,7 @@
         "start_at": "2026-08-08T12:00",
         "end_at": "2026-11-15T23:59",
         "status": "open",
-        "days_left": 37
+        "days_left": 36
       },
       "url": "https://irunner.biji.co/Yilan2027",
       "certifications": [],
@@ -11989,12 +11671,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13029",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12049,7 +11731,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 14
+        "days_left": 13
       },
       "url": "https://irunner.biji.co/2027KHM",
       "certifications": [
@@ -12063,12 +11745,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13036",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12132,7 +11814,7 @@
         "start_at": "2026-09-02T16:00",
         "end_at": "2026-10-30T16:00",
         "status": "open",
-        "days_left": 21
+        "days_left": 20
       },
       "url": "https://scbmarathon.com/index.php",
       "certifications": [
@@ -12148,12 +11830,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13155",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12208,7 +11890,7 @@
         "start_at": "2026-09-15T11:00",
         "end_at": "2026-10-25T23:59",
         "status": "open",
-        "days_left": 16
+        "days_left": 15
       },
       "url": "https://lohasnet.tw/SPIL2027/",
       "certifications": [],
@@ -12219,12 +11901,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13157",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12270,7 +11952,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12891",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12325,7 +12007,7 @@
         "start_at": "2026-09-17T00:00",
         "end_at": "2026-10-15T23:59",
         "status": "closing_soon",
-        "days_left": 6
+        "days_left": 5
       },
       "url": "https://ctrun.tw/MZ270117",
       "certifications": [],
@@ -12336,12 +12018,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13183",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12424,7 +12106,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12486,7 +12168,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 21
+        "days_left": 20
       },
       "url": "https://www.sportsnet.org.tw/20270117_web/",
       "certifications": [
@@ -12499,7 +12181,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12561,7 +12243,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 58
+        "days_left": 57
       },
       "url": "https://bao-ming.com/eb/content/7190#33728",
       "certifications": [],
@@ -12572,7 +12254,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12653,7 +12335,7 @@
         "start_at": "2026-05-29T00:00",
         "end_at": "2026-12-23T23:59",
         "status": "open",
-        "days_left": 75
+        "days_left": 74
       },
       "url": "https://www.ctau.org.tw/news/2027-01-23-%e9%99%bd%e6%98%8e%e5%b1%b1%e8%b6%85%e7%b4%9a%e9%a6%ac%e6%8b%89%e6%9d%be/",
       "certifications": [],
@@ -12666,12 +12348,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13072",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12724,7 +12406,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 22
+        "days_left": 21
       },
       "url": "https://bao-ming.com/eb/content/7157#33830",
       "certifications": [],
@@ -12735,7 +12417,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12801,12 +12483,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13059",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12870,7 +12552,7 @@
         "start_at": "2026-07-15T12:00",
         "end_at": "2026-11-15T23:59",
         "status": "open",
-        "days_left": 37
+        "days_left": 36
       },
       "url": "https://irunner.biji.co/2027TCCA",
       "certifications": [],
@@ -12881,12 +12563,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12976",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -12932,7 +12614,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13004,7 +12686,7 @@
         "start_at": "2026-08-12T18:00",
         "end_at": "2026-12-15T23:59",
         "status": "open",
-        "days_left": 67
+        "days_left": 66
       },
       "url": "https://bao-ming.com/eb/content/7164#33596",
       "certifications": [],
@@ -13015,12 +12697,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13095",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13084,7 +12766,7 @@
         "start_at": "2026-07-10T10:00",
         "end_at": "2026-12-31T23:59",
         "status": "open",
-        "days_left": 83
+        "days_left": 82
       },
       "url": "https://fsurl.cc/270214KV/taipeimarathon",
       "certifications": [],
@@ -13097,12 +12779,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13070",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13140,7 +12822,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13202,7 +12884,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 104
+        "days_left": 103
       },
       "url": "https://bao-ming.com/eb/content/7198#33792",
       "certifications": [],
@@ -13213,7 +12895,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13277,7 +12959,7 @@
         "start_at": "2026-10-01T11:00",
         "end_at": "2026-11-16T23:59",
         "status": "open",
-        "days_left": 38
+        "days_left": 37
       },
       "url": "https://lohasnet.tw/MaiXiang2027/",
       "certifications": [],
@@ -13288,12 +12970,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13170",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13357,7 +13039,7 @@
         "start_at": "2026-10-01T13:00",
         "end_at": "2026-12-31T23:59",
         "status": "open",
-        "days_left": 83
+        "days_left": 82
       },
       "url": "https://ironman.org.tw/index.php/167",
       "certifications": [],
@@ -13368,12 +13050,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13173",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13437,7 +13119,7 @@
         "start_at": "2026-09-22T18:00",
         "end_at": "2027-01-31T23:59",
         "status": "open",
-        "days_left": 114
+        "days_left": 113
       },
       "url": "https://irunner.biji.co/2027Changhua?page=5694",
       "certifications": [],
@@ -13448,12 +13130,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13123",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13513,7 +13195,7 @@
         "start_at": "2026-07-01T10:00",
         "end_at": "2026-10-15T23:59",
         "status": "closing_soon",
-        "days_left": 6
+        "days_left": 5
       },
       "url": "https://www.focusline.com.tw/270228JK/?promo=running.biji",
       "certifications": [],
@@ -13524,12 +13206,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=12943",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13582,7 +13264,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 112
+        "days_left": 111
       },
       "url": "https://bao-ming.com/eb/content/7202#33828",
       "certifications": [],
@@ -13593,7 +13275,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13648,7 +13330,7 @@
         "start_at": "2026-10-01T11:00",
         "end_at": "2027-01-15T23:59",
         "status": "open",
-        "days_left": 98
+        "days_left": 97
       },
       "url": "https://lohasnet.tw/RotaryClub2027/",
       "certifications": [],
@@ -13659,12 +13341,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13189",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13723,12 +13405,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13196",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13783,7 +13465,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 28
+        "days_left": 27
       },
       "url": "https://bao-ming.com/eb/content/7181#33748",
       "certifications": [
@@ -13796,12 +13478,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13138",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13844,7 +13526,7 @@
         "start_at": "2026-04-01T12:00",
         "end_at": "2027-01-10T23:59",
         "status": "open",
-        "days_left": 93
+        "days_left": 92
       },
       "url": "https://bao-ming.com/eb/content/6970#32718",
       "certifications": [],
@@ -13855,12 +13537,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13054",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13911,7 +13593,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 93
+        "days_left": 92
       },
       "url": "https://bao-ming.com/eb/content/6970#32718",
       "certifications": [],
@@ -13922,7 +13604,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -13983,7 +13665,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 97
+        "days_left": 96
       },
       "url": "https://bao-ming.com/eb/content/7152#33850",
       "certifications": [],
@@ -13994,7 +13676,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14054,7 +13736,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 67
+        "days_left": 66
       },
       "url": "https://bao-ming.com/eb/content/7159#33422",
       "certifications": [],
@@ -14065,7 +13747,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14120,7 +13802,7 @@
         "start_at": "2026-09-21T11:00",
         "end_at": "2027-01-10T23:59",
         "status": "open",
-        "days_left": 93
+        "days_left": 92
       },
       "url": "https://lohasnet.tw/Kapok2027/",
       "certifications": [],
@@ -14131,12 +13813,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13172",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14204,12 +13886,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13181",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14262,7 +13944,7 @@
         "start_at": "2026-10-01T12:00",
         "end_at": "2027-01-07T23:59",
         "status": "open",
-        "days_left": 90
+        "days_left": 89
       },
       "url": "https://irunner.biji.co/2027NGR",
       "certifications": [],
@@ -14273,12 +13955,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13156",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14340,7 +14022,7 @@
         "start_at": "2026-10-01T11:00",
         "end_at": "2026-12-31T23:59",
         "status": "open",
-        "days_left": 83
+        "days_left": 82
       },
       "url": "https://lohasnet.tw/Taichung_Harbor2027/",
       "certifications": [],
@@ -14351,12 +14033,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13143",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14434,12 +14116,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13111",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14503,7 +14185,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13103",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14589,12 +14271,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13121",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14660,7 +14342,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14713,7 +14395,7 @@
         "start_at": "2026-10-08T11:00",
         "end_at": "2027-02-27T23:59",
         "status": "open",
-        "days_left": 141
+        "days_left": 140
       },
       "url": "https://lohasnet.tw/TaipeiMorningSummer2027/",
       "certifications": [],
@@ -14724,12 +14406,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13194",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14797,12 +14479,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13164",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14864,7 +14546,7 @@
         "start_at": "2026-08-28T15:30",
         "end_at": "2027-01-21T23:59",
         "status": "open",
-        "days_left": 104
+        "days_left": 103
       },
       "url": null,
       "certifications": [],
@@ -14875,7 +14557,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13162",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14910,7 +14592,7 @@
         "start_at": "2026-07-09T12:00",
         "end_at": "2027-01-21T23:59",
         "status": "open",
-        "days_left": 104
+        "days_left": 103
       },
       "url": "https://bao-ming.com/eb/content/7114#33296",
       "certifications": [],
@@ -14921,12 +14603,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13169",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -14974,12 +14656,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13195",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15032,7 +14714,7 @@
         "start_at": "2026-08-20T18:00",
         "end_at": "2027-02-12T23:59",
         "status": "open",
-        "days_left": 126
+        "days_left": 125
       },
       "url": "https://bao-ming.com/eb/content/7172#33690",
       "certifications": [],
@@ -15045,12 +14727,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13104",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15086,7 +14768,7 @@
         "start_at": "2026-07-09T12:00",
         "end_at": "2027-01-21T23:59",
         "status": "open",
-        "days_left": 104
+        "days_left": 103
       },
       "url": "https://bao-ming.com/eb/content/7114#33296",
       "certifications": [],
@@ -15097,12 +14779,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13168",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15161,12 +14843,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13024",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15230,7 +14912,7 @@
         "start_at": "2026-10-01T17:00",
         "end_at": "2027-01-17T23:59",
         "status": "open",
-        "days_left": 100
+        "days_left": 99
       },
       "url": "https://lohasnet.tw/Shengang-marathon2027/",
       "certifications": [],
@@ -15241,12 +14923,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13107",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15309,7 +14991,7 @@
         "start_at": "2026-09-24T17:00",
         "end_at": "2027-02-17T23:59",
         "status": "open",
-        "days_left": 131
+        "days_left": 130
       },
       "url": null,
       "certifications": [],
@@ -15324,12 +15006,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13158",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15375,12 +15057,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13176",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15423,7 +15105,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 152
+        "days_left": 151
       },
       "url": "https://800heroes.com/races/Lanyu-2027",
       "certifications": [],
@@ -15434,7 +15116,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15480,7 +15162,7 @@
         "start_at": "2026-03-21T06:00",
         "end_at": "2027-02-14T23:59",
         "status": "open",
-        "days_left": 128
+        "days_left": 127
       },
       "url": "https://www.focusline.com.tw/270410JT?promo=running.biji",
       "certifications": [],
@@ -15491,12 +15173,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13002",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15570,12 +15252,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13184",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15623,7 +15305,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15669,12 +15351,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13177",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15749,7 +15431,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15813,7 +15495,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13192",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15881,12 +15563,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13135",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -15939,7 +15621,7 @@
         "start_at": "2026-10-01T11:00",
         "end_at": "2026-12-31T23:59",
         "status": "open",
-        "days_left": 83
+        "days_left": 82
       },
       "url": "https://lohasnet.tw/Sunfar2027/",
       "certifications": [],
@@ -15950,12 +15632,12 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         },
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13137",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -16026,7 +15708,7 @@
         "start_at": "2026-09-30T11:00",
         "end_at": "2027-01-31T23:59",
         "status": "open",
-        "days_left": 114
+        "days_left": 113
       },
       "url": null,
       "certifications": [],
@@ -16037,7 +15719,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13188",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -16109,7 +15791,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 114
+        "days_left": 113
       },
       "url": "https://bao-ming.com/eb/content/7183#34112",
       "certifications": [],
@@ -16120,7 +15802,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -16190,7 +15872,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 175
+        "days_left": 174
       },
       "url": "https://venturetreks.asia/balitrailtaiwan/",
       "certifications": [],
@@ -16201,7 +15883,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -16268,7 +15950,7 @@
         "start_at": null,
         "end_at": null,
         "status": "open",
-        "days_left": 162
+        "days_left": 161
       },
       "url": "https://bao-ming.com/eb/content/7089#33097",
       "certifications": [],
@@ -16279,7 +15961,7 @@
         {
           "name": "跑者廣場",
           "url": "http://www.taipeimarathon.org.tw/contest.aspx",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -16352,7 +16034,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13122",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     },
@@ -16398,7 +16080,7 @@
         {
           "name": "運動筆記",
           "url": "https://running.biji.co/index.php?q=competition&act=info&cid=13065",
-          "scraped_at": "2026-10-09T22:10:57+08:00"
+          "scraped_at": "2026-10-10T00:43:57+08:00"
         }
       ]
     }
