@@ -10,7 +10,11 @@
   每個產品／設計決定都要同時寫進策略書（給人看）和這份 CLAUDE.md（給程式用）；沒寫進去的就當作還沒決定。
 
 - **跟 Figma 協作（2026-10-10 決定，Sean 用 Figma 免費方案）**：免費方案不能讓 Claude 寫入 Figma、每月讀取約 20 次，所以不靠 Figma 連接器。
-  - 整頁畫面要拿到 Figma 改 → Sean 用 Figma 外掛 html.to.design 匯入 paoshi.pages.dev。
+  - 整頁畫面要拿到 Figma 改 → **Claude 用 Figma 連接器的 `html_to_figma` 直接送進 Sean 的 Figma 檔**（2026-10-10 實測免費方案可用）。Sean 的檔案：「Paoshi」https://www.figma.com/design/MmyJWpwDQEMsih9TMAsGcc 。每送一次會在檔案裡新增一頁。
+    做法：本機預覽（`paoshi-site`）把視窗設成要的寬度、點出要的狀態（主題、篩選面板、日曆…）→ 把渲染後的 DOM＋style.css 打包成獨立 HTML（拿掉 script）→ 呼叫 html_to_figma 拿到上傳網址 → curl POST。
+    注意：Figma 用 1280 寬轉換，**手機版要先把 CSS 的 @media 區塊全部拿掉**，body 固定 390px，`position:fixed` 改 absolute，不然版面會套到電腦版規則而亂掉。弧形文字（textPath）不會轉過去，圓鈕改用 `design/` 的 SVG。
+    `get_screenshot`、`get_metadata` 等讀取工具在免費方案每月約 20 次，只在需要確認結果時用。
+  - 替代：Sean 也可以自己用 Figma 外掛 html.to.design 匯入 paoshi.pages.dev（只抓得到網頁剛打開的狀態）。
   - 單一元件（圖示、按鈕、標籤）→ Claude 產生 Figma 相容 SVG 放 `design/`（不進 repo）。曲線文字要拆成各自旋轉的文字圖層（Figma 不支援 text-on-path）。
   - Sean 改完交回 → Figma「Copy as SVG」貼上，或截圖＋文字說明。
   - 需要來回微調的 → Claude 設計畫布（畫板拆成獨立物件可拖曳縮放、加 Tweaks 滑桿，Claude 讀回數值）。
