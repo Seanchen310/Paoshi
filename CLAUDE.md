@@ -9,6 +9,12 @@
 - **給人看的文件放 Claude Docs，不放 GitHub**：主文件是〈跑事 產品設計與策略書〉https://claude.ai/code/artifact/425c195c-12d2-4724-81a7-71488a2c0379 。
   每個產品／設計決定都要同時寫進策略書（給人看）和這份 CLAUDE.md（給程式用）；沒寫進去的就當作還沒決定。
 
+- **跟 Figma 協作（2026-10-10 決定，Sean 用 Figma 免費方案）**：免費方案不能讓 Claude 寫入 Figma、每月讀取約 20 次，所以不靠 Figma 連接器。
+  - 整頁畫面要拿到 Figma 改 → Sean 用 Figma 外掛 html.to.design 匯入 paoshi.pages.dev。
+  - 單一元件（圖示、按鈕、標籤）→ Claude 產生 Figma 相容 SVG 放 `design/`（不進 repo）。曲線文字要拆成各自旋轉的文字圖層（Figma 不支援 text-on-path）。
+  - Sean 改完交回 → Figma「Copy as SVG」貼上，或截圖＋文字說明。
+  - 需要來回微調的 → Claude 設計畫布（畫板拆成獨立物件可拖曳縮放、加 Tweaks 滑桿，Claude 讀回數值）。
+  - 之後若升級 Figma Professional（Full seat），再改用 Figma MCP 的 use_figma 直接寫入畫布。
 - Sean 是設計師，不寫程式；程式由 Claude 負責寫、測試、除錯。
 - 用繁體中文溝通，說明要具體、白話、少術語。
 - Sean 習慣在 **GitHub 網頁**上操作（上傳、編輯檔案），不用 GitHub Desktop。需要他動手時給逐步的網頁操作。
