@@ -32,6 +32,8 @@
 - `site/`：網站（純 HTML/CSS/JS，沒有框架、不用建置工具）。`index.html`、`style.css`、`app.js`。讀同一層的 `races.json`。
   - 部署：Cloudflare Pages 連 GitHub repo，Build command `python3 build_site.py`、output `site`。排程每次存回資料就會自動重新部署。
   - `build_site.py`：複製 races.json，並為每場比賽產生靜態網頁 `site/race/<key>/index.html`（title、description、canonical、og、schema.org SportsEvent JSON-LD、預先寫好的詳情內容），加上 sitemap.xml、robots.txt。這些產生的檔案都在 .gitignore。
+  - Google Search Console：2026-10-10 以「網址前置字元」https://paoshi.pages.dev/ 驗證（帳號 molimora@gmail.com），已送出 sitemap.xml 並要求首頁建立索引。
+    驗證靠 `site/googlec7ef7df34be6e497.html`，**不能刪**（刪了會失去驗證）。Cloudflare 會把 .html 轉址到無副檔名版本，Google 接受。
   - 本機預覽：`python3 build_site.py` 後用 `.claude/launch.json` 的 `paoshi-site`（port 8787）。
   - 網址：`/` 列表、`/race/<key>/` 詳情（真正的網址，站內用 pushState 換頁不重新載入；舊的 `#/race/<id>` 會自動轉成新網址）。資產路徑一律用絕對路徑（/app.js）。
   - 靜態網頁的 #app 有 `data-prerendered`：資料載入前先顯示預先寫好的內容，載入後換成即時狀態。
@@ -121,9 +123,8 @@
 
 ## 下一步（依優先序，與策略書一致）
 
-1. 把網站提交到 Google Search Console 並送出 sitemap（需要 Sean 的 Google 帳號驗證網站）。
-2. 寫信給跑者廣場、運動筆記，徵求使用資料的同意。
-3. 選定流量統計工具（不記錄姓名、Email、精確位置）。
-4. 收藏、比較、底部導覽、篩選條件寫進網址。
-5. 開報提醒（LINE 或 Email）。
-6. 賽事詳情補關門時間、報名費（只有運動筆記才有的場次）、路線、海拔：運動筆記詳情頁有，但一場一個請求，要限量。
+1. 寫信給跑者廣場、運動筆記，徵求使用資料的同意。
+2. 選定流量統計工具（不記錄姓名、Email、精確位置）。
+3. 收藏、比較、底部導覽、篩選條件寫進網址。
+4. 開報提醒（LINE 或 Email）。
+5. 賽事詳情補關門時間、報名費（只有運動筆記才有的場次）、路線、海拔：運動筆記詳情頁有，但一場一個請求，要限量。
