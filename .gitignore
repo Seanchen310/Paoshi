@@ -6,3 +6,6 @@ site/race/
 site/sitemap.xml
 site/robots.txt
 site/_headers
+
+# 設計檔只留在本機，不公開
+design/
