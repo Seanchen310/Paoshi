@@ -103,23 +103,43 @@
   }
 
   // 報名狀態依「今天」重新計算，資料一天只更新兩次，剩幾天才不會差一天
-  function liveStatus(reg, today) {
-    if (reg.status === 'closed' || reg.status === 'unknown') return { status: reg.status, left: null };
-    const end = reg.end, start = reg.start;
-    if (end && today > end) return { status: 'closed', left: null };
-    if (start && today < start) return { status: 'upcoming', left: null };
-    if (end) { const left = daysBetween(today, end); return { status: left <= 7 ? 'closing_soon' : 'open', left: left }; }
-    return { status: 'open', left: null };
+  // 報名狀態規則（2026-10-10 決定）：寧可說待確認，也不說錯。
+  // 和 scraper.py 的 live_status() 是同一套規則；這裡依使用者打開網頁的「現在」重算。
+  const STALE_MS = 7 * DAY, SOON_MS = 72 * 3600000;
+  const atMs = (iso) => iso ? Date.parse(iso + ':00+08:00') : null;   // 台灣時間 → 毫秒
+  function liveStatus(reg, now, scraped) {
+    const raw = reg.raw || '';
+    if (raw.indexOf('額滿') >= 0) return { status: 'full', left: null, reason: 'source_full' };
+    if (raw === '已截止' || raw === '已截止報名') return { status: 'closed', left: null, reason: 'source_closed' };
+    const start = reg.start, end = reg.end, startAt = atMs(reg.start_at), endAt = atMs(reg.end_at);
+    if (!start && !end && !raw) return { status: 'unknown', left: null, reason: 'no_info' };
+    const today = taipeiNow().date;
+    if (endAt) {
+      if (now >= endAt) return { status: 'closed', left: null, reason: 'passed' };
+    } else if (end) {
+      if (today > end) return { status: 'closed', left: null, reason: 'passed' };
+      if (today === end) return { status: 'unknown', left: null, reason: 'deadline_today' };   // 不假設當晚還報得到
+    }
+    const opens = startAt || (start ? atMs(start + 'T00:00') : null);
+    if (opens && now < opens) return { status: 'upcoming', left: null, reason: '' };
+    if (opens && scraped < opens) return { status: 'unknown', left: null, reason: 'should_have_opened' };
+    if (now - scraped > STALE_MS) return { status: 'unknown', left: null, reason: 'stale' };
+    if (endAt) {
+      const ms = endAt - now;
+      return { status: ms <= SOON_MS ? 'closing_soon' : 'open', left: Math.floor(ms / DAY), reason: '' };
+    }
+    return { status: 'open', left: null, reason: '' };      // 只知道截止日期：不倒數
   }
 
   function prepare(json) {
-    const today = taipeiNow().date;
+    const today = taipeiNow().date, now = Date.now();
     const races = json.races.filter((r) => r.date && r.date >= today).map((r) => {
-      const st = liveStatus(r.registration, today);
+      const scraped = r.sources[0] && r.sources[0].scraped_at ? Date.parse(r.sources[0].scraped_at) : now;
+      const st = liveStatus(r.registration, now, scraped);
       const fees = r.distances.map((d) => d.fee).filter((f) => f != null);
       const shortLoc = (r.location || r.address || '').replace(r.county || '', '').replace(/^台(北|中|南)市|^臺(北|中|南)市/, '');
       return Object.assign({}, r, {
-        st: st.status, left: st.left,
+        st: st.status, left: st.left, why: st.reason,
         minFee: fees.length ? Math.min.apply(null, fees) : null,
         cert: r.certifications.find((c) => CERT_LABEL[c]) || null,
         trail: r.categories.indexOf('trail') >= 0,
@@ -176,14 +196,25 @@
   }
   function statusText(r) {
     const reg = r.registration;
-    if (r.st === 'open') return '報名中 · ' + (r.left != null ? (r.left === 0 ? '今天截止' : `剩 ${r.left} 天`) : '截止日未公布');
-    if (r.st === 'closing_soon') return '快截止 · ' + (r.left === 0 ? '今天截止' : `剩 ${r.left} 天`);
+    if (r.st === 'open') {
+      if (r.left != null) return `報名中 · 剩 ${r.left} 天`;                    // 有確切截止時間才倒數
+      return '報名中 · ' + (reg.end ? `截止日 ${md(reg.end)}` : '截止日未公布');
+    }
+    if (r.st === 'closing_soon') {
+      const day = reg.end_at.slice(0, 10) === taipeiNow().date ? '今天' : md(reg.end_at.slice(0, 10));
+      return `快截止 · ${day} ${reg.end_at.slice(11, 16)} 截止`;
+    }
     if (r.st === 'upcoming') {
       const t = reg.start_at ? ' ' + reg.start_at.slice(11, 16) : '';
       return '即將開報 · ' + (reg.start ? `${md(reg.start)}${t} 開報` : '開報日未公布');
     }
     if (r.st === 'closed') return '已截止';
-    return '報名資訊未公布';
+    if (r.st === 'full') return '額滿';
+    return {
+      deadline_today: '待確認 · 今天截止',
+      should_have_opened: '待確認 · 應已開放報名',
+      stale: '待確認 · 資料超過 7 天未更新',
+    }[r.why] || '報名資訊未公布';
   }
   const feeText = (f) => f === 0 ? '免費' : 'NT$' + f.toLocaleString();
 
@@ -191,7 +222,7 @@
     return `<a class="card" href="#/race/${encodeURIComponent(r.id)}">
       <div class="date"><span class="mon">${Number(r.date.slice(5, 7))} 月</span><span class="day">${Number(r.date.slice(8, 10))}</span><span>週${weekday(r.date)}</span></div>
       <div class="card-body">
-        <div class="title-row"><span class="name">${esc(r.name)}</span>${r.trail ? '<span class="tag">越野</span>' : ''}${r.cert ? `<span class="cert">${CERT_LABEL[r.cert]}</span>` : ''}</div>
+        <div class="title-row"><span class="name">${esc(r.name)}</span>${r.postponed_from ? '<span class="tag alert">已延期</span>' : ''}${r.trail ? '<span class="tag">越野</span>' : ''}${r.cert ? `<span class="cert">${CERT_LABEL[r.cert]}</span>` : ''}</div>
         <div class="place-row"><span class="place">${esc(r.place)}</span>${r.minFee != null ? `<span class="fee">${feeText(r.minFee)}${r.minFee ? ' 起' : ''}</span>` : ''}</div>
         <div class="dists">${distPills(r, 6)}</div>
         <span class="status ${r.st}">${statusText(r)}</span>
@@ -258,7 +289,7 @@
           <button type="button" role="radio" aria-checked="${byDeadline}" data-calby="deadline">報名截止日</button>
         </div>
         <div class="cal-grid">${WD.map((w) => `<span class="cal-wd">${w}</span>`).join('')}${cells}</div>
-        <div class="legend"><span><i class="dot-open"></i>報名中</span><span><i class="dot-closing_soon"></i>快截止</span><span><i class="dot-upcoming"></i>即將開報</span><span><i class="dot-closed"></i>已截止／未公布</span></div>
+        <div class="legend"><span><i class="dot-open"></i>報名中</span><span><i class="dot-closing_soon"></i>快截止</span><span><i class="dot-upcoming"></i>即將開報</span><span><i class="dot-closed"></i>已截止／待確認</span></div>
       </section>
       <div class="day-list">${dayHead}</div></div>`;
   }
@@ -419,9 +450,13 @@
     let remind = '';
     if (r.st === 'open' || r.st === 'closing_soon') remind = reg.end ? '截止前提醒我' : '';
     else if (r.st === 'upcoming') remind = reg.start ? '開報時提醒我' : '';
-    const signup = r.url
+    // 「前往報名」只在：報名中或快截止、比賽日還沒過、有報名連結；否則改成查看官網或賽事資訊
+    const canSignup = (r.st === 'open' || r.st === 'closing_soon') && r.date >= taipeiNow().date && r.url;
+    const signup = canSignup
       ? `<a class="cta" href="${esc(r.url)}" target="_blank" rel="noopener">前往報名 ${ICON.out}</a>`
-      : `<a class="cta" href="${esc(r.sources[r.sources.length - 1].url)}" target="_blank" rel="noopener">看賽事資訊 ${ICON.out}</a>`;
+      : r.url
+        ? `<a class="cta" href="${esc(r.url)}" target="_blank" rel="noopener">查看官方網站 ${ICON.out}</a>`
+        : `<a class="cta" href="${esc(r.sources[r.sources.length - 1].url)}" target="_blank" rel="noopener">看賽事資訊 ${ICON.out}</a>`;
 
     $('#app').innerHTML = `
       <div class="bar">
@@ -430,7 +465,7 @@
       </div>
       <main class="detail">
         <section class="hero">
-          <div class="badges">${r.trail ? '<span class="tag">越野</span>' : ''}${certs}<span class="status ${r.st}">${statusText(r)}</span></div>
+          <div class="badges">${r.postponed_from ? `<span class="tag alert">已延期（原訂 ${md(r.postponed_from)}）</span>` : ''}${r.trail ? '<span class="tag">越野</span>' : ''}${certs}<span class="status ${r.st}">${statusText(r)}</span></div>
           <h1>${esc(r.name)}</h1>
           ${r.alt_names && r.alt_names.length ? `<div class="aka">也稱：${r.alt_names.map(esc).join('、')}</div>` : ''}
           <div class="when"><span class="big">${r.date.slice(5, 7)}.${r.date.slice(8, 10)}</span>

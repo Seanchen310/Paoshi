@@ -204,13 +204,13 @@ def classify(label, km):
         return "ultra"
     if km >= 42:
         return "full"
-    if 20 <= km <= 25:
-        return "half"
+    if 20 <= km <= 22:
+        return "half"           # 標準 21.0975K
     if 9 <= km < 20:
         return "10k"
     if km < 9:
         return "short"
-    return "long"               # 25–42K 之間
+    return "long"               # 22–42K 之間，例如 23K、25K 超半馬
 
 
 TRAIL_RE = re.compile(r"越野|trail|山徑|天空跑|sky\s?run", re.I)
@@ -344,6 +344,75 @@ def reg_status(start, end, today):
     return "open", None
 
 
+# ---------------------------------------------------------------
+# 報名狀態規則（2026-10-10 決定）：寧可說待確認，也不說錯
+# 網站 site/app.js 的 liveStatus() 用同一套規則，依使用者打開時的時間重算
+# ---------------------------------------------------------------
+
+STALE_DAYS = 7          # 超過 7 天沒抓到新資料 → 報名中降級為待確認
+SOON_HOURS = 72         # 有確切截止時間、剩不到 72 小時 → 快截止
+
+
+def _at(iso):
+    """'2026-10-30T16:00' → 台灣時間的 datetime。"""
+    return dt.datetime.fromisoformat(iso).replace(tzinfo=TZ) if iso else None
+
+
+def live_status(reg, now, scraped_at):
+    """回傳 (status, days_left, reason)。now、scraped_at 是有時區的 datetime。
+
+    依序判斷，第一個符合就停：
+      1. 來源寫額滿／已截止 → 維持；沒有任何報名資訊 → 待確認
+      2. 知道確切截止時間且已過 → 已截止
+      3. 只知道截止日期，今天已過 → 已截止
+      4. 只知道截止日期，今天就是截止日 → 待確認（不假設當晚還報得到）
+      5. 還沒到開報時間 → 即將開報；已到開報時間但資料是開報前抓的 → 待確認
+      6. 資料超過 7 天沒更新 → 待確認
+      7. 有確切截止時間：剩不到 72 小時 → 快截止，否則報名中（才倒數天數）
+         只知道日期 → 報名中，不倒數
+    """
+    raw = reg.get("raw") or ""
+    if "額滿" in raw:
+        return "full", None, "source_full"
+    if raw in ("已截止", "已截止報名"):
+        return "closed", None, "source_closed"
+    start, end = reg.get("start"), reg.get("end")
+    start_at, end_at = _at(reg.get("start_at")), _at(reg.get("end_at"))
+    if not (start or end or raw):
+        return "unknown", None, "no_info"
+    today = now.astimezone(TZ).date().isoformat()
+
+    if end_at:
+        if now >= end_at:
+            return "closed", None, "passed"
+    elif end:
+        if today > end:
+            return "closed", None, "passed"
+        if today == end:
+            return "unknown", None, "deadline_today"
+
+    opens = start_at or (_at(start + "T00:00") if start else None)
+    if opens and now < opens:
+        return "upcoming", None, ""
+    if opens and scraped_at < opens:
+        return "unknown", None, "should_have_opened"
+    if now - scraped_at > dt.timedelta(days=STALE_DAYS):
+        return "unknown", None, "stale"
+    if end_at:
+        hours = (end_at - now).total_seconds() / 3600
+        return ("closing_soon" if hours <= SOON_HOURS else "open"), int(hours // 24), ""
+    return "open", None, ""
+
+
+def apply_status_rules(races, now):
+    """合併完之後統一套用報名狀態規則（CSV 和網站看到的一致）。"""
+    for r in races:
+        scraped = dt.datetime.fromisoformat(r["sources"][0]["scraped_at"]) if r["sources"][0].get("scraped_at") else now
+        st, left, _ = live_status(r["registration"], now, scraped)
+        r["registration"]["status"], r["registration"]["days_left"] = st, left
+    return races
+
+
 def make_id(date_iso, name):
     h = hashlib.sha1((date_iso + "|" + name).encode("utf-8")).hexdigest()[:8]
     return f"{date_iso}-{h}"
@@ -429,7 +498,7 @@ CAT_ZH = {"full": "全馬", "half": "半馬", "10k": "10K", "short": "10K以下"
           "ultra": "超馬", "triathlon": "鐵人", "relay": "接力", "timed": "計時賽",
           "virtual": "線上", "other": "其他", "trail": "越野"}
 STATUS_ZH = {"open": "報名中", "closing_soon": "快截止", "upcoming": "即將開報",
-             "closed": "已截止", "unknown": "未知"}
+             "closed": "已截止", "full": "額滿", "unknown": "待確認"}
 
 
 def write_outputs(races, out_dir):

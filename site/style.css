@@ -131,6 +131,7 @@ button { cursor: pointer; }
 /* 越野標籤 */
 .tag { flex: none; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: var(--open-bg); color: var(--open-text); }
 .badges .tag { font-size: 11px; padding: 2px 7px; }
+.tag.alert { background: var(--soon-bg); color: var(--soon-text); }
 
 /* ---------- 日曆 ---------- */
 .cal { padding: 8px 10px 12px; display: flex; flex-direction: column; gap: 10px; }
@@ -160,7 +161,7 @@ button { cursor: pointer; }
 .dot-open { background: #2E9E74; }
 .dot-closing_soon { background: #E0A100; }
 .dot-upcoming { background: #4F8DC0; }
-.dot-closed, .dot-unknown { background: #9AA9B8; }
+.dot-closed, .dot-unknown, .dot-full { background: #9AA9B8; }
 .cal-cell.sel .dots i { box-shadow: 0 0 0 1px var(--chip-on-text); }
 .legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px; color: var(--muted); padding: 0 4px; }
 .legend span { display: flex; align-items: center; gap: 4px; }
