@@ -66,7 +66,7 @@ def main(argv=None):
 
     pz = scraper.normalize(pz_raw, today, scraped_at)
     bj = biji.normalize(bj_raw, today, scraped_at)
-    races = merge.merge(pz, bj, today)
+    races = scraper.tag_trail(merge.merge(pz, bj, today))
     jpath, cpath = scraper.write_outputs(races, args.out)
     print(f"跑者廣場 {len(pz)} 場、運動筆記 {len(bj)} 場（不含海外）→ 合併後 {len(races)} 場")
     print(scraper.summarize(races))

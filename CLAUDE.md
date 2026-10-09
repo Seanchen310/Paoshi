@@ -27,7 +27,8 @@
   - 報名狀態、剩幾天在瀏覽器依台灣時間的今天重算；比賽日已過的不顯示。
   - 「截止前提醒我／開報時提醒我」＝下載 .ics 行事曆檔（含提醒），不需要帳號或伺服器。
   - 搜尋只重畫結果、不重畫搜尋框，避免打斷注音選字。
-- `tests/`：`python -m unittest discover tests`（35 個），用真實頁面片段當測試資料。改解析邏輯前後都要跑。
+  - 兩種瀏覽方式：列表／日曆（右上角按鈕切換，記在 localStorage）。日曆可切「比賽日／報名截止日」，點日期看當天的賽事；圓點顏色＝報名狀態。
+- `tests/`：`python -m unittest discover tests`（36 個），用真實頁面片段當測試資料。改解析邏輯前後都要跑。
 - 2026-10-09 合併結果：跑者廣場 193、運動筆記 199（不含海外）→ 237 場（兩邊都有 155、只有運動筆記 44、只有跑者廣場 38）；報名中 70、快截止 13、即將開報 4、未知 30、已截止 120。
 
 ## 跑者廣場頁面結構（解析重點）
@@ -62,6 +63,7 @@
 - id = 日期＋賽名的 hash（合併時用跑者廣場的賽名）。
 
 - category：full / half(20–25K) / 10k(9–20K) / short(<9K) / long(25–42K) / ultra / triathlon / relay / timed / virtual / other
+- `categories` 另外可能有 `trail`（越野）：兩個網站都沒這欄，`scraper.tag_trail` 用賽名判斷（越野、trail、山徑、天空跑、skyrun），合併後才加。
 - status：open / closing_soon(≤7 天) / upcoming / closed / unknown
 - region：北部 / 中部 / 南部 / 東部 / 離島
 

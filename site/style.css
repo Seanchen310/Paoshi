@@ -107,6 +107,44 @@ button { cursor: pointer; }
 .foot { padding: 8px 16px 32px; font-size: 12px; line-height: 1.7; color: var(--muted); text-align: center; }
 .foot a { text-decoration: underline; }
 
+/* 越野標籤 */
+.tag { flex: none; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: var(--open-bg); color: var(--open-text); }
+.badges .tag { font-size: 11px; padding: 2px 7px; }
+
+/* ---------- 日曆 ---------- */
+.cal { padding: 8px 10px 12px; display: flex; flex-direction: column; gap: 10px; }
+.cal-top { display: flex; align-items: center; justify-content: space-between; }
+.cal-top h2 { margin: 0; font-size: 17px; font-weight: 700; color: var(--strong); display: flex; align-items: baseline; gap: 8px; }
+.cal-top h2 small { font-size: 12px; font-weight: 500; color: var(--muted); }
+.cal-top .icon-btn:disabled { opacity: .3; cursor: default; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 3px; background: var(--seg); border-radius: 10px; }
+.seg button { height: 34px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 500; }
+.seg button[aria-checked="true"] { background: var(--seg-on); color: var(--text); font-weight: 700; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; }
+.cal-wd { text-align: center; font-size: 11px; color: var(--muted); padding: 2px 0 4px; }
+.cal-cell {
+  height: 48px; border: 0; border-radius: 10px; background: transparent; padding: 6px 0 4px;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between; color: var(--muted);
+}
+.cal-cell b { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 600; line-height: 1; }
+.cal-cell.past { opacity: .4; }
+.cal-cell.has { color: var(--strong); background: var(--bg); }
+.cal-cell.has b { font-weight: 700; }
+.cal-cell.today b { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.cal-cell.sel { background: var(--chip-on); color: var(--chip-on-text); }
+.cal-cell.sel b { color: var(--chip-on-text); }
+.dots { display: flex; gap: 2px; align-items: center; height: 6px; }
+.dots i, .legend i { display: inline-block; width: 6px; height: 6px; border-radius: 3px; }
+.dots em { font-style: normal; font-size: 10px; line-height: 6px; }
+.dot-open { background: #2E9E74; }
+.dot-closing_soon { background: #E0A100; }
+.dot-upcoming { background: #4F8DC0; }
+.dot-closed, .dot-unknown { background: #9AA9B8; }
+.cal-cell.sel .dots i { box-shadow: 0 0 0 1px var(--chip-on-text); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px; color: var(--muted); padding: 0 4px; }
+.legend span { display: flex; align-items: center; gap: 4px; }
+.day-head { margin: 6px 2px 0; font-size: 15px; font-weight: 700; color: var(--strong); }
+
 /* ---------- 篩選 ---------- */
 .sheet-wrap { position: fixed; inset: 0; z-index: 20; background: var(--dim); display: flex; align-items: flex-end; justify-content: center; }
 .sheet {

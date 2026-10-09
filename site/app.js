@@ -42,6 +42,10 @@
     back: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
     share: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M8 8l4-4 4 4M5 13v6h14v-6"/></svg>',
     cal: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4M12 13v4M10 15h4"/></svg>',
+    calendar: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>',
+    list: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg>',
+    prev: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+    next: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
     out: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>',
   };
 
@@ -73,7 +77,7 @@
     if (applyTheme() !== before) render(); }, 60000);
 
   // ---------- 資料 ----------
-  const CAT_CHIPS = [['full', '全馬'], ['half', '半馬'], ['10k', '10K'], ['short', '10K 以下'], ['ultra', '超馬'], ['triathlon', '鐵人']];
+  const CAT_CHIPS = [['full', '全馬'], ['half', '半馬'], ['10k', '10K'], ['short', '10K 以下'], ['ultra', '超馬'], ['trail', '越野'], ['triathlon', '鐵人']];
   const REGIONS = ['北部', '中部', '南部', '東部', '離島'];
   const DATES = [['any', '不限'], ['month', '本月'], ['3m', '未來 3 個月'], ['weekend', '只看週末']];
   const TABS = [['open', '可報名'], ['upcoming', '即將開報'], ['all', '全部']];
@@ -86,9 +90,12 @@
     tab: 'open', q: '',
     dists: saved.dists || [], regions: saved.regions || [], county: saved.county || '',
     date: saved.date || 'any', cert: !!saved.cert,
+    view: saved.view === 'cal' ? 'cal' : 'list',   // 列表／日曆
+    calBy: 'race',                                // 日曆標示：比賽日／報名截止日
   };
+  const CAL = { month: null, day: null };          // 日曆目前看的月份（YYYY-MM）與選到的日期
   function saveFilters() {
-    store('paoshi-filters', { dists: F.dists, regions: F.regions, county: F.county, date: F.date, cert: F.cert });
+    store('paoshi-filters', { dists: F.dists, regions: F.regions, county: F.county, date: F.date, cert: F.cert, view: F.view });
   }
 
   // 報名狀態依「今天」重新計算，資料一天只更新兩次，剩幾天才不會差一天
@@ -111,6 +118,7 @@
         st: st.status, left: st.left,
         minFee: fees.length ? Math.min.apply(null, fees) : null,
         cert: r.certifications.find((c) => CERT_LABEL[c]) || null,
+        trail: r.categories.indexOf('trail') >= 0,
         place: [r.county, shortLoc].filter(Boolean).join(' · '),
         hay: [r.name].concat(r.alt_names || [], [r.county, r.location, r.address]).join(' ').toLowerCase().replace(/台/g, '臺'),
       });
@@ -179,7 +187,7 @@
     return `<a class="card" href="#/race/${encodeURIComponent(r.id)}">
       <div class="date"><span class="mon">${Number(r.date.slice(5, 7))} 月</span><span class="day">${Number(r.date.slice(8, 10))}</span><span>週${weekday(r.date)}</span></div>
       <div class="card-body">
-        <div class="title-row"><span class="name">${esc(r.name)}</span>${r.cert ? `<span class="cert">${CERT_LABEL[r.cert]}</span>` : ''}</div>
+        <div class="title-row"><span class="name">${esc(r.name)}</span>${r.trail ? '<span class="tag">越野</span>' : ''}${r.cert ? `<span class="cert">${CERT_LABEL[r.cert]}</span>` : ''}</div>
         <div class="place-row"><span class="place">${esc(r.place)}</span>${r.minFee != null ? `<span class="fee">${feeText(r.minFee)}${r.minFee ? ' 起' : ''}</span>` : ''}</div>
         <div class="dists">${distPills(r, 6)}</div>
         <span class="status ${r.st}">${statusText(r)}</span>
@@ -190,6 +198,65 @@
   function updatedText() {
     const u = DATA && DATA.updated;
     return u ? `${md(u.slice(0, 10))} ${u.slice(11, 16)} 更新` : '';
+  }
+
+  // ---------- 畫面：日曆 ----------
+  const ymOf = (iso) => iso.slice(0, 7);
+  function addMonths(ym, n) {
+    const y = Number(ym.slice(0, 4)), m = Number(ym.slice(5, 7)) - 1 + n;
+    const d = new Date(Date.UTC(y, m, 1));
+    return d.toISOString().slice(0, 7);
+  }
+  function calendarHtml(rows, today) {
+    const byDeadline = F.calBy === 'deadline';
+    const keyOf = (r) => byDeadline ? r.registration.end : r.date;
+    const byDay = {};
+    rows.forEach((r) => {
+      const k = keyOf(r);
+      if (!k || k < today) return;                 // 截止日已過的不標
+      (byDay[k] = byDay[k] || []).push(r);
+    });
+    const days = Object.keys(byDay).sort();
+    const minYm = ymOf(today);
+    const maxYm = days.length ? ymOf(days[days.length - 1]) : minYm;
+    if (!CAL.month || CAL.month < minYm || CAL.month > maxYm) CAL.month = minYm;
+    const ym = CAL.month;
+    const inMonth = days.filter((d) => ymOf(d) === ym);
+    if (!CAL.day || ymOf(CAL.day) !== ym || !byDay[CAL.day]) CAL.day = inMonth[0] || null;
+
+    const first = toDate(ym + '-01');
+    const lead = first.getUTCDay();
+    const total = new Date(Date.UTC(first.getUTCFullYear(), first.getUTCMonth() + 1, 0)).getUTCDate();
+    let cells = '';
+    for (let i = 0; i < lead; i++) cells += '<span class="cal-cell blank"></span>';
+    for (let d = 1; d <= total; d++) {
+      const iso = `${ym}-${String(d).padStart(2, '0')}`;
+      const list = byDay[iso] || [];
+      const cls = ['cal-cell', list.length ? 'has' : '', iso === CAL.day ? 'sel' : '', iso === today ? 'today' : '', iso < today ? 'past' : ''].join(' ');
+      const dots = list.slice(0, 3).map((r) => `<i class="dot-${r.st}"></i>`).join('');
+      const label = `${Number(ym.slice(5))}月${d}日${list.length ? `，${list.length} 場${byDeadline ? '截止' : '比賽'}` : ''}`;
+      cells += list.length
+        ? `<button type="button" class="${cls}" data-day="${iso}" aria-label="${label}" aria-pressed="${iso === CAL.day}"><b>${d}</b><span class="dots">${dots}${list.length > 3 ? '<em>+</em>' : ''}</span></button>`
+        : `<span class="${cls}" aria-hidden="true"><b>${d}</b></span>`;
+    }
+    const picked = CAL.day ? byDay[CAL.day] : [];
+    const dayHead = CAL.day
+      ? `<h3 class="day-head">${md(CAL.day)}（週${weekday(CAL.day)}）${byDeadline ? '報名截止' : ''} · ${picked.length} 場</h3>${picked.map(card).join('')}`
+      : `<div class="notice">這個月沒有符合條件的${byDeadline ? '報名截止' : '比賽'}。</div>`;
+    return `<section class="cal box">
+        <div class="cal-top">
+          <button type="button" class="icon-btn" data-cal="-1" aria-label="上個月" ${ym <= minYm ? 'disabled' : ''}>${ICON.prev}</button>
+          <h2>${ym.slice(0, 4)} 年 ${Number(ym.slice(5))} 月<small>${inMonth.length ? `${inMonth.reduce((n, d) => n + byDay[d].length, 0)} 場` : ''}</small></h2>
+          <button type="button" class="icon-btn" data-cal="1" aria-label="下個月" ${ym >= maxYm ? 'disabled' : ''}>${ICON.next}</button>
+        </div>
+        <div class="seg" role="radiogroup" aria-label="日曆標示">
+          <button type="button" role="radio" aria-checked="${!byDeadline}" data-calby="race">比賽日</button>
+          <button type="button" role="radio" aria-checked="${byDeadline}" data-calby="deadline">報名截止日</button>
+        </div>
+        <div class="cal-grid">${WD.map((w) => `<span class="cal-wd">${w}</span>`).join('')}${cells}</div>
+        <div class="legend"><span><i class="dot-open"></i>報名中</span><span><i class="dot-closing_soon"></i>快截止</span><span><i class="dot-upcoming"></i>即將開報</span><span><i class="dot-closed"></i>已截止／未公布</span></div>
+      </section>
+      ${dayHead}`;
   }
 
   // ---------- 畫面：列表 ----------
@@ -204,10 +271,10 @@
     if (failed) body = `<div class="notice">賽事資料載入失敗，請檢查網路後再試。<br><button type="button" data-act="reload">重新載入</button></div>`;
     else if (!DATA) body = `<div class="notice">載入賽事中…</div>`;
     else if (!rows.length) body = `<div class="notice">沒有符合條件的比賽。<br><button type="button" data-act="clear">清除所有篩選</button></div>`;
-    else body = rows.map(card).join('');
+    else body = F.view === 'cal' ? calendarHtml(rows, today) : rows.map(card).join('');
 
     const tabsHtml = TABS.map(([k, label]) => `<button type="button" role="tab" aria-selected="${F.tab === k}" data-tab="${k}">${label}<span class="num">${DATA ? base.filter((r) => inTab(r, k)).length : ''}</span></button>`).join('');
-    const listHtml = `<div class="meta"><span>依比賽日期排序</span><span>${updatedText()}</span></div>${body}`;
+    const listHtml = `<div class="meta"><span>${F.view === 'cal' ? '點日期看當天的比賽' : '依比賽日期排序'}</span><span>${updatedText()}</span></div>${body}`;
     if (onlyResults && $('#q')) {        // 打字搜尋時只換結果，不動搜尋框（注音輸入才不會被打斷）
       $('.tabs').innerHTML = tabsHtml;
       $('.list').innerHTML = listHtml;
@@ -220,6 +287,7 @@
           <div class="brand"><b>跑事</b><small>${mode === 'night' ? '玄門夜色 · 夜晚' : '靈氣仙境 · 白天'}</small></div>
           <div class="icon-row">
             <button type="button" class="round accent" data-act="theme" aria-label="${mode === 'night' ? '切換為白天主題' : '切換為夜晚主題'}">${mode === 'night' ? ICON.moon : ICON.sun}</button>
+            <button type="button" class="round" data-act="view" aria-label="${F.view === 'cal' ? '切換為列表' : '切換為日曆'}">${F.view === 'cal' ? ICON.list : ICON.calendar}</button>
             <button type="button" class="round" data-act="filter" aria-label="篩選${extra ? `（已套用 ${extra} 項）` : ''}">${ICON.filter}${extra ? '<span class="dot"></span>' : ''}</button>
           </div>
         </div>
@@ -320,7 +388,7 @@
       </div>
       <main class="detail">
         <section class="hero">
-          <div class="badges">${certs}<span class="status ${r.st}">${statusText(r)}</span></div>
+          <div class="badges">${r.trail ? '<span class="tag">越野</span>' : ''}${certs}<span class="status ${r.st}">${statusText(r)}</span></div>
           <h1>${esc(r.name)}</h1>
           ${r.alt_names && r.alt_names.length ? `<div class="aka">也稱：${r.alt_names.map(esc).join('、')}</div>` : ''}
           <div class="when"><span class="big">${r.date.slice(5, 7)}.${r.date.slice(8, 10)}</span>
@@ -440,13 +508,16 @@
   function refresh() { saveFilters(); render(); }
 
   document.addEventListener('click', (e) => {
-    const t = e.target.closest('[data-act],[data-tab],[data-dist],[data-date],[data-region]');
+    const t = e.target.closest('[data-act],[data-tab],[data-dist],[data-date],[data-region],[data-day],[data-cal],[data-calby]');
     if (!t) {
       if (e.target.closest('a.card')) { listScroll = window.scrollY; cameFromList = true; }
       return;
     }
     const d = t.dataset;
     if (d.tab) { F.tab = d.tab; return refresh(); }
+    if (d.day) { CAL.day = d.day; return renderList(true); }
+    if (d.cal) { CAL.month = addMonths(CAL.month, Number(d.cal)); CAL.day = null; return renderList(true); }
+    if (d.calby) { F.calBy = d.calby; CAL.day = null; return renderList(true); }
     if (d.dist) { F.dists = toggleIn(F.dists, d.dist); return refresh(); }
     if (d.date) { F.date = d.date; return refresh(); }
     if (d.region) {
@@ -458,6 +529,7 @@
     const race = rt.page === 'detail' && DATA ? DATA.races.find((x) => x.id === rt.id) : null;
     switch (d.act) {
       case 'theme': return toggleTheme();
+      case 'view': F.view = F.view === 'cal' ? 'list' : 'cal'; return refresh();
       case 'filter': sheetOpen = true; return renderSheet();
       case 'close':
         if (t.classList.contains('sheet-wrap') && e.target !== t) return;   // 點面板內部不關

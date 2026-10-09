@@ -112,6 +112,17 @@ class TestMerge(unittest.TestCase):
         self.assertTrue(any("額滿" in i for i in r["issues"]))
 
 
+class TestTrail(unittest.TestCase):
+    def test_tag_trail(self):
+        names = ["2026 Maokong 貓空 Night Trail", "2027 SUPERACE 野馬越野系列賽冬嶺野馬",
+                 "南庄山水悠遊行 2026-山水路跑賽", "2026 陽明山超級馬拉松"]
+        rs = [dict(race(n, "2026-10-09", "臺北市"), categories=["10k"]) for n in names]
+        rs[2]["alt_names"] = ["2026 南庄山水悠遊行 — 山水路跑賽 × 慢城爬坡(觀賞)賽"]
+        scraper.tag_trail(rs)
+        self.assertEqual([("trail" in r["categories"]) for r in rs], [True, True, False, False])
+        self.assertEqual(rs[0]["categories"], ["10k", "trail"])
+
+
 class TestCli(unittest.TestCase):
     def test_end_to_end(self):
         import tempfile

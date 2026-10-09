@@ -213,6 +213,18 @@ def classify(label, km):
     return "long"               # 25–42K 之間
 
 
+TRAIL_RE = re.compile(r"越野|trail|山徑|天空跑|sky\s?run", re.I)
+
+
+def tag_trail(races):
+    """兩個網站都沒有「越野」欄位，用賽名判斷；是越野賽就在 categories 加上 trail。"""
+    for r in races:
+        if any(TRAIL_RE.search(n) for n in [r["name"]] + r.get("alt_names", [])):
+            if "trail" not in r["categories"]:
+                r["categories"] = sorted(r["categories"] + ["trail"])
+    return races
+
+
 def parse_fee_quota(title):
     """按鈕 title 格式範例：'1400<br/>限額：1500'、' 100<br/>限額： 共500人'、'0'。"""
     t = (title or "").replace("<br/>", "\n").replace("<br>", "\n")
@@ -415,7 +427,7 @@ def normalize(raw_rows, today, scraped_at):
 
 CAT_ZH = {"full": "全馬", "half": "半馬", "10k": "10K", "short": "10K以下", "long": "25-42K",
           "ultra": "超馬", "triathlon": "鐵人", "relay": "接力", "timed": "計時賽",
-          "virtual": "線上", "other": "其他"}
+          "virtual": "線上", "other": "其他", "trail": "越野"}
 STATUS_ZH = {"open": "報名中", "closing_soon": "快截止", "upcoming": "即將開報",
              "closed": "已截止", "unknown": "未知"}
 
