@@ -34,11 +34,35 @@ TZ = dt.timezone(dt.timedelta(hours=8))  # 台灣時間
 # 1. 下載與解析 HTML
 # ---------------------------------------------------------------
 
-def fetch_html(url=SOURCE_URL, timeout=30):
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        charset = resp.headers.get_content_charset() or "utf-8"
-        return resp.read().decode(charset, errors="replace")
+HEADERS = {
+    "User-Agent": USER_AGENT,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.6",
+}
+
+
+def fetch_html(url=SOURCE_URL, timeout=30, attempts=3, wait=20):
+    """下載網頁；遇到伺服器錯誤或連線問題會等一下再試，最多試 attempts 次。"""
+    import time
+    import urllib.error
+    last = None
+    for i in range(1, attempts + 1):
+        try:
+            req = urllib.request.Request(url, headers=HEADERS)
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                charset = resp.headers.get_content_charset() or "utf-8"
+                return resp.read().decode(charset, errors="replace")
+        except urllib.error.HTTPError as e:
+            last = e
+            print(f"第 {i} 次下載失敗：網站回應 HTTP {e.code}", file=sys.stderr)
+            if e.code < 500 and e.code != 429:
+                break  # 4xx（例如被拒絕）重試也沒用
+        except (urllib.error.URLError, TimeoutError, OSError) as e:
+            last = e
+            print(f"第 {i} 次下載失敗：{e}", file=sys.stderr)
+        if i < attempts:
+            time.sleep(wait * i)
+    raise RuntimeError(f"無法下載跑者廣場賽事頁（{last}）")
 
 
 class GridParser(HTMLParser):
@@ -445,7 +469,11 @@ def main(argv=None):
             html = f.read()
     else:
         print("下載跑者廣場賽事頁…")
-        html = fetch_html()
+        try:
+            html = fetch_html()
+        except RuntimeError as e:
+            print(e, file=sys.stderr)
+            return 2
         os.makedirs(args.out, exist_ok=True)
         with open(os.path.join(args.out, "source.html"), "w", encoding="utf-8") as f:
             f.write(html)  # 留一份原始網頁，出問題時可以重跑解析
