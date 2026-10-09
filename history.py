@@ -29,6 +29,7 @@ FIELDS = {
     "distances": "組別",
 }
 CLOSED_WORDS = ("已截止", "額滿")
+FILLABLE = ("organizer", "url", "address", "start_time")   # 空白 → 有值 不記
 
 
 def race_key(r):
@@ -96,6 +97,8 @@ def diff(old, new, today):
                     events.append({"type": "changed", "key": k, "name": n["name"], "date": n["date"],
                                    "field": f, "changes": dc})
             elif o.get(f) != n.get(f):
+                if f in FILLABLE and not o.get(f):
+                    continue            # 從空白變成有值＝補上資料（例如從詳情頁補到），不算來源改了
                 events.append({"type": "changed", "key": k, "name": n["name"], "date": n["date"],
                                "field": f, "old": o.get(f), "new": n.get(f)})
         # 截止日還沒到，來源就標成已截止／額滿 → 提前截止

@@ -51,6 +51,17 @@ class TestDiff(unittest.TestCase):
         self.assertEqual(kinds, {("42.195K", "fee"), ("5K", "added")})
         self.assertIn("42.195K 報名費 2,200 → 2,400", history.describe(ev[0]))
 
+    def test_filled_in_blanks_are_not_changes(self):
+        a = [race("2026 臺北馬拉松", "2026-12-20", cid="13020", dists=(("42.195K", None, None),))]
+        a[0]["organizer"] = None
+        a[0]["url"] = None
+        b = [race("2026 臺北馬拉松", "2026-12-20", cid="13020", dists=(("42.195K", 2200, 9000),))]
+        self.assertEqual(self.run_diff(a, b), [])                 # 補上承辦單位、連結、費用、名額
+        c = [race("2026 臺北馬拉松", "2026-12-20", cid="13020", dists=(("42.195K", 2400, 9000),))]
+        c[0]["organizer"] = "別的單位"
+        ev = self.run_diff(b, c)
+        self.assertEqual(sorted(e.get("field") for e in ev), ["distances", "organizer"])   # 真的改了才記
+
     def test_rename_same_biji_cid_is_change_not_add_remove(self):
         a = [race("2026 臺北馬拉松", "2026-12-20", cid="13020")]
         b = [race("2026 臺北馬拉松 TAIPEI MARATHON", "2026-12-20", cid="13020")]
