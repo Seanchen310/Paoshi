@@ -739,13 +739,20 @@
   });
 
   // 電腦版：咖啡按鈕右邊緣對齊日夜切換鈕的右緣（詳情頁沒有日夜鈕 → 對齊內容欄右緣）；手機維持距右邊 16px
+  // 電腦版列表頁：平常浮在右下角；捲到底時，按鈕下緣停在最後一張卡片的下緣，不掉進頁尾
+  const FAB_GAP = 48;
   function placeFab() {
     const fab = $('.fab-bmc');
     if (!fab) return;
-    if (!isWide()) { fab.style.right = ''; return; }
+    if (!isWide()) { fab.style.right = ''; fab.style.bottom = ''; return; }
     const anchor = $('[data-act="theme"]');
     const edge = anchor ? anchor.getBoundingClientRect().right : $('#app').getBoundingClientRect().right - 16;
     fab.style.right = Math.max(16, document.documentElement.clientWidth - edge) + 'px';
+    const cards = route().page === 'list' ? document.querySelectorAll('.list .card') : [];
+    if (cards.length) {
+      const lastBottom = cards[cards.length - 1].getBoundingClientRect().bottom;
+      fab.style.bottom = Math.max(FAB_GAP, window.innerHeight - lastBottom) + 'px';
+    } else fab.style.bottom = '';
   }
 
   // 「請跑事喝杯咖啡」：手機＝右下角懸浮圓鈕（大咖啡杯＋弧形「支持跑事」）；電腦＝浮動圖示鈕，滑鼠移過去展開文字
@@ -768,8 +775,11 @@
     // 往下捲時藏起來（不擋內容），往上捲或回到頂端時再出現
     let lastY = window.scrollY;
     window.addEventListener('scroll', () => {
+      placeFab();
       const y = window.scrollY;
-      if (y > lastY + 6 && y > 80) a.classList.add('fab-hide');
+      const nearEnd = isWide() && y + window.innerHeight >= document.documentElement.scrollHeight - 240;
+      if (nearEnd) a.classList.remove('fab-hide');          // 電腦版捲到底：出現在最後一張卡片旁
+      else if (y > lastY + 6 && y > 80) a.classList.add('fab-hide');
       else if (y < lastY - 6 || y <= 80) a.classList.remove('fab-hide');
       lastY = y;
     }, { passive: true });
