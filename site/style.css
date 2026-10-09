@@ -126,22 +126,19 @@ button { cursor: pointer; }
 .foot { padding: 8px 16px 96px; font-size: 12px; line-height: 1.7; color: var(--muted); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .foot p { margin: 0; }
 
-/* 「請跑事喝杯咖啡」懸浮圓鈕：Buy Me a Coffee 官方黃色 */
+/* 「請跑事喝杯咖啡」懸浮按鈕：Buy Me a Coffee 官方黃色，圖示＋文字（手機沒有滑鼠移過去，要直接看得懂） */
 .fab-bmc {
   position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 15;
-  height: 52px; min-width: 52px; border-radius: 26px; background: #FFDD00; color: #0D0C22;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  box-shadow: 0 4px 14px rgba(13, 12, 34, .22); text-decoration: none;
+  height: 44px; padding: 0 16px 0 12px; border-radius: 22px; background: #FFDD00; color: #0D0C22;
+  display: flex; align-items: center; gap: 6px; text-decoration: none;
+  box-shadow: 0 4px 14px rgba(13, 12, 34, .22);
+  transition: transform .25s ease, opacity .25s ease;
 }
-.fab-bmc { transition: transform .25s ease, opacity .25s ease; }
-.fab-bmc.fab-hide { transform: translateY(24px) scale(.8); opacity: 0; pointer-events: none; }
-.fab-bmc svg { width: 24px; height: 24px; flex: none; }
-.fab-bmc span { display: none; font-size: 14px; font-weight: 700; white-space: nowrap; }
+.fab-bmc.fab-hide { transform: translateY(24px) scale(.9); opacity: 0; pointer-events: none; }
+.fab-bmc svg { width: 22px; height: 22px; flex: none; }
+.fab-bmc span { font-size: 14px; font-weight: 700; white-space: nowrap; }
+.fab-bmc:hover { filter: brightness(.96); }
 body[data-page="detail"] .fab-bmc { bottom: calc(92px + env(safe-area-inset-bottom)); }   /* 讓開底部的報名按鈕 */
-@media (hover: hover) and (min-width: 1024px) {
-  .fab-bmc:hover { padding: 0 20px 0 16px; }
-  .fab-bmc:hover span { display: inline; }
-}
 
 /* 提醒：選行事曆 */
 .sheet-sub { margin: -10px 0 0; }
