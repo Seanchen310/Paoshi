@@ -367,7 +367,11 @@
       </div>`;
   }
 
+  const bmcInline = () => BMC_SLUG
+    ? `<a class="bmc-inline" href="https://buymeacoffee.com/${encodeURIComponent(BMC_SLUG)}" target="_blank" rel="noopener" aria-label="請跑事喝杯咖啡">${ICON.coffee}<span>請跑事喝杯咖啡</span></a>`
+    : '';
   const footerHtml = () => `<footer class="foot">
+      ${bmcInline()}
       <p>資料來源：<a href="http://www.taipeimarathon.org.tw/contest.aspx" target="_blank" rel="noopener">跑者廣場</a>、<a href="https://running.biji.co/index.php?q=competition" target="_blank" rel="noopener">運動筆記</a>。<br>報名與最新內容以主辦單位官網為準。</p>
     </footer>`;
 
@@ -519,6 +523,7 @@
             <span class="f">${d.fee != null ? feeText(d.fee) : ''}</span></div>`).join('')}
         </div>${hasFee ? '' : '<p class="fine">報名費與名額請見主辦單位簡章。</p>'}</section>` : ''}
         ${conflict ? '<div class="warn">兩個資料來源的日期不一致，報名前請以主辦單位官網為準。</div>' : ''}
+        ${bmcInline()}
         <p class="fine">賽事資訊整理自${src}，報名與最新內容以主辦單位官網為準。</p>
       </main>
       <div class="actions">
@@ -659,7 +664,6 @@
         if (location.hash && r.key) history.replaceState(null, '', `/race/${r.key}/`);   // 舊網址換成新網址
       }
     } else { document.title = LIST_TITLE; renderList(); renderSheet(); }
-    placeFab();
   }
   // 站內換頁不重新載入：網址照樣是真的 /race/<key>/，可以分享、可以被 Google 收錄
   function go(url) { history.pushState(null, '', url); render(); }
@@ -738,18 +742,7 @@
     if (e.key === 'Escape' && (sheetOpen || calSheet)) { sheetOpen = false; calSheet = null; render(); }
   });
 
-  // 電腦版：咖啡按鈕的右邊和日夜切換鈕對齊（詳情頁沒有日夜鈕 → 對齊內容欄右邊）；手機維持距右邊 16px
-  function placeFab() {
-    const fab = $('.fab-bmc');
-    if (!fab) return;
-    if (!isWide()) { fab.style.right = ''; return; }
-    const anchor = $('[data-act="theme"]');
-    const app = $('#app').getBoundingClientRect();
-    const edge = anchor ? anchor.getBoundingClientRect().right : app.right - 16;
-    fab.style.right = Math.max(16, document.documentElement.clientWidth - edge) + 'px';
-  }
-
-  // 「請跑事喝杯咖啡」懸浮按鈕：每頁右下角都有（詳情頁會往上讓開報名按鈕）
+  // 「請跑事喝杯咖啡」：手機＝右下角懸浮膠囊（圖示＋文字）；電腦＝頁尾資料來源上方的圓鈕（bmcInline，滑鼠移過去展開文字）
   if (BMC_SLUG && !$('.fab-bmc')) {
     const a = document.createElement('a');
     a.className = 'fab-bmc';
@@ -758,8 +751,6 @@
     a.setAttribute('aria-label', '請跑事喝杯咖啡');
     a.innerHTML = `${ICON.coffee}<span>請跑事喝杯咖啡</span>`;
     document.body.appendChild(a);
-    placeFab();
-    window.addEventListener('resize', placeFab);
     // 往下捲時藏起來（不擋內容），往上捲或回到頂端時再出現
     let lastY = window.scrollY;
     window.addEventListener('scroll', () => {

@@ -140,6 +140,22 @@ button { cursor: pointer; }
 .fab-bmc:hover { filter: brightness(.96); }
 body[data-page="detail"] .fab-bmc { bottom: calc(92px + env(safe-area-inset-bottom)); }   /* 讓開底部的報名按鈕 */
 
+/* 電腦版：不浮動，放在頁尾資料來源上方；平常只有咖啡圓鈕，滑鼠移過去展開文字 */
+.bmc-inline { display: none; }
+@media (min-width: 1024px) {
+  .fab-bmc { display: none; }
+  .bmc-inline {
+    display: inline-flex; align-self: center; align-items: center; justify-content: center; gap: 0;
+    height: 52px; min-width: 52px; padding: 0 14px; border-radius: 26px;
+    background: #FFDD00; color: #0D0C22 !important; text-decoration: none !important;
+    box-shadow: 0 3px 10px rgba(13, 12, 34, .15); transition: gap .2s ease, padding .2s ease;
+  }
+  .bmc-inline svg { width: 24px; height: 24px; flex: none; }
+  .bmc-inline span { max-width: 0; overflow: hidden; white-space: nowrap; font-size: 14px; font-weight: 700; transition: max-width .25s ease; }
+  .bmc-inline:hover, .bmc-inline:focus-visible { gap: 8px; padding: 0 20px 0 16px; }
+  .bmc-inline:hover span, .bmc-inline:focus-visible span { max-width: 160px; }
+}
+
 /* 提醒：選行事曆 */
 .sheet-sub { margin: -10px 0 0; }
 .choices { display: flex; flex-direction: column; gap: 10px; }
