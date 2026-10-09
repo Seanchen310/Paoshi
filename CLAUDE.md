@@ -5,6 +5,10 @@
 
 ## 跟 Sean 合作
 
+- **所有工作都在 Claude Code 做**（產品策略、設計討論、程式）。Sean 是設計師，Claude 兼 PM 與工程師。
+- **給人看的文件放 Claude Docs，不放 GitHub**：主文件是〈跑事 產品設計與策略書〉https://claude.ai/code/artifact/425c195c-12d2-4724-81a7-71488a2c0379 。
+  每個產品／設計決定都要同時寫進策略書（給人看）和這份 CLAUDE.md（給程式用）；沒寫進去的就當作還沒決定。
+
 - Sean 是設計師，不寫程式；程式由 Claude 負責寫、測試、除錯。
 - 用繁體中文溝通，說明要具體、白話、少術語。
 - Sean 習慣在 **GitHub 網頁**上操作（上傳、編輯檔案），不用 GitHub Desktop。需要他動手時給逐步的網頁操作。
