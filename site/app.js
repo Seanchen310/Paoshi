@@ -8,7 +8,7 @@
   'use strict';
 
   // Buy Me a Coffee 帳號（buymeacoffee.com/ 後面那段）；空白就不顯示按鈕
-  const BMC_SLUG = '';
+  const BMC_SLUG = 'sean310';
 
   // ---------- 小工具 ----------
   const $ = (sel) => document.querySelector(sel);
