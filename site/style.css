@@ -283,10 +283,19 @@ button { cursor: pointer; }
   .list { padding: 4px 0 40px; }
   .foot { padding: 8px 0 40px; }
   .card:hover { border-color: var(--accent); }
+
+  /* 日曆：兩個月並排，當天清單排在下方、卡片多欄 */
+  .cal-wrap.two { display: flex; flex-direction: column; align-items: stretch; gap: 16px; }
+  .cal-wrap.two .cal { padding: 12px 20px 16px; }
+  .cal-wrap.two .seg { max-width: 360px; align-self: center; width: 100%; }
+  .months { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+  .month h3 { margin: 4px 0 6px; text-align: center; font-size: 14px; font-weight: 700; color: var(--strong); }
+  .cal-wrap.two .day-list { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .cal-wrap.two .day-list .day-head, .cal-wrap.two .day-list .notice { grid-column: 1 / -1; }
 }
 
 /* ---------- 大桌機（≥1360px）：卡片三欄 ---------- */
 @media (min-width: 1360px) {
   .app { max-width: 1360px; }
-  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cards, .cal-wrap.two .day-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }

@@ -242,23 +242,8 @@
     const d = new Date(Date.UTC(y, m, 1));
     return d.toISOString().slice(0, 7);
   }
-  function calendarHtml(rows, today) {
-    const byDeadline = F.calBy === 'deadline';
-    const keyOf = (r) => byDeadline ? r.registration.end : r.date;
-    const byDay = {};
-    rows.forEach((r) => {
-      const k = keyOf(r);
-      if (!k || k < today) return;                 // 截止日已過的不標
-      (byDay[k] = byDay[k] || []).push(r);
-    });
-    const days = Object.keys(byDay).sort();
-    const minYm = ymOf(today);
-    const maxYm = days.length ? ymOf(days[days.length - 1]) : minYm;
-    if (!CAL.month || CAL.month < minYm || CAL.month > maxYm) CAL.month = minYm;
-    const ym = CAL.month;
-    const inMonth = days.filter((d) => ymOf(d) === ym);
-    if (!CAL.day || ymOf(CAL.day) !== ym || !byDay[CAL.day]) CAL.day = inMonth[0] || null;
-
+  // 一個月的格子
+  function monthGrid(ym, byDay, today, byDeadline) {
     const first = toDate(ym + '-01');
     const lead = first.getUTCDay();
     const total = new Date(Date.UTC(first.getUTCFullYear(), first.getUTCMonth() + 1, 0)).getUTCDate();
@@ -274,21 +259,51 @@
         ? `<button type="button" class="${cls}" data-day="${iso}" aria-label="${label}" aria-pressed="${iso === CAL.day}"><b>${d}</b><span class="dots">${dots}${list.length > 3 ? '<em>+</em>' : ''}</span></button>`
         : `<span class="${cls}" aria-hidden="true"><b>${d}</b></span>`;
     }
+    return `<div class="cal-grid">${WD.map((w) => `<span class="cal-wd">${w}</span>`).join('')}${cells}</div>`;
+  }
+
+  // 電腦版一次看兩個月，手機和 iPad 一個月；箭頭一次移動一個月
+  function calendarHtml(rows, today) {
+    const byDeadline = F.calBy === 'deadline';
+    const keyOf = (r) => byDeadline ? r.registration.end : r.date;
+    const byDay = {};
+    rows.forEach((r) => {
+      const k = keyOf(r);
+      if (!k || k < today) return;                 // 截止日已過的不標
+      (byDay[k] = byDay[k] || []).push(r);
+    });
+    const days = Object.keys(byDay).sort();
+    const span = isWide() ? 2 : 1;
+    const minYm = ymOf(today);
+    const lastYm = days.length ? ymOf(days[days.length - 1]) : minYm;
+    const maxStart = lastYm > minYm && span === 2 ? addMonths(lastYm, -1) : lastYm;   // 最後一頁的第一個月
+    if (!CAL.month || CAL.month < minYm || CAL.month > maxStart) CAL.month = minYm;
+    const months = Array.from({ length: span }, (_, i) => addMonths(CAL.month, i));
+    const shown = days.filter((d) => months.indexOf(ymOf(d)) >= 0);
+    if (!CAL.day || months.indexOf(ymOf(CAL.day)) < 0 || !byDay[CAL.day]) CAL.day = shown[0] || null;
+    const count = shown.reduce((n, d) => n + byDay[d].length, 0);
+
+    const y0 = months[0].slice(0, 4), y1 = months[span - 1].slice(0, 4);
+    const title = span === 1
+      ? `${y0} 年 ${Number(months[0].slice(5))} 月`
+      : `${y0} 年 ${Number(months[0].slice(5))} 月 – ${y1 !== y0 ? y1 + ' 年 ' : ''}${Number(months[1].slice(5))} 月`;
+    const grids = months.map((ym) => `<div class="month">${span > 1 ? `<h3>${Number(ym.slice(5))} 月</h3>` : ''}${monthGrid(ym, byDay, today, byDeadline)}</div>`).join('');
+
     const picked = CAL.day ? byDay[CAL.day] : [];
     const dayHead = CAL.day
       ? `<h3 class="day-head">${md(CAL.day)}（週${weekday(CAL.day)}）${byDeadline ? '報名截止' : ''} · ${picked.length} 場</h3>${picked.map(card).join('')}`
-      : `<div class="notice">這個月沒有符合條件的${byDeadline ? '報名截止' : '比賽'}。</div>`;
-    return `<div class="cal-wrap"><section class="cal box">
+      : `<div class="notice">${span > 1 ? '這兩個月' : '這個月'}沒有符合條件的${byDeadline ? '報名截止' : '比賽'}。</div>`;
+    return `<div class="cal-wrap${span > 1 ? ' two' : ''}"><section class="cal box">
         <div class="cal-top">
-          <button type="button" class="icon-btn" data-cal="-1" aria-label="上個月" ${ym <= minYm ? 'disabled' : ''}>${ICON.prev}</button>
-          <h2>${ym.slice(0, 4)} 年 ${Number(ym.slice(5))} 月<small>${inMonth.length ? `${inMonth.reduce((n, d) => n + byDay[d].length, 0)} 場` : ''}</small></h2>
-          <button type="button" class="icon-btn" data-cal="1" aria-label="下個月" ${ym >= maxYm ? 'disabled' : ''}>${ICON.next}</button>
+          <button type="button" class="icon-btn" data-cal="-1" aria-label="上個月" ${CAL.month <= minYm ? 'disabled' : ''}>${ICON.prev}</button>
+          <h2>${title}<small>${count ? `${count} 場` : ''}</small></h2>
+          <button type="button" class="icon-btn" data-cal="1" aria-label="下個月" ${CAL.month >= maxStart ? 'disabled' : ''}>${ICON.next}</button>
         </div>
         <div class="seg" role="radiogroup" aria-label="日曆標示">
           <button type="button" role="radio" aria-checked="${!byDeadline}" data-calby="race">比賽日</button>
           <button type="button" role="radio" aria-checked="${byDeadline}" data-calby="deadline">報名截止日</button>
         </div>
-        <div class="cal-grid">${WD.map((w) => `<span class="cal-wd">${w}</span>`).join('')}${cells}</div>
+        <div class="months">${grids}</div>
         <div class="legend"><span><i class="dot-open"></i>報名中</span><span><i class="dot-closing_soon"></i>快截止</span><span><i class="dot-upcoming"></i>即將開報</span><span><i class="dot-closed"></i>已截止／待確認</span></div>
       </section>
       <div class="day-list">${dayHead}</div></div>`;
