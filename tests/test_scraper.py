@@ -141,17 +141,5 @@ class TestNormalize(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)))
 
 
-class TestCli(unittest.TestCase):
-    def test_end_to_end(self):
-        import tempfile
-        with tempfile.TemporaryDirectory() as d:
-            rc = s.main(["--html", os.path.join(HERE, "fixture.html"), "--out", d, "--today", "2026-10-09"])
-            self.assertEqual(rc, 0)
-            self.assertTrue(os.path.exists(os.path.join(d, "races.json")))
-            with open(os.path.join(d, "races.csv"), encoding="utf-8-sig") as f:
-                lines = f.read().splitlines()
-            self.assertEqual(len(lines), 5)
-
-
 if __name__ == "__main__":
     unittest.main()

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 跑事｜跑者廣場賽事爬蟲
 
@@ -9,12 +8,10 @@
 
 只用 Python 內建模組，不需要另外安裝套件。
 
-用法：
-  python3 scraper.py                 # 抓網站，輸出到 output/
-  python3 scraper.py --html 檔案.html  # 改用存下來的網頁檔（測試用）
+這個檔案也放兩個來源共用的工具（距離分類、縣市、報名狀態、輸出）。
+執行請用 run.py（會同時抓跑者廣場和運動筆記並合併）。
 """
 
-import argparse
 import csv
 import datetime as dt
 import hashlib
@@ -41,7 +38,7 @@ HEADERS = {
 }
 
 
-def fetch_html(url=SOURCE_URL, timeout=30, attempts=3, wait=20):
+def fetch_html(url=SOURCE_URL, timeout=30, attempts=3, wait=20, label=SOURCE_NAME):
     """下載網頁；遇到伺服器錯誤或連線問題會等一下再試，最多試 attempts 次。"""
     import time
     import urllib.error
@@ -62,7 +59,7 @@ def fetch_html(url=SOURCE_URL, timeout=30, attempts=3, wait=20):
             print(f"第 {i} 次下載失敗：{e}", file=sys.stderr)
         if i < attempts:
             time.sleep(wait * i)
-    raise RuntimeError(f"無法下載跑者廣場賽事頁（{last}）")
+    raise RuntimeError(f"無法下載{label}賽事頁（{last}）")
 
 
 class GridParser(HTMLParser):
@@ -293,7 +290,8 @@ def parse_registration(text, race_date, today):
     """
     issues = []
     raw = (text or "").strip()
-    reg = {"raw": raw, "start": None, "end": None, "status": "unknown", "days_left": None}
+    reg = {"raw": raw, "start": None, "end": None, "start_at": None, "end_at": None,
+           "status": "unknown", "days_left": None}
     if raw == "已截止":
         reg["status"] = "closed"
         return reg, issues
@@ -318,19 +316,20 @@ def parse_registration(text, race_date, today):
 
     reg["start"] = start.isoformat() if start else None
     reg["end"] = end.isoformat() if end else None
-
-    if end and today > end:
-        reg["status"] = "closed"
-    elif start and today < start:
-        reg["status"] = "upcoming"
-    else:
-        reg["status"] = "open"
-        if end:
-            left_days = (end - today).days
-            reg["days_left"] = left_days
-            if left_days <= 7:
-                reg["status"] = "closing_soon"
+    reg["status"], reg["days_left"] = reg_status(start, end, today)
     return reg, issues
+
+
+def reg_status(start, end, today):
+    """依報名起訖日（date 或 None）算出 (status, days_left)。"""
+    if end and today > end:
+        return "closed", None
+    if start and today < start:
+        return "upcoming", None
+    if end:
+        left_days = (end - today).days
+        return ("closing_soon" if left_days <= 7 else "open"), left_days
+    return "open", None
 
 
 def make_id(date_iso, name):
@@ -390,9 +389,11 @@ def normalize(raw_rows, today, scraped_at):
         races.append({
             "id": make_id(date_iso, name),
             "name": name,
+            "alt_names": [],
             "date": date_iso or None,
             "start_time": start_time,
             "location": location or None,
+            "address": None,
             "county": county,
             "region": COUNTY_TO_REGION.get(county),
             "distances": distances,
@@ -402,8 +403,9 @@ def normalize(raw_rows, today, scraped_at):
             "url": url or None,
             "certifications": certs,
             "flag": "new" if "new.gif" in flag_imgs else ("updated" if "update.png" in flag_imgs else None),
+            "postponed_from": None,
             "issues": issues,
-            "source": {"name": SOURCE_NAME, "url": SOURCE_URL, "scraped_at": scraped_at},
+            "sources": [{"name": SOURCE_NAME, "url": SOURCE_URL, "scraped_at": scraped_at}],
         })
     return races
 
@@ -427,19 +429,21 @@ def write_outputs(races, out_dir):
     cpath = os.path.join(out_dir, "races.csv")
     with open(cpath, "w", encoding="utf-8-sig", newline="") as f:  # utf-8-sig：Excel 才不會亂碼
         w = csv.writer(f)
-        w.writerow(["日期", "時間", "賽事名稱", "縣市", "地區", "地點", "距離", "分類",
+        w.writerow(["日期", "時間", "賽事名稱", "縣市", "地區", "地點", "地址", "距離", "分類",
                     "報名狀態", "報名開始", "報名截止", "剩幾天", "最低報名費", "認證",
-                    "承辦單位", "報名連結", "資料問題"])
+                    "承辦單位", "報名連結", "來源", "資料問題"])
         for r in races:
             fees = [d["fee"] for d in r["distances"] if d["fee"]]
             w.writerow([
                 r["date"], r["start_time"], r["name"], r["county"], r["region"], r["location"],
+                r["address"],
                 " / ".join(d["label"] for d in r["distances"]),
                 "、".join(CAT_ZH.get(c, c) for c in r["categories"]),
                 STATUS_ZH[r["registration"]["status"]],
                 r["registration"]["start"], r["registration"]["end"], r["registration"]["days_left"],
                 min(fees) if fees else "", "、".join(r["certifications"]),
-                r["organizer"], r["url"], "；".join(r["issues"]),
+                r["organizer"], r["url"], "、".join(x["name"] for x in r["sources"]),
+                "；".join(r["issues"]),
             ])
     return jpath, cpath
 
@@ -449,45 +453,9 @@ def summarize(races):
     st = Counter(r["registration"]["status"] for r in races)
     lines = [f"共 {len(races)} 場賽事"]
     lines.append("  " + "、".join(f"{STATUS_ZH[k]} {v}" for k, v in st.most_common()))
+    src = Counter("＋".join(x["name"] for x in r["sources"]) for r in races)
+    if len(src) > 1:
+        lines.append("  來源：" + "、".join(f"{k} {v}" for k, v in src.most_common()))
     flagged = [r for r in races if r["issues"]]
     lines.append(f"  有資料問題的賽事：{len(flagged)} 場（寫在 races.csv 最後一欄）")
     return "\n".join(lines)
-
-
-def main(argv=None):
-    ap = argparse.ArgumentParser(description="抓取跑者廣場賽事並整理成 JSON / CSV")
-    ap.add_argument("--html", help="改用本機的 HTML 檔，不連網")
-    ap.add_argument("--out", default="output", help="輸出資料夾（預設 output）")
-    ap.add_argument("--today", help="指定今天日期 YYYY-MM-DD（測試用）")
-    args = ap.parse_args(argv)
-
-    now = dt.datetime.now(TZ)
-    today = dt.date.fromisoformat(args.today) if args.today else now.date()
-
-    if args.html:
-        with open(args.html, encoding="utf-8") as f:
-            html = f.read()
-    else:
-        print("下載跑者廣場賽事頁…")
-        try:
-            html = fetch_html()
-        except RuntimeError as e:
-            print(e, file=sys.stderr)
-            return 2
-        os.makedirs(args.out, exist_ok=True)
-        with open(os.path.join(args.out, "source.html"), "w", encoding="utf-8") as f:
-            f.write(html)  # 留一份原始網頁，出問題時可以重跑解析
-
-    raw = parse_html(html)
-    if not raw:
-        print("找不到賽事表格，網站可能改版了。原始網頁已存成 source.html。", file=sys.stderr)
-        return 1
-    races = normalize(raw, today, now.isoformat(timespec="seconds"))
-    jpath, cpath = write_outputs(races, args.out)
-    print(summarize(races))
-    print(f"已輸出：{jpath}\n        {cpath}")
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())

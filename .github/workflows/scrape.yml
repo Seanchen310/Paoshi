@@ -1,5 +1,5 @@
-# 每天台灣時間 06:07 和 18:07 自動抓一次跑者廣場賽事，
-# 有新資料就存回 output/ 資料夾。
+# 每天台灣時間 06:07 和 18:07 自動抓一次跑者廣場、運動筆記的賽事，
+# 合併後有新資料就存回 output/ 資料夾。
 name: 抓取賽事資料
 
 on:
@@ -32,7 +32,7 @@ jobs:
       - name: 抓取並整理
         env:
           TZ: Asia/Taipei
-        run: python scraper.py --out output
+        run: python run.py --out output
 
       - name: 存回 repo
         run: |
