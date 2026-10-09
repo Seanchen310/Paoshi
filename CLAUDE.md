@@ -19,6 +19,7 @@
 - `biji.py`：運動筆記 `running.biji.co/index.php?q=competition`，一頁就有本月起所有賽事（約 200 場，1 個請求）。
 - `merge.py`：比對同一場比賽並合併欄位。
 - `.github/workflows/scrape.yml`：GitHub Actions 每天台灣時間 06:07、18:07 執行 `run.py`，結果 commit 回 `output/`。
+- 網站：**https://paoshi.pages.dev**（Cloudflare Pages 專案 `paoshi`，帳號 molimora@gmail.com；GitHub App 只授權 Paoshi repo）。
 - `site/`：網站（純 HTML/CSS/JS，沒有框架、不用建置工具）。`index.html`、`style.css`、`app.js`。讀同一層的 `races.json`。
   - 部署：Cloudflare Pages 連 GitHub repo，Build command `cp output/races.json site/races.json`、output `site`。排程每次存回資料就會自動重新部署。
   - 本機預覽：`cp output/races.json site/races.json` 後用 `.claude/launch.json` 的 `paoshi-site`（port 8787）。`site/races.json` 在 .gitignore。
@@ -88,6 +89,5 @@
 
 ## 下一步（依優先序）
 
-1. 網站上線到 Cloudflare Pages（Sean 不想讓 GitHub ID 出現在網址，所以不用 GitHub Pages）。
-2. 設計稿上還沒做的：收藏／我的賽季、底部導覽列、路線海拔。
-3. 賽事詳情補關門時間、報名費（只有運動筆記才有的 44 場）、路線、海拔：運動筆記詳情頁有，但一場一個請求，要限量（例如只抓報名中、且每天只抓新出現的）。
+1. 設計稿上還沒做的：收藏／我的賽季、底部導覽列、路線海拔。
+2. 賽事詳情補關門時間、報名費（只有運動筆記才有的 44 場）、路線、海拔：運動筆記詳情頁有，但一場一個請求，要限量（例如只抓報名中、且每天只抓新出現的）。
