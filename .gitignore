@@ -1,3 +1,4 @@
-site/races.json
-output/source*.html
 __pycache__/
+output/source*.html
+.DS_Store
+site/races.json
