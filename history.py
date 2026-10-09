@@ -68,9 +68,10 @@ def _dist_changes(old, new):
             out.append({"label": label, "change": "removed", "old": old[label]})
         else:
             (of, oq), (nf, nq) = old[label], new[label]
-            if of != nf:
+            # 從「沒有」變成有值＝補上資料（例如從詳情頁補到報名費），不算變化；只記真的改了
+            if of != nf and of is not None:
                 out.append({"label": label, "change": "fee", "old": of, "new": nf})
-            if oq != nq:
+            if oq != nq and oq is not None:
                 out.append({"label": label, "change": "quota", "old": oq, "new": nq})
     return out
 

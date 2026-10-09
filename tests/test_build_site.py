@@ -55,6 +55,25 @@ class TestBuildSite(unittest.TestCase):
         self.assertEqual([o["price"] for o in ld["offers"]], [1800])          # 沒有費用的組別不列
         self.assertEqual(ld["offers"][0]["availability"], "https://schema.org/InStock")
 
+    def test_calendar_files(self):
+        site, _ = self.build([RACE])
+        d = os.path.join(site, "race", "biji-13155")
+        self.assertEqual(sorted(f for f in os.listdir(d) if f.endswith(".ics")), ["deadline.ics", "open.ics", "race.ics"])
+        with open(os.path.join(d, "deadline.ics"), encoding="utf-8", newline="") as f:
+            ics = f.read()
+        self.assertIn("\r\nDTSTART:20261030T080000Z\r\n", ics)              # 10/30 16:00 台灣時間
+        self.assertIn("SUMMARY:報名截止：2027 渣打臺北公益馬拉松", ics)
+        self.assertEqual(ics.count("BEGIN:VALARM"), 3)                       # 前 3 天、前 1 天、前 3 小時
+        with open(os.path.join(site, "_headers"), encoding="utf-8") as f:
+            self.assertIn("Content-Type: text/calendar", f.read())
+
+    def test_date_only_deadline_reminds_at_9am(self):
+        r = json.loads(json.dumps(RACE))
+        r["registration"].update(end_at=None)
+        files = build_site.race_ics_files(r, "https://paoshi.pages.dev/race/biji-13155/")
+        self.assertIn("DTSTART;VALUE=DATE:20261030", files["deadline.ics"])
+        self.assertIn("TRIGGER:-P2DT15H", files["deadline.ics"])               # 3 天前早上 9 點
+
     def test_sitemap_and_robots(self):
         site, _ = self.build([RACE])
         with open(os.path.join(site, "sitemap.xml"), encoding="utf-8") as f:

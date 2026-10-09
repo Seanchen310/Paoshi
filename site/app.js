@@ -317,8 +317,16 @@
       if (!groups.length || groups[groups.length - 1].ym !== ym) groups.push({ ym: ym, rows: [] });
       groups[groups.length - 1].rows.push(r);
     });
-    return groups.map((g) => {
-      const label = (g.ym.slice(0, 4) !== today.slice(0, 4) ? `${g.ym.slice(0, 4)} 年 ` : '') + `${Number(g.ym.slice(5))} 月`;
+    // 少於兩場的月份，和相鄰也只有一場的月份併成同一段（同一列），右邊才不會空一格
+    const merged = [];
+    groups.forEach((g) => {
+      const last = merged[merged.length - 1];
+      if (g.rows.length < 2 && last && last.small) { last.yms.push(g.ym); last.rows = last.rows.concat(g.rows); }
+      else merged.push({ yms: [g.ym], rows: g.rows, small: g.rows.length < 2 });
+    });
+    const monthName = (ym, showYear) => (showYear ? `${ym.slice(0, 4)} 年 ` : '') + `${Number(ym.slice(5))} 月`;
+    return merged.map((g) => {
+      const label = g.yms.map((ym, i) => monthName(ym, ym.slice(0, 4) !== today.slice(0, 4) && (i === 0 || ym.slice(0, 4) !== g.yms[i - 1].slice(0, 4)))).join('、');
       return `<section class="month-group" aria-label="${label}">
         <h3 class="month-head">${label}<small>${g.rows.length} 場</small></h3>
         <div class="cards">${g.rows.map(card).join('')}</div>
@@ -359,11 +367,7 @@
       </div>`;
   }
 
-  const bmcButton = () => BMC_SLUG
-    ? `<a class="bmc" href="https://buymeacoffee.com/${encodeURIComponent(BMC_SLUG)}" target="_blank" rel="noopener">${ICON.coffee}<span>請跑事喝杯咖啡</span></a>`
-    : '';
   const footerHtml = () => `<footer class="foot">
-      ${bmcButton()}
       <p>資料來源：<a href="http://www.taipeimarathon.org.tw/contest.aspx" target="_blank" rel="noopener">跑者廣場</a>、<a href="https://running.biji.co/index.php?q=competition" target="_blank" rel="noopener">運動筆記</a>。<br>報名與最新內容以主辦單位官網為準。</p>
     </footer>`;
 
@@ -476,7 +480,7 @@
 
     const seen = new Set();
     const groups = r.distances.filter((d) => !seen.has(d.label) && seen.add(d.label));
-    const hasFee = groups.some((d) => d.fee != null || d.quota != null);
+    const hasFee = groups.some((d) => d.fee != null || d.quota != null || d.time_limit);
     // 只提醒會影響報名的不一致：截止日、可能額滿、比賽改期；開報日不同只在還沒開報時才重要
     const conflict = r.issues.some((i) => /截止日兩邊不同|可能額滿|舊日期/.test(i) ||
       (r.st === 'upcoming' && i.indexOf('開始日兩邊不同') >= 0));
@@ -511,12 +515,11 @@
         <dl class="box info">${info.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
         ${groups.length ? `<section class="sec"><h2>組別</h2><div class="box groups">
           ${groups.map((d) => `<div class="grp"><span class="d ${d.category === 'full' || d.category === 'half' ? d.category : ''}">${esc(d.label)}</span>
-            <span class="q">${hasFee ? (d.quota != null ? `名額 ${d.quota.toLocaleString()}${d.quota_shared ? '（共用）' : ''}` : '名額未公布') : ''}</span>
+            <span class="q">${groupNote(d, hasFee)}</span>
             <span class="f">${d.fee != null ? feeText(d.fee) : ''}</span></div>`).join('')}
         </div>${hasFee ? '' : '<p class="fine">報名費與名額請見主辦單位簡章。</p>'}</section>` : ''}
         ${conflict ? '<div class="warn">兩個資料來源的日期不一致，報名前請以主辦單位官網為準。</div>' : ''}
         <p class="fine">賽事資訊整理自${src}，報名與最新內容以主辦單位官網為準。</p>
-        ${bmcButton()}
       </main>
       <div class="actions">
         <button type="button" class="sq" data-act="ics-race" aria-label="比賽日加到行事曆">${ICON.cal}</button>
@@ -526,64 +529,97 @@
     window.scrollTo(0, 0);
   }
 
-  // ---------- 加到行事曆（.ics 檔，iPhone／Google／Outlook 都能開） ----------
-  function icsText(s) { return String(s || '').replace(/\\/g, '\\\\').replace(/[,;]/g, (c) => '\\' + c).replace(/\n/g, '\\n'); }
-  const ymd = (iso) => iso.replace(/-/g, '');
-  function utcStamp(isoLocal) {   // '2026-10-01T12:00'（台灣時間）→ '20261001T040000Z'
-    const d = new Date(isoLocal + ':00+08:00');
-    return d.toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+  // 組別的小字：名額、限時（關門時間）、各組起跑時間
+  function minutesText(m) {
+    if (m % 60 === 0) return `${m / 60} 小時`;
+    if (m > 60) return m % 30 === 0 ? `${m / 60} 小時` : `${Math.floor(m / 60)} 小時 ${m % 60} 分`;
+    return `${m} 分鐘`;
   }
-  function nextDay(iso) { return new Date(toDate(iso).getTime() + DAY).toISOString().slice(0, 10); }
-  function makeIcs(ev) {
-    const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Paoshi//跑事//ZH', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT',
-      'UID:' + ev.uid + '@paoshi', 'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '')];
-    if (ev.at) {
-      lines.push('DTSTART:' + utcStamp(ev.at));
-      lines.push('DTEND:' + utcStamp(ev.endAt || ev.at));
-    } else {
-      lines.push('DTSTART;VALUE=DATE:' + ymd(ev.date), 'DTEND;VALUE=DATE:' + ymd(nextDay(ev.date)));
+  function groupNote(d, hasFee) {
+    const parts = [];
+    if (d.quota != null) parts.push(`名額 ${d.quota.toLocaleString()}${d.quota_shared ? '（共用）' : ''}`);
+    else if (hasFee) parts.push('名額未公布');
+    if (d.time_limit) parts.push(`限時 ${minutesText(d.time_limit)}`);
+    if (d.start) parts.push(`${d.start} 起跑`);
+    return parts.join('<br>');
+  }
+
+  // ---------- 加到行事曆：選 Apple 行事曆或 Google 日曆 ----------
+  // .ics 檔在部署時就產生好（build_site.py）放在 /race/<key>/ 底下：iPhone 點了直接跳出「加入行事曆」，不會變成下載。
+  // Google 日曆不能自訂提醒時間，所以截止提醒＝在「截止前一天早上 9 點」建立一個提醒行程。
+  const UA = navigator.userAgent;
+  const IS_APPLE = /iPhone|iPad|iPod|Macintosh/.test(UA) && !/Android/.test(UA);
+  const IS_ANDROID = /Android/.test(UA);
+  const gStamp = (ms) => new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+  const gDay = (iso) => iso.replace(/-/g, '');
+  let calSheet = null;      // { race, kind }
+
+  function calEvent(r, kind) {
+    const reg = r.registration;
+    const page = `${location.origin}/race/${r.key || r.id}/`;
+    const link = r.url || page;
+    const base = { file: `/race/${r.key || r.id}/${kind}.ics`, location: r.address || r.location || '' };
+    if (kind === 'race') {
+      const at = r.start_time ? atMs(`${r.date}T${r.start_time}`) : null;
+      return Object.assign(base, {
+        heading: '比賽日加到行事曆',
+        apple: r.start_time ? '比賽前一天、起跑前 2 小時提醒' : '比賽前一天早上 9 點提醒',
+        google: '比賽日加到你的 Google 日曆',
+        text: r.name,
+        dates: at ? `${gStamp(at)}/${gStamp(at + 5 * 3600000)}` : `${gDay(r.date)}/${gDay(new Date(toDate(r.date).getTime() + DAY).toISOString().slice(0, 10))}`,
+        details: `${r.distances.map((d) => d.label).join(' / ')}\n報名：${link}\n跑事：${page}`,
+      });
     }
-    lines.push('SUMMARY:' + icsText(ev.title));
-    if (ev.location) lines.push('LOCATION:' + icsText(ev.location));
-    if (ev.url) lines.push('URL:' + ev.url);
-    lines.push('DESCRIPTION:' + icsText(ev.desc));
-    (ev.alarms || []).forEach((t) => lines.push('BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsText(ev.title), 'TRIGGER:' + t, 'END:VALARM'));
-    lines.push('END:VEVENT', 'END:VCALENDAR');
-    return lines.join('\r\n');
-  }
-  function download(name, text) {
-    const blob = new Blob([text], { type: 'text/calendar;charset=utf-8' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = name.replace(/[\\/:*?"<>|]/g, '') + '.ics';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
-  }
-  function addRaceToCalendar(r) {
-    const page = location.href;
-    const ev = { uid: r.id, title: r.name, location: r.address || r.location, url: r.url || page,
-      desc: `${r.distances.map((d) => d.label).join(' / ')}\n跑事：${page}`, alarms: ['-PT15H'] };
-    if (r.start_time) { ev.at = `${r.date}T${r.start_time}`; ev.endAt = `${r.date}T${String(Number(r.start_time.slice(0, 2)) + 5).padStart(2, '0')}${r.start_time.slice(2)}`; ev.alarms = ['-P1D', '-PT2H']; }
-    else ev.date = r.date;
-    download(r.name, makeIcs(ev));
-    toast('已下載行事曆檔，打開它就能加入行事曆');
-  }
-  function addReminder(r) {
-    const reg = r.registration, page = location.href;
-    const ev = { url: r.url || page, location: r.address || r.location };
-    if (r.st === 'upcoming') {
-      Object.assign(ev, { uid: r.id + '-open', title: `開放報名：${r.name}`, desc: `比賽日 ${r.date}\n報名：${r.url || page}` });
-      if (reg.start_at) { ev.at = reg.start_at; ev.endAt = reg.start_at; ev.alarms = ['-P1D', '-PT10M']; }
-      else { ev.date = reg.start; ev.alarms = ['-PT15H']; }                      // 前一天 09:00
-    } else {
-      Object.assign(ev, { uid: r.id + '-close', title: `報名截止：${r.name}`, desc: `比賽日 ${r.date}\n報名：${r.url || page}` });
-      if (reg.end_at && reg.end_at.slice(11) !== '00:00') { ev.at = reg.end_at; ev.endAt = reg.end_at; ev.alarms = ['-P3D', '-P1D', '-PT3H']; }
-      else { ev.date = reg.end; ev.alarms = ['-P2DT15H', '-PT15H']; }           // 三天前、前一天 09:00
+    if (kind === 'open') {
+      const at = reg.start_at ? atMs(reg.start_at) : atMs(reg.start + 'T09:00');
+      return Object.assign(base, {
+        heading: '開報時提醒我',
+        apple: reg.start_at ? '開報前一天、開報前 10 分鐘提醒' : '開報前一天早上 9 點提醒',
+        google: `開報時間（${md(reg.start)}${reg.start_at ? ' ' + reg.start_at.slice(11, 16) : ' 09:00'}）建立提醒行程`,
+        text: `開放報名：${r.name}`,
+        dates: `${gStamp(at)}/${gStamp(at + 30 * 60000)}`,
+        details: `比賽日 ${r.date}\n報名：${link}\n跑事：${page}`,
+      });
     }
-    download(ev.title, makeIcs(ev));
-    toast('已下載提醒，打開它加入行事曆，時間到會通知你');
+    // 報名截止
+    const exact = reg.end_at && !reg.end_at.endsWith('T00:00');
+    let at = atMs(reg.end + 'T09:00') - DAY;                 // 截止前一天早上 9 點
+    let text = `明天截止報名：${r.name}`;
+    if (at < Date.now()) { at = exact ? atMs(reg.end_at) - 3 * 3600000 : atMs(reg.end + 'T09:00'); text = `今天截止報名：${r.name}`; }
+    return Object.assign(base, {
+      heading: '截止前提醒我',
+      apple: exact ? '截止前 3 天、前 1 天、前 3 小時各提醒一次' : '截止前 3 天、前 1 天早上 9 點各提醒一次',
+      google: '截止前一天早上 9 點建立提醒行程',
+      text: text,
+      dates: `${gStamp(at)}/${gStamp(at + 30 * 60000)}`,
+      details: `報名截止：${md(reg.end)}${exact ? ' ' + reg.end_at.slice(11, 16) : ''}\n比賽日 ${r.date}\n報名：${link}\n跑事：${page}`,
+    });
   }
+  function gcalUrl(ev) {
+    const q = new URLSearchParams({ action: 'TEMPLATE', text: ev.text, dates: ev.dates, details: ev.details,
+      location: ev.location, ctz: 'Asia/Taipei' });
+    return 'https://calendar.google.com/calendar/render?' + q.toString();
+  }
+  const APPLE_ICON = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>';
+  const GOOGLE_ICON = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4M10 14h4v4"/></svg>';
+  function renderCalSheet() {
+    if (!calSheet) return;
+    const ev = calEvent(calSheet.race, calSheet.kind);
+    const apple = `<a class="choice" href="${esc(ev.file)}" data-act="cal-pick">${APPLE_ICON}<span><b>Apple 行事曆</b><small>iPhone、iPad、Mac · ${esc(ev.apple)}</small></span>${IS_APPLE ? '<em>建議</em>' : ''}</a>`;
+    const google = `<a class="choice" href="${esc(gcalUrl(ev))}" target="_blank" rel="noopener" data-act="cal-pick">${GOOGLE_ICON}<span><b>Google 日曆</b><small>Android、電腦 · ${esc(ev.google)}</small></span>${IS_ANDROID ? '<em>建議</em>' : ''}</a>`;
+    document.body.style.overflow = 'hidden';
+    $('#sheet').innerHTML = `
+      <div class="sheet-wrap" data-act="close">
+        <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="cal-title">
+          <div class="grip"></div>
+          <div class="sheet-head"><h1 id="cal-title">${ev.heading}</h1><button type="button" class="text-btn" data-act="close">取消</button></div>
+          <p class="fine sheet-sub">${esc(calSheet.race.name)}<br>選你手機上用的行事曆，提醒會自動加進去。</p>
+          <div class="choices">${IS_ANDROID ? google + apple : apple + google}</div>
+          <a class="other-ics" href="${esc(ev.file)}" download data-act="cal-pick">其他行事曆（Outlook 等）：下載 .ics 檔</a>
+        </div>
+      </div>`;
+  }
+  function openCal(r, kind) { calSheet = { race: r, kind: kind }; renderCalSheet(); }
 
   // ---------- 提示訊息、分享 ----------
   let toastTimer;
@@ -614,6 +650,7 @@
   function render() {
     const rt = route();
     $('#app').className = 'app ' + (rt.page === 'detail' ? 'is-detail' : 'is-list');
+    document.body.dataset.page = rt.page;
     if (rt.page === 'detail') {
       sheetOpen = false; renderSheet(); renderDetail(rt.id);
       const r = DATA && DATA.races.find((x) => x.key === rt.id || x.id === rt.id);
@@ -666,7 +703,7 @@
       case 'filter': sheetOpen = true; return renderSheet();
       case 'close':
         if (t.classList.contains('sheet-wrap') && e.target !== t) return;   // 點面板內部不關
-        sheetOpen = false; return render();
+        sheetOpen = false; calSheet = null; return render();
       case 'clear':
         Object.assign(F, { tab: 'open', q: '', dists: [], regions: [], county: '', date: 'any', cert: false });
         return refresh();
@@ -679,8 +716,11 @@
         else go('/');
         return;
       case 'share': return race && share(race);
-      case 'ics-race': return race && addRaceToCalendar(race);
-      case 'ics-remind': return race && addReminder(race);
+      case 'ics-race': return race && openCal(race, 'race');
+      case 'ics-remind': return race && openCal(race, race.st === 'upcoming' ? 'open' : 'deadline');
+      case 'cal-pick':
+        setTimeout(() => { calSheet = null; render(); toast('已打開行事曆，確認後就會加入提醒'); }, 400);
+        return;
     }
   });
   function onSearch(e) {
@@ -694,8 +734,27 @@
     if (e.target.id === 'county') { F.county = e.target.value; refresh(); }
   });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && sheetOpen) { sheetOpen = false; render(); }
+    if (e.key === 'Escape' && (sheetOpen || calSheet)) { sheetOpen = false; calSheet = null; render(); }
   });
+
+  // 「請跑事喝杯咖啡」懸浮圓鈕：每頁右下角都有（詳情頁會往上讓開報名按鈕）
+  if (BMC_SLUG && !$('.fab-bmc')) {
+    const a = document.createElement('a');
+    a.className = 'fab-bmc';
+    a.href = `https://buymeacoffee.com/${encodeURIComponent(BMC_SLUG)}`;
+    a.target = '_blank'; a.rel = 'noopener';
+    a.setAttribute('aria-label', '請跑事喝杯咖啡');
+    a.innerHTML = `${ICON.coffee}<span>請跑事喝杯咖啡</span>`;
+    document.body.appendChild(a);
+    // 往下捲時藏起來（不擋內容），往上捲或回到頂端時再出現
+    let lastY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y > lastY + 6 && y > 80) a.classList.add('fab-hide');
+      else if (y < lastY - 6 || y <= 80) a.classList.remove('fab-hide');
+      lastY = y;
+    }, { passive: true });
+  }
 
   applyTheme();
   render();

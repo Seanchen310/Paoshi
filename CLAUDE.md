@@ -22,6 +22,11 @@
   - 下載失敗會重試 3 次（跑者廣場常間歇性回 HTTP 500）。
 - `biji.py`：運動筆記 `running.biji.co/index.php?q=competition`，一頁就有本月起所有賽事（約 200 場，1 個請求）。
 - `merge.py`：比對同一場比賽並合併欄位。
+- `biji_detail.py`：運動筆記賽事詳情頁的「項目」區（每組起跑、費用、限時、限額、參賽贈品）＋主辦單位＋相關連結（線上報名／活動簡章，略過 doubleclick 等廣告追蹤連結）。
+  - 有禮貌地抓：排程每次最多 20 頁（`--details 20`）、每頁間隔 3 秒；快取在 `data/biji_details.json`（進 git），14 天內不重抓；沒抓過的、可報名／即將開報的、比賽日近的優先。單頁失敗不影響排程。
+  - 只補空白：跑者廣場有的報名費、名額照用（運動筆記詳情頁的費用偶爾有錯，例如渣打半馬）；新增每組 `time_limit`（分鐘）、`time_limit_text`、`start`；補 organizer、url。
+  - 組別比對：標籤相同，或距離差 0.3 公里內最接近的（列表 42K ↔ 詳情 42.195K）。
+  - 歷史紀錄：費用、名額從「沒有」變成有值不算變化（是補資料），只記真的改了。
 - `history.py`：歷史紀錄（策略書排第 1 的優勢）。每次排程和上一次比對 → `history/`：`latest.json`（比對基準）、`snapshots/*.json.gz`（有變化才存）、`changes.jsonl`、`runs.jsonl`（每次執行一行，算排程成功率）、`CHANGES.md`（給人看，最近半年）。
   - 只比對來源寫的事實，不比對推算的狀態／剩幾天，避免假變化。
   - 同一場比賽的編號：有運動筆記就用 `biji-<cid>`（改名改期不變），否則用 id。
@@ -39,13 +44,16 @@
   - 靜態網頁的 #app 有 `data-prerendered`：資料載入前先顯示預先寫好的內容，載入後換成即時狀態。
   - 篩選是列表上的底部面板，篩選條件存在 localStorage。
   - 報名狀態、剩幾天在瀏覽器依台灣時間的今天重算；比賽日已過的不顯示。
-  - 「截止前提醒我／開報時提醒我」＝下載 .ics 行事曆檔（含提醒），不需要帳號或伺服器。
+  - 「截止前提醒我／開報時提醒我」／行事曆鈕 → 跳出選單：Apple 行事曆（連到部署時產生的 `/race/<key>/{deadline,open,race}.ics`，`_headers` 設成 text/calendar，iPhone 直接跳出加入畫面）或 Google 日曆（calendar.google.com 新增活動連結；不能自訂提醒，所以截止提醒＝截止前一天 09:00 的行程）。依裝置把建議的排第一（iPhone/Mac→Apple、Android→Google）。另有「下載 .ics」給其他行事曆。
+  - 「請跑事喝杯咖啡」＝右下角懸浮圓鈕（Buy Me a Coffee 黃），往下捲自動藏起、往上捲出現；詳情頁位置抬高讓開報名列。
+  - 詳情頁組別小字：名額、限時（關門時間）、起跑時間。
+  - 列表月份分段：少於兩場的相鄰月份併成一段（「2027 年 11 月、12 月 · 2 場」）。
   - 搜尋只重畫結果、不重畫搜尋框，避免打斷注音選字。
   - 版面：手機（<768）單欄、底部篩選面板；iPad（≥768）卡片兩欄、搜尋與分頁同列、日曆與當天清單並排、篩選改置中視窗；桌機（≥1024）頁首併成一排（品牌｜搜尋＋分頁｜主題）、篩選常駐左側欄；≥1360 卡片三欄。
   - 列表依月份分段，月份小標題（「2027 年 1 月 · 18 場」，今年不寫年份）捲動時固定在頂端；所有尺寸都有。詳情頁最寬 720–760px。
   - Buy Me a Coffee：`app.js` 最上面的 `BMC_SLUG` = `sean310`（buymeacoffee.com/sean310；空白就不顯示）。用一般連結按鈕，不用官方 script（它用 document.write，在動態畫面會壞）。出現在列表頁尾、詳情頁說明下方。
   - 兩種瀏覽方式：列表／日曆（列表正上方有文字的兩段式切換，記在 localStorage；刻意不用右上角圖示按鈕，因為不好被發現）。日曆可切「比賽日／報名截止日」，點日期看當天的賽事；圓點顏色＝報名狀態。電腦版（≥1024）一次並排兩個月、當天清單排在下方多欄；手機與 iPad 一個月。箭頭一次移一個月。
-- `tests/`：`python -m unittest discover tests`（54 個），用真實頁面片段當測試資料。改解析邏輯前後都要跑。
+- `tests/`：`python -m unittest discover tests`（62 個），用真實頁面片段當測試資料。改解析邏輯前後都要跑。
 - 2026-10-09 合併結果：跑者廣場 193、運動筆記 199（不含海外）→ 237 場（兩邊都有 155、只有運動筆記 44、只有跑者廣場 38）；報名中 70、快截止 13、即將開報 4、未知 30、已截止 120。
 
 ## 跑者廣場頁面結構（解析重點）
@@ -90,7 +98,7 @@
 
 ## 資料格式（races.json 每筆）
 
-`id, key, name, alt_names, date, start_time, location, address, county, region, distances[{label, km, category, fee, quota, quota_shared}], categories, organizer, registration{raw, start, end, start_at, end_at, status, days_left}, url, certifications, flag, postponed_from, issues, sources[{name, url, scraped_at}]`
+`id, key, name, alt_names, date, start_time, location, address, county, region, distances[{label, km, category, fee, quota, quota_shared, time_limit?, time_limit_text?, start?}], categories, organizer, registration{raw, start, end, start_at, end_at, status, days_left}, url, certifications, flag, postponed_from, issues, sources[{name, url, scraped_at}]`
 
 - id = 日期＋賽名的 hash（合併時用跑者廣場的賽名）。
 - key = 穩定編號（有運動筆記就是 `biji-<cid>`，否則同 id），網站網址與歷史紀錄都用它。
@@ -128,4 +136,4 @@
 2. 選定流量統計工具（不記錄姓名、Email、精確位置）。
 3. 收藏、比較、底部導覽、篩選條件寫進網址。
 4. 開報提醒（LINE 或 Email）。
-5. 賽事詳情補關門時間、報名費（只有運動筆記才有的場次）、路線、海拔：運動筆記詳情頁有，但一場一個請求，要限量。
+5. 路線、海拔（運動筆記詳情頁的簡介裡是圖片，不好結構化）。

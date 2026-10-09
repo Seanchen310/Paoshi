@@ -22,6 +22,7 @@ import os
 import sys
 
 import biji
+import biji_detail
 import history
 import merge
 import scraper
@@ -47,6 +48,9 @@ def main(argv=None):
     ap.add_argument("--out", default="output", help="輸出資料夾（預設 output）")
     ap.add_argument("--today", help="指定今天日期 YYYY-MM-DD（測試用）")
     ap.add_argument("--history", help="歷史紀錄資料夾（排程用 history；不給就不記錄）")
+    ap.add_argument("--details", type=int, default=0,
+                    help="這次最多抓幾場運動筆記詳情頁（排程用 20；預設 0＝不抓，只用已存的）")
+    ap.add_argument("--details-cache", default="data/biji_details.json", help="詳情頁快取檔")
     args = ap.parse_args(argv)
 
     now = dt.datetime.now(scraper.TZ)
@@ -74,6 +78,14 @@ def main(argv=None):
     scraper.apply_status_rules(races, when)
     for r in races:
         r["key"] = history.race_key(r)     # 穩定編號：網站網址 /race/<key>/ 用它，改名改期也不變
+
+    # 運動筆記詳情頁：報名費、關門時間、主辦單位（限量抓，存在快取）
+    cache = biji_detail.load_cache(args.details_cache)
+    if args.details:
+        ok, bad = biji_detail.update_cache(cache, races, when, limit=args.details)
+        biji_detail.save_cache(args.details_cache, cache)
+        print(f"運動筆記詳情頁：這次抓了 {ok} 頁" + (f"、失敗 {bad} 頁" if bad else "") + f"，累積 {len(cache)} 場")
+    biji_detail.apply_details(races, cache)
     jpath, cpath = scraper.write_outputs(races, args.out)
     print(f"跑者廣場 {len(pz)} 場、運動筆記 {len(bj)} 場（不含海外）→ 合併後 {len(races)} 場")
     print(scraper.summarize(races))

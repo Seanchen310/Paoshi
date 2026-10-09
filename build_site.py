@@ -6,7 +6,11 @@
   2. 每場比賽一個靜態網頁 site/race/<key>/index.html
      內容直接寫在 HTML 裡（賽名、日期、地點、報名費…）＋ schema.org 賽事結構化資料，
      讓 Google 收錄「XX 馬拉松 報名」。打開後 app.js 會用最新資料、依當下時間重算狀態。
-  3. site/sitemap.xml、site/robots.txt
+  3. 每場比賽的行事曆檔（iPhone 點了直接出現「加入行事曆」）：
+       /race/<key>/race.ics      比賽日
+       /race/<key>/deadline.ics  報名截止提醒（截止前 3 天、前 1 天…）
+       /race/<key>/open.ics      開報提醒
+  4. site/sitemap.xml、site/robots.txt、site/_headers（讓 .ics 用行事曆格式送出）
 
 產生的檔案都不進 git（.gitignore），只在部署時產生。
 """
@@ -88,6 +92,28 @@ def status_text(reg):
     return STATUS_TEXT.get(st, "報名資訊未公布")
 
 
+def minutes_text(m):
+    if m % 60 == 0:
+        return f"{m // 60} 小時"
+    if m > 60:
+        return f"{m / 60:g} 小時" if m % 30 == 0 else f"{m // 60} 小時 {m % 60} 分"
+    return f"{m} 分鐘"
+
+
+def group_note(d, has_fee):
+    """組別的小字：名額、限時（關門時間）、起跑時間。"""
+    parts = []
+    if d.get("quota") is not None:
+        parts.append("名額 " + format(d["quota"], ",") + ("（共用）" if d.get("quota_shared") else ""))
+    elif has_fee:
+        parts.append("名額未公布")
+    if d.get("time_limit"):
+        parts.append("限時 " + minutes_text(d["time_limit"]))
+    if d.get("start"):
+        parts.append(e(d["start"]) + " 起跑")
+    return "<br>".join(parts)
+
+
 def description(r):
     reg = r["registration"]
     county, loc = r.get("county") or "", (r.get("location") or r.get("address") or "").replace("台", "臺")
@@ -157,10 +183,10 @@ def race_page(r, scraped):
     if r.get("organizer"):
         info.append(("承辦單位", e(r["organizer"])))
     groups = unique_distances(r)
-    has_fee = any(d.get("fee") is not None or d.get("quota") is not None for d in groups)
+    has_fee = any(d.get("fee") is not None or d.get("quota") is not None or d.get("time_limit") for d in groups)
     rows = "".join(
         f'<div class="grp"><span class="d {d["category"] if d["category"] in CAT_FULL_HALF else ""}">{e(d["label"])}</span>'
-        f'<span class="q">{("名額 " + format(d["quota"], ",") + ("（共用）" if d.get("quota_shared") else "")) if d.get("quota") is not None else ("名額未公布" if has_fee else "")}</span>'
+        f'<span class="q">{group_note(d, has_fee)}</span>'
         f'<span class="f">{fee_text(d["fee"]) if d.get("fee") is not None else ""}</span></div>'
         for d in groups)
     srcs = "、".join(f'<a href="{e(s["url"])}" target="_blank" rel="noopener">{e(s["name"])}</a>' for s in r["sources"])
@@ -195,7 +221,7 @@ def race_page(r, scraped):
 <script type="application/ld+json">{json_ld(r, url)}</script>
 {THEME_SCRIPT}
 </head>
-<body>
+<body data-page="detail">
 <div class="app is-detail" id="app" data-prerendered="1">
   <div class="bar"><a class="icon-btn" href="/" data-act="back" aria-label="返回列表">{ICON_BACK}</a></div>
   <main class="detail">
@@ -219,6 +245,90 @@ def race_page(r, scraped):
 """
 
 
+# ---------------------------------------------------------------
+# 行事曆檔（.ics）
+# ---------------------------------------------------------------
+
+TZ = dt.timezone(dt.timedelta(hours=8))
+UTC = dt.timezone.utc
+
+
+def _ics_text(s):
+    return str(s or "").replace("\\", "\\\\").replace(",", "\\,").replace(";", "\\;").replace("\n", "\\n")
+
+
+def _utc(local_iso):
+    """'2026-10-30T16:00'（台灣時間）→ '20261030T080000Z'"""
+    return dt.datetime.fromisoformat(local_iso).replace(tzinfo=TZ).astimezone(UTC).strftime("%Y%m%dT%H%M%SZ")
+
+
+def make_ics(uid, title, desc, location, url, at=None, end_at=None, date=None, alarms=(), stamp=None):
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Paoshi//跑事//ZH", "CALSCALE:GREGORIAN",
+             "METHOD:PUBLISH", "BEGIN:VEVENT", f"UID:{uid}@paoshi.pages.dev",
+             "DTSTAMP:" + (stamp or dt.datetime.now(UTC)).strftime("%Y%m%dT%H%M%SZ")]
+    if at:
+        lines += ["DTSTART:" + _utc(at), "DTEND:" + _utc(end_at or at)]
+    else:
+        d = dt.date.fromisoformat(date)
+        lines += ["DTSTART;VALUE=DATE:" + d.strftime("%Y%m%d"),
+                  "DTEND;VALUE=DATE:" + (d + dt.timedelta(days=1)).strftime("%Y%m%d")]
+    lines.append("SUMMARY:" + _ics_text(title))
+    if location:
+        lines.append("LOCATION:" + _ics_text(location))
+    if url:
+        lines.append("URL:" + url)
+    lines.append("DESCRIPTION:" + _ics_text(desc))
+    for t in alarms:
+        lines += ["BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + _ics_text(title), "TRIGGER:" + t, "END:VALARM"]
+    lines += ["END:VEVENT", "END:VCALENDAR"]
+    return "\r\n".join(lines) + "\r\n"
+
+
+def race_ics_files(r, page_url, stamp=None):
+    """回傳 {檔名: 內容}。截止提醒：有確切時間就準時提醒，只有日期就在前幾天早上 9 點提醒。"""
+    reg = r["registration"]
+    where = r.get("address") or r.get("location")
+    link = r.get("url") or page_url
+    files = {}
+    dists = " / ".join(d["label"] for d in unique_distances(r))
+    if r.get("start_time"):
+        h = int(r["start_time"][:2]) + 5
+        end = f'{r["date"]}T{min(h, 23):02d}{r["start_time"][2:]}'
+        files["race.ics"] = make_ics(r["key"], r["name"], f"{dists}\n跑事：{page_url}", where, link,
+                                     at=f'{r["date"]}T{r["start_time"]}', end_at=end, alarms=("-P1D", "-PT2H"), stamp=stamp)
+    else:
+        files["race.ics"] = make_ics(r["key"], r["name"], f"{dists}\n跑事：{page_url}", where, link,
+                                     date=r["date"], alarms=("-PT15H",), stamp=stamp)
+    desc = f"比賽日 {r['date']}\n報名：{link}\n跑事：{page_url}"
+    if reg.get("end"):
+        title = f"報名截止：{r['name']}"
+        if reg.get("end_at") and not reg["end_at"].endswith("T00:00"):
+            files["deadline.ics"] = make_ics(r["key"] + "-close", title, desc, where, link, at=reg["end_at"],
+                                             alarms=("-P3D", "-P1D", "-PT3H"), stamp=stamp)
+        else:  # 只知道日期：截止前 3 天、前 1 天的早上 9 點
+            files["deadline.ics"] = make_ics(r["key"] + "-close", title, desc, where, link, date=reg["end"],
+                                             alarms=("-P2DT15H", "-PT15H"), stamp=stamp)
+    if reg.get("start"):
+        title = f"開放報名：{r['name']}"
+        if reg.get("start_at"):
+            files["open.ics"] = make_ics(r["key"] + "-open", title, desc, where, link, at=reg["start_at"],
+                                         alarms=("-P1D", "-PT10M"), stamp=stamp)
+        else:
+            files["open.ics"] = make_ics(r["key"] + "-open", title, desc, where, link, date=reg["start"],
+                                         alarms=("-PT15H",), stamp=stamp)
+    return files
+
+
+HEADERS = """/race/*
+  X-Robots-Tag: all
+
+/*.ics
+  Content-Type: text/calendar; charset=utf-8
+  Content-Disposition: inline
+  X-Robots-Tag: noindex
+"""
+
+
 def build(races_json, site_dir):
     with open(races_json, encoding="utf-8") as f:
         data = json.load(f)
@@ -238,6 +348,9 @@ def build(races_json, site_dir):
         os.makedirs(d, exist_ok=True)
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
             f.write(race_page(r, scraped))
+        for name, text in race_ics_files(r, f"{SITE_URL}/race/{r['key']}/").items():
+            with open(os.path.join(d, name), "w", encoding="utf-8", newline="") as f:
+                f.write(text)
         urls.append((f"{SITE_URL}/race/{r['key']}/", scraped[:10]))
 
     with open(os.path.join(site_dir, "sitemap.xml"), "w", encoding="utf-8") as f:
@@ -245,6 +358,8 @@ def build(races_json, site_dir):
         for u, last in urls:
             f.write(f"  <url><loc>{u}</loc><lastmod>{last}</lastmod></url>\n")
         f.write("</urlset>\n")
+    with open(os.path.join(site_dir, "_headers"), "w", encoding="utf-8") as f:
+        f.write(HEADERS)
     with open(os.path.join(site_dir, "robots.txt"), "w", encoding="utf-8") as f:
         f.write(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n")
     return len(urls) - 1
