@@ -18,6 +18,11 @@
   - 下載失敗會重試 3 次（跑者廣場常間歇性回 HTTP 500）。
 - `biji.py`：運動筆記 `running.biji.co/index.php?q=competition`，一頁就有本月起所有賽事（約 200 場，1 個請求）。
 - `merge.py`：比對同一場比賽並合併欄位。
+- `history.py`：歷史紀錄（策略書排第 1 的優勢）。每次排程和上一次比對 → `history/`：`latest.json`（比對基準）、`snapshots/*.json.gz`（有變化才存）、`changes.jsonl`、`runs.jsonl`（每次執行一行，算排程成功率）、`CHANGES.md`（給人看，最近半年）。
+  - 只比對來源寫的事實，不比對推算的狀態／剩幾天，避免假變化。
+  - 同一場比賽的編號：有運動筆記就用 `biji-<cid>`（改名改期不變），否則用 id。
+  - 事件：added／ended（比賽日過了）／removed_before_race（比賽前消失，可能取消）／changed（逐欄位，組別看費用與名額）／early_close（截止日前來源就標已截止或額滿，記提前幾天）。
+  - 2026-10-10 開始累積（第一次執行只建立基準）。
 - `.github/workflows/scrape.yml`：GitHub Actions 每天台灣時間 06:07、18:07 執行 `run.py`，結果 commit 回 `output/`。
 - 網站：**https://paoshi.pages.dev**（Cloudflare Pages 專案 `paoshi`，帳號 molimora@gmail.com；GitHub App 只授權 Paoshi repo）。
 - `site/`：網站（純 HTML/CSS/JS，沒有框架、不用建置工具）。`index.html`、`style.css`、`app.js`。讀同一層的 `races.json`。
@@ -30,7 +35,7 @@
   - 版面：手機（<768）單欄、底部篩選面板；iPad（≥768）卡片兩欄、搜尋與分頁同列、日曆與當天清單並排、篩選改置中視窗；桌機（≥1024）篩選常駐左側欄；≥1360 卡片三欄。詳情頁最寬 720–760px。
   - Buy Me a Coffee：`app.js` 最上面的 `BMC_SLUG` = `sean310`（buymeacoffee.com/sean310；空白就不顯示）。用一般連結按鈕，不用官方 script（它用 document.write，在動態畫面會壞）。出現在列表頁尾、詳情頁說明下方。
   - 兩種瀏覽方式：列表／日曆（列表正上方有文字的兩段式切換，記在 localStorage；刻意不用右上角圖示按鈕，因為不好被發現）。日曆可切「比賽日／報名截止日」，點日期看當天的賽事；圓點顏色＝報名狀態。
-- `tests/`：`python -m unittest discover tests`（36 個），用真實頁面片段當測試資料。改解析邏輯前後都要跑。
+- `tests/`：`python -m unittest discover tests`（43 個），用真實頁面片段當測試資料。改解析邏輯前後都要跑。
 - 2026-10-09 合併結果：跑者廣場 193、運動筆記 199（不含海外）→ 237 場（兩邊都有 155、只有運動筆記 44、只有跑者廣場 38）；報名中 70、快截止 13、即將開報 4、未知 30、已截止 120。
 
 ## 跑者廣場頁面結構（解析重點）
@@ -51,6 +56,19 @@
 - 「國內」列表混有日本、香港、中國賽事 → 地點和地址都對不到臺灣縣市就略過。
 - 報名費、主辦單位、關門時間只在詳情頁（`act=info&cid=`），目前沒抓。
 
+## 報名狀態規則（2026-10-10 決定，採用策略書；網站待實作）
+
+原則：寧可說待確認，也不說錯。
+- 狀態：open 報名中／closing_soon 快截止／upcoming 即將開報（分頁名稱維持「即將開報」）／closed 已截止／full 額滿／unknown 待確認。
+- 只知道截止「日期」→ 不倒數，顯示「截止日 10/30」；知道確切截止時間（運動筆記的 end_at）才倒數。
+- 快截止＝有確切截止時間且剩不到 72 小時。
+- 只知道日期、今天就是截止日 → 待確認。
+- 超過 7 天沒抓到新資料 → 報名中降級為待確認（剛好 7 天不降級）。
+- 即將開報的比賽已到開報時間 → 待確認，等下次抓取。
+- 來源寫額滿 → full。已取消、已延期等異動要當主訊息，不用綠色報名中蓋過。
+- 「前往報名」只在：報名中、比賽日未過、有報名連結 時顯示；否則提供「查看官方公告／賽事資訊」。
+- 半馬改為 20–22K；22–42K 為長距離（long）。
+
 ## 合併規則（merge.py）
 
 - 配對：日期相同（或運動筆記的延期前日期）＋賽名相似（去掉年份、第N屆、馬拉松／路跑等通用字後比相鄰兩字；≥0.5，或 ≥0.3 且有 2 字以上完全相同）＋縣市相同（相似度 ≥0.9 可不看縣市）。一對一、最像的先配。
@@ -64,7 +82,7 @@
 
 - id = 日期＋賽名的 hash（合併時用跑者廣場的賽名）。
 
-- category：full / half(20–25K) / 10k(9–20K) / short(<9K) / long(25–42K) / ultra / triathlon / relay / timed / virtual / other
+- category：full / half(20–25K，待改 20–22K) / 10k(9–20K) / short(<9K) / long(25–42K) / ultra / triathlon / relay / timed / virtual / other
 - `categories` 另外可能有 `trail`（越野）：兩個網站都沒這欄，`scraper.tag_trail` 用賽名判斷（越野、trail、山徑、天空跑、skyrun），合併後才加。
 - status：open / closing_soon(≤7 天) / upcoming / closed / unknown
 - region：北部 / 中部 / 南部 / 東部 / 離島

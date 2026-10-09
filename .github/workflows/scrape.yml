@@ -32,13 +32,13 @@ jobs:
       - name: 抓取並整理
         env:
           TZ: Asia/Taipei
-        run: python run.py --out output
+        run: python run.py --out output --history history
 
       - name: 存回 repo
         run: |
           git config user.name "paoshi-bot"
           git config user.email "paoshi-bot@users.noreply.github.com"
-          git add output/races.json output/races.csv
+          git add output/races.json output/races.csv history/
           if git diff --cached --quiet; then
             echo "資料沒有變化"
           else

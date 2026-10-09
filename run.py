@@ -5,6 +5,7 @@
   1. 跑者廣場 contest.aspx（1 個請求）
   2. 運動筆記 賽事列表（1 個請求）
   3. 合併同一場比賽 → output/races.json、output/races.csv
+  4. 和上一次比對，記下變化 → history/（加上 --history history 才會記）
 
 只用 Python 內建模組，不需要另外安裝套件。
 
@@ -21,6 +22,7 @@ import os
 import sys
 
 import biji
+import history
 import merge
 import scraper
 
@@ -44,6 +46,7 @@ def main(argv=None):
     ap.add_argument("--biji-html", help="運動筆記：改用本機的 HTML 檔，不連網")
     ap.add_argument("--out", default="output", help="輸出資料夾（預設 output）")
     ap.add_argument("--today", help="指定今天日期 YYYY-MM-DD（測試用）")
+    ap.add_argument("--history", help="歷史紀錄資料夾（排程用 history；不給就不記錄）")
     args = ap.parse_args(argv)
 
     now = dt.datetime.now(scraper.TZ)
@@ -71,6 +74,10 @@ def main(argv=None):
     print(f"跑者廣場 {len(pz)} 場、運動筆記 {len(bj)} 場（不含海外）→ 合併後 {len(races)} 場")
     print(scraper.summarize(races))
     print(f"已輸出：{jpath}\n        {cpath}")
+    if args.history:
+        when = now if not args.today else dt.datetime.combine(today, now.time(), now.tzinfo)
+        events = history.update(args.history, races, when)
+        print(f"歷史紀錄：這次有 {len(events)} 筆變化（{args.history}/CHANGES.md）")
     return 0
 
 
