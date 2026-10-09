@@ -1454,11 +1454,11 @@ null
 "date": "2026-12-05",
 "distances": {
 "115.1K": [
-null,
+2100,
 null
 ],
 "53.1K": [
-null,
+1300,
 null
 ],
 "62K": [
@@ -2322,7 +2322,7 @@ null
 "id": "2027-01-17-30746e01",
 "location": null,
 "name": "2027 MIZUNO 美津濃馬拉松接力賽",
-"organizer": null,
+"organizer": "中華民國體育運動總會 、 台灣美津濃股份有限公司",
 "postponed_from": "2026-11-08",
 "reg_end": null,
 "reg_end_at": null,
@@ -2926,20 +2926,20 @@ null
 "date": "2027-02-28",
 "distances": {
 "100K": [
-null,
-null
+3700,
+350
 ],
 "42.195K": [
 null,
 null
 ],
 "50K": [
-null,
-null
+2400,
+150
 ],
 "76K": [
-null,
-null
+3400,
+100
 ]
 },
 "id": "2027-02-28-06c546ca",
@@ -3213,20 +3213,20 @@ null
 "date": "2026-11-14",
 "distances": {
 "10K": [
-null,
-null
+650,
+150
 ],
 "21K": [
-null,
-null
+750,
+150
 ],
 "42.195K": [
-null,
-null
+850,
+150
 ],
 "5K": [
-null,
-null
+550,
+150
 ]
 },
 "id": "2026-11-14-609d770c",
@@ -4002,26 +4002,26 @@ null
 "date": "2026-10-31",
 "distances": {
 "12K": [
-null,
-null
+650,
+1500
 ],
 "23K": [
-null,
-null
+900,
+1000
 ],
 "42.195K": [
-null,
-null
+1100,
+1000
 ],
 "5K": [
-null,
-null
+550,
+1500
 ]
 },
 "id": "2026-10-31-68db9ac5",
 "location": null,
 "name": "2026 清水馬拉松嘉年華",
-"organizer": null,
+"organizer": "議長張清照服務處 、 清水紫雲巖管理委員會 、 清水區賞鳥協會",
 "postponed_from": null,
 "reg_end": "2026-10-31",
 "reg_end_at": "2026-10-31T23:59",
@@ -4033,7 +4033,7 @@ null
 "運動筆記"
 ],
 "start_time": null,
-"url": null
+"url": "https://signup.lohasnet.tw/signup/4228"
 },
 "biji-13029": {
 "address": "宜蘭縣宜蘭市梅洲二路140號",
@@ -4042,19 +4042,19 @@ null
 "distances": {
 "10K": [
 1100,
-null
+400
 ],
 "21K": [
 1300,
-null
+600
 ],
 "42.195K": [
 1400,
-null
+600
 ],
 "4K": [
 750,
-null
+1000
 ]
 },
 "id": "2027-01-10-aaf237f0",
@@ -4262,7 +4262,7 @@ null
 "id": "2027-01-09-e644ef2f",
 "location": null,
 "name": "2027 富邦人壽高雄馬拉松 DAY 1",
-"organizer": null,
+"organizer": "高雄市政府運動發展局",
 "postponed_from": null,
 "reg_end": null,
 "reg_end_at": null,
@@ -5162,15 +5162,15 @@ null
 "date": "2026-12-27",
 "distances": {
 "11.5K": [
-null,
+1000,
 1000
 ],
 "21.5K": [
-null,
+1100,
 1000
 ],
 "6K": [
-null,
+800,
 1000
 ]
 },
@@ -5908,7 +5908,7 @@ null
 "id": "2027-03-14-0a60c4a9",
 "location": null,
 "name": "2027柚花追香半程馬拉松-麻豆場",
-"organizer": null,
+"organizer": "麻豆區農會",
 "postponed_from": null,
 "reg_end": null,
 "reg_end_at": null,
@@ -6059,7 +6059,7 @@ null
 "運動筆記"
 ],
 "start_time": null,
-"url": null
+"url": "https://bao-ming.com/eb/content/7110#reg"
 },
 "biji-13111": {
 "address": "高雄市鳳山區維武路1號",
@@ -6114,7 +6114,7 @@ null
 "id": "2026-10-24-11167dc3",
 "location": null,
 "name": "2026新世紀福音戰士",
-"organizer": null,
+"organizer": "展通虹策略整合行銷股份有限公司",
 "postponed_from": null,
 "reg_end": null,
 "reg_end_at": null,
@@ -6236,7 +6236,7 @@ null
 "id": "2026-11-08-75792368",
 "location": null,
 "name": "2026 Taiwan Extreme Super Triathlon",
-"organizer": null,
+"organizer": "中華民國全能運動協會 、 台南市早起鳥路跑協會",
 "postponed_from": null,
 "reg_end": "2026-10-15",
 "reg_end_at": "2026-10-15T23:59",
@@ -6248,7 +6248,7 @@ null
 "運動筆記"
 ],
 "start_time": null,
-"url": null
+"url": "https://www.focusline.com.tw/261108HP/personal"
 },
 "biji-13117": {
 "address": "臺北市士林區溪山里至善路三段199號",
@@ -6423,7 +6423,7 @@ null
 "id": "2027-11-27-3bfe1386",
 "location": null,
 "name": "玩野樂園",
-"organizer": null,
+"organizer": "破圈運動行銷股份有限公司",
 "postponed_from": null,
 "reg_end": null,
 "reg_end_at": null,
@@ -7050,19 +7050,19 @@ null
 "date": "2026-12-05",
 "distances": {
 "23.8K": [
-null,
+1050,
 100
 ],
 "32.6K": [
-null,
+1200,
 20
 ],
 "42.2K": [
-null,
+1250,
 200
 ],
 "5.4K": [
-null,
+750,
 60
 ],
 "5.4Kx4": [
@@ -7070,11 +7070,11 @@ null,
 25
 ],
 "51K": [
-null,
+1300,
 20
 ],
 "8.2K": [
-null,
+850,
 100
 ]
 },
@@ -7102,28 +7102,28 @@ null,
 "date": "2026-12-26",
 "distances": {
 "22K": [
-null,
-null
+1050,
+100
 ],
 "31.8K": [
-null,
-null
+1200,
+50
 ],
 "4.6K": [
-null,
-null
+750,
+100
 ],
 "44K": [
-null,
-null
+1250,
+300
 ],
 "48.6K": [
-null,
-null
+1300,
+50
 ],
 "9.8K": [
-null,
-null
+850,
+100
 ]
 },
 "id": "2026-12-26-49d5ab76",
@@ -7153,19 +7153,19 @@ null
 "date": "2027-01-10",
 "distances": {
 "12K": [
-null,
+850,
 9000
 ],
 "21.0975K": [
-null,
+1500,
 9800
 ],
 "3K": [
-null,
+650,
 3000
 ],
 "42.195K": [
-null,
+1500,
 4700
 ]
 },
@@ -7229,15 +7229,15 @@ null,
 "date": "2027-01-10",
 "distances": {
 "10K": [
-null,
+100,
 500
 ],
 "21K": [
-null,
+100,
 500
 ],
 "6K": [
-null,
+100,
 500
 ]
 },
@@ -7265,26 +7265,26 @@ null,
 "date": "2027-04-03",
 "distances": {
 "12K": [
-null,
-null
+990,
+500
 ],
 "2.5K": [
-null,
-null
+350,
+200
 ],
 "21K": [
-null,
-null
+1090,
+500
 ],
 "6K": [
-null,
-null
+890,
+500
 ]
 },
 "id": "2027-04-03-f046c98e",
 "location": null,
 "name": "2027 中山香香生活節",
-"organizer": null,
+"organizer": "宜蘭縣冬山鄉中山社區發展協會",
 "postponed_from": "2027-03-20",
 "reg_end": "2027-02-17",
 "reg_end_at": "2027-02-17T23:59",
@@ -7297,7 +7297,7 @@ null
 "運動筆記"
 ],
 "start_time": null,
-"url": null
+"url": "https://bao-ming.com/eb/content/7192#reg"
 },
 "biji-13159": {
 "address": "高雄市岡山區劉厝里",
@@ -7340,7 +7340,7 @@ null
 "id": "2026-11-08-ebcb9d93",
 "location": null,
 "name": "財政部115年統一發票盃路跑臺北場活動-休閒組(3km)",
-"organizer": null,
+"organizer": "財政部 、 第一金融控股股份有限公司",
 "postponed_from": null,
 "reg_end": "2026-10-31",
 "reg_end_at": "2026-10-31T23:59",
@@ -7352,7 +7352,7 @@ null
 "運動筆記"
 ],
 "start_time": null,
-"url": null
+"url": "https://irunner.biji.co/2026-2mofrun03k?page=5379"
 },
 "biji-13161": {
 "address": "台北市北投區大業路65巷89號",
@@ -7367,7 +7367,7 @@ null
 "id": "2026-11-07-c1c97c58",
 "location": null,
 "name": "2026年第七屆＜農禪寺水月禪跑＞",
-"organizer": null,
+"organizer": "農禪寺",
 "postponed_from": null,
 "reg_end": "2026-10-18",
 "reg_end_at": "2026-10-18T10:00",
@@ -7379,7 +7379,7 @@ null
 "運動筆記"
 ],
 "start_time": null,
-"url": null
+"url": "https://webreg.ddm.org.tw/webreg/Client/WebRegNote?lang=zh-TW&s_no=A202600474"
 },
 "biji-13162": {
 "address": "台南市安平區漁濱路",
@@ -7387,26 +7387,26 @@ null
 "date": "2027-03-21",
 "distances": {
 "10K": [
-null,
-null
+650,
+500
 ],
 "21.0975K": [
-null,
-null
+850,
+500
 ],
 "42.195K": [
-null,
-null
+1100,
+800
 ],
 "5K": [
-null,
-null
+450,
+500
 ]
 },
 "id": "2027-03-21-c1fd93a4",
 "location": null,
 "name": "2027府城英雄馬拉松",
-"organizer": null,
+"organizer": "府城國際超級馬拉松協會",
 "postponed_from": null,
 "reg_end": "2027-01-21",
 "reg_end_at": "2027-01-21T23:59",
@@ -7418,7 +7418,7 @@ null
 "運動筆記"
 ],
 "start_time": null,
-"url": null
+"url": "https://bao-ming.com/eb/content/7198#reg"
 },
 "biji-13163": {
 "address": "臺南市新化區中興路42巷36號",
@@ -7789,15 +7789,15 @@ null,
 "date": "2026-12-12",
 "distances": {
 "11K": [
-null,
+750,
 null
 ],
 "3.6K": [
-null,
+350,
 null
 ],
 "5K": [
-null,
+550,
 null
 ]
 },
@@ -8001,15 +8001,15 @@ null
 "date": "2027-01-03",
 "distances": {
 "10.5K": [
-null,
+1050,
 null
 ],
 "21K": [
-null,
+1180,
 null
 ],
 "4.5K": [
-null,
+980,
 null
 ]
 },
@@ -8037,15 +8037,15 @@ null
 "date": "2027-01-17",
 "distances": {
 "10K": [
-null,
+1080,
 null
 ],
 "21K": [
-null,
+1180,
 null
 ],
 "3.5K": [
-null,
+980,
 null
 ]
 },
@@ -8144,26 +8144,26 @@ null,
 null
 ],
 "13.2K": [
-null,
-null
+1800,
+800
 ],
 "24.7K": [
-null,
-null
+2800,
+600
 ],
 "37.4K": [
-null,
-null
+4600,
+400
 ],
 "58.9K": [
-null,
-null
+5900,
+200
 ]
 },
 "id": "2027-04-24-45f45615",
 "location": null,
 "name": "2027 The North Face 100 谷關越野挑戰賽",
-"organizer": null,
+"organizer": "The North Face",
 "postponed_from": null,
 "reg_end": "2027-01-31",
 "reg_end_at": "2027-01-31T23:59",
@@ -8175,7 +8175,7 @@ null
 "運動筆記"
 ],
 "start_time": null,
-"url": null
+"url": "https://bao-ming.com/eb/content/7183#reg"
 },
 "biji-13189": {
 "address": "臺北市中山區樂群一路基隆河基16號水門",
@@ -8270,7 +8270,7 @@ null
 "id": "2027-04-17-2c500803",
 "location": null,
 "name": "2027 ELLE RUN With Style",
-"organizer": null,
+"organizer": "ELLE Taiwan 、 台灣赫斯特媒體(股)公司",
 "postponed_from": null,
 "reg_end": "2027-02-19",
 "reg_end_at": "2027-02-19T23:59",
