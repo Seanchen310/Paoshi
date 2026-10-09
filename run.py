@@ -72,6 +72,8 @@ def main(argv=None):
     races = scraper.tag_trail(merge.merge(pz, bj, today))
     when = now if not args.today else dt.datetime.combine(today, now.time(), now.tzinfo)
     scraper.apply_status_rules(races, when)
+    for r in races:
+        r["key"] = history.race_key(r)     # 穩定編號：網站網址 /race/<key>/ 用它，改名改期也不變
     jpath, cpath = scraper.write_outputs(races, args.out)
     print(f"跑者廣場 {len(pz)} 場、運動筆記 {len(bj)} 場（不含海外）→ 合併後 {len(races)} 場")
     print(scraper.summarize(races))

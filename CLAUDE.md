@@ -30,16 +30,19 @@
 - `.github/workflows/scrape.yml`：GitHub Actions 每天台灣時間 06:07、18:07 執行 `run.py`，結果 commit 回 `output/`。
 - 網站：**https://paoshi.pages.dev**（Cloudflare Pages 專案 `paoshi`，帳號 molimora@gmail.com；GitHub App 只授權 Paoshi repo）。
 - `site/`：網站（純 HTML/CSS/JS，沒有框架、不用建置工具）。`index.html`、`style.css`、`app.js`。讀同一層的 `races.json`。
-  - 部署：Cloudflare Pages 連 GitHub repo，Build command `cp output/races.json site/races.json`、output `site`。排程每次存回資料就會自動重新部署。
-  - 本機預覽：`cp output/races.json site/races.json` 後用 `.claude/launch.json` 的 `paoshi-site`（port 8787）。`site/races.json` 在 .gitignore。
-  - 路由用網址 hash：`#/` 列表、`#/race/<id>` 詳情。篩選是列表上的底部面板，篩選條件存在 localStorage。
+  - 部署：Cloudflare Pages 連 GitHub repo，Build command `python3 build_site.py`、output `site`。排程每次存回資料就會自動重新部署。
+  - `build_site.py`：複製 races.json，並為每場比賽產生靜態網頁 `site/race/<key>/index.html`（title、description、canonical、og、schema.org SportsEvent JSON-LD、預先寫好的詳情內容），加上 sitemap.xml、robots.txt。這些產生的檔案都在 .gitignore。
+  - 本機預覽：`python3 build_site.py` 後用 `.claude/launch.json` 的 `paoshi-site`（port 8787）。
+  - 網址：`/` 列表、`/race/<key>/` 詳情（真正的網址，站內用 pushState 換頁不重新載入；舊的 `#/race/<id>` 會自動轉成新網址）。資產路徑一律用絕對路徑（/app.js）。
+  - 靜態網頁的 #app 有 `data-prerendered`：資料載入前先顯示預先寫好的內容，載入後換成即時狀態。
+  - 篩選是列表上的底部面板，篩選條件存在 localStorage。
   - 報名狀態、剩幾天在瀏覽器依台灣時間的今天重算；比賽日已過的不顯示。
   - 「截止前提醒我／開報時提醒我」＝下載 .ics 行事曆檔（含提醒），不需要帳號或伺服器。
   - 搜尋只重畫結果、不重畫搜尋框，避免打斷注音選字。
   - 版面：手機（<768）單欄、底部篩選面板；iPad（≥768）卡片兩欄、搜尋與分頁同列、日曆與當天清單並排、篩選改置中視窗；桌機（≥1024）篩選常駐左側欄；≥1360 卡片三欄。詳情頁最寬 720–760px。
   - Buy Me a Coffee：`app.js` 最上面的 `BMC_SLUG` = `sean310`（buymeacoffee.com/sean310；空白就不顯示）。用一般連結按鈕，不用官方 script（它用 document.write，在動態畫面會壞）。出現在列表頁尾、詳情頁說明下方。
   - 兩種瀏覽方式：列表／日曆（列表正上方有文字的兩段式切換，記在 localStorage；刻意不用右上角圖示按鈕，因為不好被發現）。日曆可切「比賽日／報名截止日」，點日期看當天的賽事；圓點顏色＝報名狀態。
-- `tests/`：`python -m unittest discover tests`（51 個），用真實頁面片段當測試資料。改解析邏輯前後都要跑。
+- `tests/`：`python -m unittest discover tests`（54 個），用真實頁面片段當測試資料。改解析邏輯前後都要跑。
 - 2026-10-09 合併結果：跑者廣場 193、運動筆記 199（不含海外）→ 237 場（兩邊都有 155、只有運動筆記 44、只有跑者廣場 38）；報名中 70、快截止 13、即將開報 4、未知 30、已截止 120。
 
 ## 跑者廣場頁面結構（解析重點）
@@ -84,9 +87,10 @@
 
 ## 資料格式（races.json 每筆）
 
-`id, name, alt_names, date, start_time, location, address, county, region, distances[{label, km, category, fee, quota, quota_shared}], categories, organizer, registration{raw, start, end, start_at, end_at, status, days_left}, url, certifications, flag, postponed_from, issues, sources[{name, url, scraped_at}]`
+`id, key, name, alt_names, date, start_time, location, address, county, region, distances[{label, km, category, fee, quota, quota_shared}], categories, organizer, registration{raw, start, end, start_at, end_at, status, days_left}, url, certifications, flag, postponed_from, issues, sources[{name, url, scraped_at}]`
 
 - id = 日期＋賽名的 hash（合併時用跑者廣場的賽名）。
+- key = 穩定編號（有運動筆記就是 `biji-<cid>`，否則同 id），網站網址與歷史紀錄都用它。
 
 - category：full / half(20–22K) / 10k(9–20K) / short(<9K) / long(25–42K) / ultra / triathlon / relay / timed / virtual / other
 - `categories` 另外可能有 `trail`（越野）：兩個網站都沒這欄，`scraper.tag_trail` 用賽名判斷（越野、trail、山徑、天空跑、skyrun），合併後才加。

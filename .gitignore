@@ -2,3 +2,6 @@ __pycache__/
 output/source*.html
 .DS_Store
 site/races.json
+site/race/
+site/sitemap.xml
+site/robots.txt

@@ -1,8 +1,8 @@
 /* 跑事｜網頁程式
  * 讀 races.json（每天兩次由 GitHub Actions 更新），畫出三個畫面：
- *   #/            賽事列表
+ *   /                 賽事列表
  *   （篩選是列表上的底部面板）
- *   #/race/<id>   賽事詳情
+ *   /race/<key>/      賽事詳情（每場一個真正的網址，build_site.py 會預先產生靜態網頁給 Google）
  */
 (function () {
   'use strict';
@@ -153,7 +153,7 @@
 
   function load() {
     failed = false;
-    fetch('races.json', { cache: 'no-cache' })
+    fetch('/races.json', { cache: 'no-cache' })
       .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then((j) => { DATA = prepare(j); render(); })
       .catch(() => { failed = true; render(); });
@@ -219,7 +219,7 @@
   const feeText = (f) => f === 0 ? '免費' : 'NT$' + f.toLocaleString();
 
   function card(r) {
-    return `<a class="card" href="#/race/${encodeURIComponent(r.id)}">
+    return `<a class="card" href="/race/${encodeURIComponent(r.key || r.id)}/">
       <div class="date"><span class="mon">${Number(r.date.slice(5, 7))} 月</span><span class="day">${Number(r.date.slice(8, 10))}</span><span>週${weekday(r.date)}</span></div>
       <div class="card-body">
         <div class="title-row"><span class="name">${esc(r.name)}</span>${r.postponed_from ? '<span class="tag alert">已延期</span>' : ''}${r.trail ? '<span class="tag">越野</span>' : ''}${r.cert ? `<span class="cert">${CERT_LABEL[r.cert]}</span>` : ''}</div>
@@ -419,10 +419,15 @@
 
   // ---------- 畫面：詳情 ----------
   function renderDetail(id) {
-    if (!DATA) { $('#app').innerHTML = `<div class="list"><div class="notice">${failed ? '賽事資料載入失敗。' : '載入賽事中…'}</div></div>`; return; }
-    const r = DATA.races.find((x) => x.id === id);
+    if (!DATA) {
+      if ($('#app').dataset.prerendered) return;    // 靜態網頁已經有內容，等資料到了再換成即時狀態
+      $('#app').innerHTML = `<div class="list"><div class="notice">${failed ? '賽事資料載入失敗。' : '載入賽事中…'}</div></div>`;
+      return;
+    }
+    delete $('#app').dataset.prerendered;
+    const r = DATA.races.find((x) => x.key === id || x.id === id);
     if (!r) {
-      $('#app').innerHTML = `<div class="bar"><a class="icon-btn" href="#/" aria-label="返回列表">${ICON.back}</a></div>
+      $('#app').innerHTML = `<div class="bar"><a class="icon-btn" href="/" data-act="back" aria-label="返回列表">${ICON.back}</a></div>
         <div class="detail"><div class="notice">找不到這場比賽，可能已經結束或改了名稱。<br><button type="button" data-act="home">回到賽事列表</button></div></div>`;
       return;
     }
@@ -460,7 +465,7 @@
 
     $('#app').innerHTML = `
       <div class="bar">
-        <a class="icon-btn" href="#/" data-act="back" aria-label="返回列表">${ICON.back}</a>
+        <a class="icon-btn" href="/" data-act="back" aria-label="返回列表">${ICON.back}</a>
         <button type="button" class="icon-btn" data-act="share" aria-label="分享">${ICON.share}</button>
       </div>
       <main class="detail">
@@ -567,17 +572,28 @@
   // ---------- 路由與事件 ----------
   let listScroll = 0;
   let cameFromList = false;
+  const LIST_TITLE = '跑事｜台灣路跑賽事，現在還能報名哪些';
   function route() {
-    const m = location.hash.match(/^#\/race\/(.+)$/);
-    return m ? { page: 'detail', id: decodeURIComponent(m[1]) } : { page: 'list' };
+    const m = location.pathname.match(/^\/race\/([^/]+)\/?$/);
+    if (m) return { page: 'detail', id: decodeURIComponent(m[1]) };
+    const old = location.hash.match(/^#\/race\/(.+)$/);              // 舊網址 #/race/<id> 也認得
+    return old ? { page: 'detail', id: decodeURIComponent(old[1]) } : { page: 'list' };
   }
   function render() {
     const rt = route();
     $('#app').className = 'app ' + (rt.page === 'detail' ? 'is-detail' : 'is-list');
-    if (rt.page === 'detail') { sheetOpen = false; renderSheet(); renderDetail(rt.id); }
-    else { renderList(); renderSheet(); }
+    if (rt.page === 'detail') {
+      sheetOpen = false; renderSheet(); renderDetail(rt.id);
+      const r = DATA && DATA.races.find((x) => x.key === rt.id || x.id === rt.id);
+      if (r) {
+        document.title = `${r.name} 報名資訊｜跑事`;
+        if (location.hash && r.key) history.replaceState(null, '', `/race/${r.key}/`);   // 舊網址換成新網址
+      }
+    } else { document.title = LIST_TITLE; renderList(); renderSheet(); }
   }
-  window.addEventListener('hashchange', () => {
+  // 站內換頁不重新載入：網址照樣是真的 /race/<key>/，可以分享、可以被 Google 收錄
+  function go(url) { history.pushState(null, '', url); render(); }
+  window.addEventListener('popstate', () => {
     const rt = route();
     render();
     if (rt.page === 'list') { window.scrollTo(0, listScroll); cameFromList = false; }
@@ -589,7 +605,13 @@
   document.addEventListener('click', (e) => {
     const t = e.target.closest('[data-act],[data-tab],[data-dist],[data-date],[data-region],[data-day],[data-cal],[data-calby],[data-view]');
     if (!t) {
-      if (e.target.closest('a.card')) { listScroll = window.scrollY; cameFromList = true; }
+      const a = e.target.closest('a.card');
+      if (a && !e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {   // 一般點擊：站內換頁；按著 ⌘ 照樣開新分頁
+        e.preventDefault();
+        listScroll = window.scrollY; cameFromList = true;
+        go(a.getAttribute('href'));
+        window.scrollTo(0, 0);
+      }
       return;
     }
     const d = t.dataset;
@@ -606,7 +628,7 @@
       return refresh();
     }
     const rt = route();
-    const race = rt.page === 'detail' && DATA ? DATA.races.find((x) => x.id === rt.id) : null;
+    const race = rt.page === 'detail' && DATA ? DATA.races.find((x) => x.key === rt.id || x.id === rt.id) : null;
     switch (d.act) {
       case 'theme': return toggleTheme();
       case 'filter': sheetOpen = true; return renderSheet();
@@ -618,9 +640,11 @@
         return refresh();
       case 'cert': F.cert = !F.cert; return refresh();
       case 'reload': return load();
-      case 'home': location.hash = '#/'; return;
+      case 'home': e.preventDefault(); return go('/');
       case 'back':
-        if (cameFromList) { e.preventDefault(); history.back(); }     // 回到列表原本捲到的位置
+        e.preventDefault();
+        if (cameFromList) history.back();      // 回到列表原本捲到的位置
+        else go('/');
         return;
       case 'share': return race && share(race);
       case 'ics-race': return race && addRaceToCalendar(race);

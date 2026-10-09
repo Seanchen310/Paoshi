@@ -20,7 +20,7 @@
 
 `site/` 是給大家看的網頁，讀 `races.json` 畫出賽事列表、篩選、詳情。部署在 Cloudflare Pages：
 
-- Build command：`cp output/races.json site/races.json`
+- Build command：`python3 build_site.py`（複製資料，並為每場比賽產生一個獨立網頁＋sitemap，讓 Google 收錄）
 - Build output directory：`site`
 
 每次排程把新資料存回 repo，Cloudflare 就會自動重新部署。
