@@ -367,11 +367,7 @@
       </div>`;
   }
 
-  const bmcInline = () => BMC_SLUG
-    ? `<a class="bmc-inline" href="https://buymeacoffee.com/${encodeURIComponent(BMC_SLUG)}" target="_blank" rel="noopener" aria-label="請跑事喝杯咖啡">${ICON.coffee}<span>請跑事喝杯咖啡</span></a>`
-    : '';
   const footerHtml = () => `<footer class="foot">
-      ${bmcInline()}
       <p>資料來源：<a href="http://www.taipeimarathon.org.tw/contest.aspx" target="_blank" rel="noopener">跑者廣場</a>、<a href="https://running.biji.co/index.php?q=competition" target="_blank" rel="noopener">運動筆記</a>。<br>報名與最新內容以主辦單位官網為準。</p>
     </footer>`;
 
@@ -523,7 +519,6 @@
             <span class="f">${d.fee != null ? feeText(d.fee) : ''}</span></div>`).join('')}
         </div>${hasFee ? '' : '<p class="fine">報名費與名額請見主辦單位簡章。</p>'}</section>` : ''}
         ${conflict ? '<div class="warn">兩個資料來源的日期不一致，報名前請以主辦單位官網為準。</div>' : ''}
-        ${bmcInline()}
         <p class="fine">賽事資訊整理自${src}，報名與最新內容以主辦單位官網為準。</p>
       </main>
       <div class="actions">
@@ -664,6 +659,7 @@
         if (location.hash && r.key) history.replaceState(null, '', `/race/${r.key}/`);   // 舊網址換成新網址
       }
     } else { document.title = LIST_TITLE; renderList(); renderSheet(); }
+    placeFab();
   }
   // 站內換頁不重新載入：網址照樣是真的 /race/<key>/，可以分享、可以被 Google 收錄
   function go(url) { history.pushState(null, '', url); render(); }
@@ -742,20 +738,33 @@
     if (e.key === 'Escape' && (sheetOpen || calSheet)) { sheetOpen = false; calSheet = null; render(); }
   });
 
-  // 「請跑事喝杯咖啡」：手機＝右下角懸浮圓鈕（咖啡圖示＋「支持跑事」）；電腦＝頁尾資料來源上方的圓鈕（bmcInline，滑鼠移過去展開文字）
+  // 電腦版：咖啡按鈕右邊緣對齊日夜切換鈕的右緣（詳情頁沒有日夜鈕 → 對齊內容欄右緣）；手機維持距右邊 16px
+  function placeFab() {
+    const fab = $('.fab-bmc');
+    if (!fab) return;
+    if (!isWide()) { fab.style.right = ''; return; }
+    const anchor = $('[data-act="theme"]');
+    const edge = anchor ? anchor.getBoundingClientRect().right : $('#app').getBoundingClientRect().right - 16;
+    fab.style.right = Math.max(16, document.documentElement.clientWidth - edge) + 'px';
+  }
+
+  // 「請跑事喝杯咖啡」：手機＝右下角懸浮圓鈕（大咖啡杯＋弧形「支持跑事」）；電腦＝浮動圖示鈕，滑鼠移過去展開文字
   if (BMC_SLUG && !$('.fab-bmc')) {
     const a = document.createElement('a');
     a.className = 'fab-bmc';
     a.href = `https://buymeacoffee.com/${encodeURIComponent(BMC_SLUG)}`;
     a.target = '_blank'; a.rel = 'noopener';
     a.setAttribute('aria-label', '支持跑事：請跑事喝杯咖啡');
-    // 圓鈕：上面大咖啡杯，下面「支持跑事」沿著圓的下緣排成弧形
-    a.innerHTML = `<svg viewBox="0 0 64 64" aria-hidden="true">
-      <svg x="18" y="6" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 01-5 5H9a5 5 0 01-5-5V9zM17 10h1.5a2.5 2.5 0 010 5H17M8 3v3M12 3v3"/></svg>
-      <path id="fab-arc" d="M 7 32 A 25 25 0 0 0 57 32" fill="none"/>
-      <text font-size="9.5" font-weight="700" letter-spacing="1" fill="currentColor"><textPath href="#fab-arc" startOffset="50%" text-anchor="middle">支持跑事</textPath></text>
-    </svg>`;
+    // 手機：圓鈕，大咖啡杯置中、「支持跑事」沿圓的下緣排成弧形
+    // 電腦：咖啡圖示，滑鼠移過去向左展開「請跑事喝杯咖啡」
+    a.innerHTML = `<svg class="fab-round" viewBox="0 0 64 64" aria-hidden="true">
+      <svg x="16" y="13" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 01-5 5H9a5 5 0 01-5-5V9zM17 10h1.5a2.5 2.5 0 010 5H17M8 3v3M12 3v3"/></svg>
+      <path id="fab-arc" d="M 5 32 A 27 27 0 0 0 59 32" fill="none"/>
+      <text font-size="8.5" font-weight="700" letter-spacing="1" fill="currentColor"><textPath href="#fab-arc" startOffset="50%" text-anchor="middle">支持跑事</textPath></text>
+    </svg><span class="fab-wide" aria-hidden="true">${ICON.coffee}<em>請跑事喝杯咖啡</em></span>`;
     document.body.appendChild(a);
+    placeFab();
+    window.addEventListener('resize', placeFab);
     // 往下捲時藏起來（不擋內容），往上捲或回到頂端時再出現
     let lastY = window.scrollY;
     window.addEventListener('scroll', () => {
