@@ -182,6 +182,58 @@
   "organizer": "LAVA 鐵人公司",
   "signup_url": null
  },
+ "12859": {
+  "brochure_url": "https://lohasnet.tw/Huma2026/",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 21.0,
+    "label": "21K",
+    "name": "半馬組",
+    "quota": 3000,
+    "start": "06:30",
+    "time_limit": 240,
+    "time_limit_text": "4小時"
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 11.0,
+    "label": "11K",
+    "name": "挑戰組",
+    "quota": 2000,
+    "start": "06:40",
+    "time_limit": 150,
+    "time_limit_text": "2小時30分"
+   },
+   {
+    "fee": 800,
+    "gifts": "號碼布(含別針)、樂活計時晶片、紀念衣、完賽獎牌、成績證書、可愛雞造型娃娃、登山健行包、高級專業運動襪、礦泉水、餐點",
+    "km": 6.0,
+    "label": "6K",
+    "name": "樂活組",
+    "quota": 2000,
+    "start": "06:50",
+    "time_limit": 90,
+    "time_limit_text": "1小時30分"
+   },
+   {
+    "fee": 800,
+    "gifts": "號碼布(含別針)、樂活計時晶片、紀念衣、完賽獎牌、成績證書、可愛雞造型娃娃、登山健行包、高級專業運動襪、礦泉水、餐點",
+    "km": 4.0,
+    "label": "4K",
+    "name": "健走組",
+    "quota": 2000,
+    "start": "06:50",
+    "time_limit": 90,
+    "time_limit_text": "1小時30分"
+   }
+  ],
+  "organizer": "雲林縣虎馬路跑協會",
+  "signup_url": "https://signup.lohasnet.tw/signup/4192"
+ },
  "12887": {
   "brochure_url": "https://www.focusline.com.tw/261011IY",
   "fetched_at": "2026-10-10T09:39:37+08:00",
@@ -286,6 +338,58 @@
   "organizer": "臺南市鐵南人運動協會",
   "signup_url": "https://bao-ming.com/eb/content/6963#reg"
  },
+ "12890": {
+  "brochure_url": "https://bao-ming.com/eb/content/6913#32558",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 21.0,
+    "label": "21K",
+    "name": "燕窩組",
+    "quota": 1000,
+    "start": "06:00",
+    "time_limit": 240,
+    "time_limit_text": "4小時"
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 11.0,
+    "label": "11K",
+    "name": "雞精組",
+    "quota": 1000,
+    "start": "06:10",
+    "time_limit": 120,
+    "time_limit_text": "2小時"
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 6.0,
+    "label": "6K",
+    "name": "珍珠組",
+    "quota": 1000,
+    "start": "06:20",
+    "time_limit": 90,
+    "time_limit_text": "1.5小時"
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 2.0,
+    "label": "2K",
+    "name": "人蔘組",
+    "quota": 1000,
+    "start": "06:30",
+    "time_limit": 60,
+    "time_limit_text": "1小時"
+   }
+  ],
+  "organizer": "華陀扶元堂生藥科技股份有限公司",
+  "signup_url": "https://bao-ming.com/eb/content/6913#reg"
+ },
  "12891": {
   "brochure_url": null,
   "fetched_at": "2026-10-10T02:01:27+08:00",
@@ -386,6 +490,162 @@
   ],
   "organizer": "光圈整合行銷有限公司",
   "signup_url": "https://bao-ming.com/eb/content/6989#reg"
+ },
+ "12924": {
+  "brochure_url": "https://lohasnet.tw/Shuishang2026/",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 1100,
+    "gifts": "號碼布(含別針)、樂活計時晶片、機能排汗紀念衣、公共意外險、完賽獎牌、多功能兩用運動旅行包、專業運動襪、成績證書、麵包餐盒",
+    "km": 21.0,
+    "label": "21K",
+    "name": "半馬組",
+    "quota": 600,
+    "start": "06:00",
+    "time_limit": 240,
+    "time_limit_text": "4小時"
+   },
+   {
+    "fee": 900,
+    "gifts": "號碼布(含別針)、樂活計時晶片、機能排汗紀念衣、公共意外險、完賽獎牌、多功能兩用運動旅行包、成績證書、麵包餐盒",
+    "km": 10.0,
+    "label": "10K",
+    "name": "挑戰組",
+    "quota": 400,
+    "start": "06:20",
+    "time_limit": 180,
+    "time_limit_text": "3小時"
+   },
+   {
+    "fee": 700,
+    "gifts": "號碼布(含別針)、樂活計時晶片、機能排汗紀念衣、公共意外險、完賽獎牌、多功能兩用運動旅行包、成績證書、麵包餐盒",
+    "km": 5.0,
+    "label": "5K",
+    "name": "樂活+健走組",
+    "quota": null,
+    "start": "06:40",
+    "time_limit": 120,
+    "time_limit_text": "2小時"
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 5.5,
+    "label": "5.5K",
+    "name": "健走組",
+    "quota": null,
+    "start": null,
+    "time_limit": null,
+    "time_limit_text": null
+   }
+  ],
+  "organizer": "嘉義縣水上鄉公所",
+  "signup_url": "https://signup.lohasnet.tw/signup/4259"
+ },
+ "12926": {
+  "brochure_url": "https://www.ctrun.com.tw/Activity/?EventMain_ID=301&Article_ID=6216&VT=FCB5193FDA2F8BB92D6466D3DD327EAE",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 1100,
+    "gifts": "紀念上衣、號碼布、晶片、緹花浴巾、草農米、米粉、完賽餐點(礦泉水)、完賽便當、完賽獎牌、完賽證書",
+    "km": 42.195,
+    "label": "42.195K",
+    "name": "全程馬拉松",
+    "quota": 1000,
+    "start": "06:10",
+    "time_limit": 450,
+    "time_limit_text": "7.5小時"
+   },
+   {
+    "fee": 1100,
+    "gifts": "紀念上衣、號碼布、晶片、緹花毛巾、草農米、米粉、完賽餐點(礦泉水)、完賽餐盒、完賽獎牌、完賽證書",
+    "km": 22.0,
+    "label": "22K",
+    "name": "半程馬拉松",
+    "quota": 1000,
+    "start": "06:10",
+    "time_limit": 240,
+    "time_limit_text": "4小時"
+   },
+   {
+    "fee": 900,
+    "gifts": "紀念上衣、號碼布、晶片、緹花毛巾、草農米、米粉、完賽餐點(礦泉水)、完賽餐盒、完賽獎牌、完賽證書",
+    "km": 10.0,
+    "label": "10K",
+    "name": "挑戰組",
+    "quota": 800,
+    "start": "06:20",
+    "time_limit": null,
+    "time_limit_text": null
+   },
+   {
+    "fee": 700,
+    "gifts": "紀念上衣、號碼布、緹花毛巾、草農米、米粉、完賽餐點(礦泉水)、完賽餐盒、完賽獎牌、完賽證書",
+    "km": 5.0,
+    "label": "5K",
+    "name": "健康組",
+    "quota": 500,
+    "start": "06:20",
+    "time_limit": 90,
+    "time_limit_text": "1小時30分"
+   }
+  ],
+  "organizer": "南投縣馬拉松協會 、 草屯鎮公所",
+  "signup_url": null
+ },
+ "12942": {
+  "brochure_url": "https://www.ctrun.com.tw/Activity?EventMain_ID=299",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 1300,
+    "gifts": "號碼布、別針、晶片、紀念上衣、完賽獎牌、成績證明、大浴巾、古早味滷麵、運動夾克",
+    "km": 42.0,
+    "label": "42K",
+    "name": "全馬組",
+    "quota": 500,
+    "start": "06:10",
+    "time_limit": 450,
+    "time_limit_text": "7.5小時"
+   },
+   {
+    "fee": 1000,
+    "gifts": "號碼布、別針、晶片、紀念上衣、完賽獎牌、成績證明、大浴巾、古早味滷麵、運動夾克",
+    "km": 21.0,
+    "label": "21K",
+    "name": "半馬組",
+    "quota": 500,
+    "start": "06:20",
+    "time_limit": 240,
+    "time_limit_text": "4小時"
+   },
+   {
+    "fee": 850,
+    "gifts": "號碼布、別針、晶片、紀念上衣、完賽獎牌、成績證明、大浴巾、古早味滷麵、運動夾克",
+    "km": 10.0,
+    "label": "10K",
+    "name": "樂活組",
+    "quota": 400,
+    "start": "06:30",
+    "time_limit": 150,
+    "time_limit_text": "2.5小時"
+   },
+   {
+    "fee": 650,
+    "gifts": "號碼布、別針、晶片、紀念上衣、完賽獎牌、成績證明、大浴巾、古早味滷麵、運動夾克",
+    "km": 5.0,
+    "label": "5K",
+    "name": "逍遙組",
+    "quota": 500,
+    "start": "06:45",
+    "time_limit": 90,
+    "time_limit_text": "1.5小時"
+   }
+  ],
+  "organizer": "台南市龍崎區文衡殿",
+  "signup_url": null
  },
  "12943": {
   "brochure_url": "https://www.focusline.com.tw/270228JK",
@@ -792,6 +1052,47 @@
   "organizer": "德成鞋業集團",
   "signup_url": null
  },
+ "12999": {
+  "brochure_url": "https://irunner.biji.co/CIMarathon2026?page=4839",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 1300,
+    "gifts": "紀念背心、號碼布、計時晶片、參賽須知、旅行衣保袋、賽事聯名襪、完賽獎牌、電子成績證書、完賽毛巾、完賽提袋、完賽餐點",
+    "km": 21.0,
+    "label": "21K",
+    "name": "半程馬拉松組",
+    "quota": 3500,
+    "start": "17:00",
+    "time_limit": 210,
+    "time_limit_text": "3.5小時"
+   },
+   {
+    "fee": 1000,
+    "gifts": "紀念衣、號碼布、計時晶片、參賽須知、旅行衣保袋、完賽獎牌、電子成績證書、完賽毛巾、完賽提袋、完賽餐點",
+    "km": 10.0,
+    "label": "10K",
+    "name": "漫遊健跑組",
+    "quota": 2500,
+    "start": "17:35",
+    "time_limit": 120,
+    "time_limit_text": "2小時"
+   },
+   {
+    "fee": 800,
+    "gifts": "紀念衣、號碼布、計時晶片、參賽須知、完賽獎牌、電子成績證書、完賽毛巾、完賽提袋、完賽餐點",
+    "km": 6.0,
+    "label": "6K",
+    "name": "親子星空組",
+    "quota": 2000,
+    "start": "18:10",
+    "time_limit": 90,
+    "time_limit_text": "1.5小時"
+   }
+  ],
+  "organizer": "中華航空股份有限公司",
+  "signup_url": "https://irunner.biji.co/CIMarathon2026/signup"
+ },
  "13002": {
   "brochure_url": "https://www.focusline.com.tw/270410JT?promo=running.biji",
   "fetched_at": "2026-10-10T02:08:43+08:00",
@@ -947,6 +1248,58 @@
   ],
   "organizer": "金車大塚股份有限公司 、 寶康行銷股份有限公司",
   "signup_url": "https://bao-ming.com/eb/content/7013#reg"
+ },
+ "13016": {
+  "brochure_url": null,
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 42.195,
+    "label": "42.195K",
+    "name": "全馬組",
+    "quota": null,
+    "start": null,
+    "time_limit": null,
+    "time_limit_text": null
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 21.0,
+    "label": "21K",
+    "name": "半馬組",
+    "quota": null,
+    "start": null,
+    "time_limit": null,
+    "time_limit_text": null
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 10.0,
+    "label": "10K",
+    "name": "10K",
+    "quota": null,
+    "start": null,
+    "time_limit": null,
+    "time_limit_text": null
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 3.0,
+    "label": "3K",
+    "name": "3K",
+    "quota": null,
+    "start": null,
+    "time_limit": null,
+    "time_limit_text": null
+   }
+  ],
+  "organizer": null,
+  "signup_url": null
  },
  "13024": {
   "brochure_url": null,
@@ -1339,6 +1692,47 @@
   "organizer": "高雄市政府運動發展局",
   "signup_url": null
  },
+ "13037": {
+  "brochure_url": null,
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 21.0,
+    "label": "21K",
+    "name": "半馬組",
+    "quota": null,
+    "start": null,
+    "time_limit": null,
+    "time_limit_text": null
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 10.0,
+    "label": "10K",
+    "name": "健康組",
+    "quota": null,
+    "start": null,
+    "time_limit": null,
+    "time_limit_text": null
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 5.0,
+    "label": "5K",
+    "name": "休閒組",
+    "quota": null,
+    "start": null,
+    "time_limit": null,
+    "time_limit_text": null
+   }
+  ],
+  "organizer": "北埔鄉公所",
+  "signup_url": null
+ },
  "13040": {
   "brochure_url": "https://lohasnet.tw/shenshourun2026/",
   "fetched_at": "2026-10-10T09:39:37+08:00",
@@ -1379,6 +1773,47 @@
   ],
   "organizer": "元太道堂 、 社團法人臺北市元太慈愛人文推廣協進會",
   "signup_url": "https://signup.lohasnet.tw/signup/4239"
+ },
+ "13044": {
+  "brochure_url": "https://www.ctrun.com.tw/Activity/?EventMain_ID=338&Article_ID=6857&VT=FCB5193FDA2F8BB92D6466D3DD327EAE",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 800,
+    "gifts": "紀念上衣(二選一)、完賽電子證書、完賽紀念獎牌、超細纖維速乾毛巾、台糖黑瑪卡蠔蜆精、台糖蜆精、餐盒、礦泉水",
+    "km": 21.0,
+    "label": "21K",
+    "name": "半馬組",
+    "quota": 700,
+    "start": "06:30",
+    "time_limit": 210,
+    "time_limit_text": "3小時30分"
+   },
+   {
+    "fee": 600,
+    "gifts": "紀念上衣(二選一)、完賽電子證書、完賽紀念獎牌、超細纖維速乾毛巾、台糖黑瑪卡蠔蜆精、台糖蜆精、餐盒、礦泉水",
+    "km": 11.0,
+    "label": "11K",
+    "name": "健康組",
+    "quota": 1100,
+    "start": "06:40",
+    "time_limit": 150,
+    "time_limit_text": "2小時30分"
+   },
+   {
+    "fee": 400,
+    "gifts": "紀念上衣(二選一)、完賽電子證書、完賽紀念獎牌、超細纖維速乾毛巾、台糖黑瑪卡蠔蜆精、台糖蜆精、餅乾、礦泉水",
+    "km": 3.0,
+    "label": "3K",
+    "name": "休閒組",
+    "quota": 1200,
+    "start": "06:50",
+    "time_limit": 90,
+    "time_limit_text": "1小時30分"
+   }
+  ],
+  "organizer": "台灣糖業股份有限公司",
+  "signup_url": "https://www.ctrun.com.tw/Activity?EventMain_ID=338&Register=true&ActionStr=Create&Team=false&VT=FCB5193FDA2F8BB92D6466D3DD327EAE"
  },
  "13049": {
   "brochure_url": "https://lohasnet.tw/Dianqi2026/",
@@ -1618,6 +2053,58 @@
   "organizer": "桃園市大園區公所 、 桃園市觀音區公所",
   "signup_url": "https://bao-ming.com/eb/content/7047#reg"
  },
+ "13060": {
+  "brochure_url": "https://bao-ming.com/eb/content/7044#32985",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 30.0,
+    "label": "30K",
+    "name": "LV4 高手組",
+    "quota": 300,
+    "start": "06:30",
+    "time_limit": 600,
+    "time_limit_text": "10小時"
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 28.0,
+    "label": "28K",
+    "name": "LV3 進階組",
+    "quota": 300,
+    "start": "07:00",
+    "time_limit": 540,
+    "time_limit_text": "9小時"
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 19.3,
+    "label": "19.3K",
+    "name": "LV2 挑戰組",
+    "quota": 300,
+    "start": "08:00",
+    "time_limit": 480,
+    "time_limit_text": "8小時"
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 19.3,
+    "label": "19.3K",
+    "name": "LV2 挑戰組",
+    "quota": 300,
+    "start": "08:00",
+    "time_limit": 480,
+    "time_limit_text": "8小時"
+   }
+  ],
+  "organizer": "台灣龍虎鳳越野協會",
+  "signup_url": "https://bao-ming.com/eb/content/7044#reg"
+ },
  "13065": {
   "brochure_url": null,
   "fetched_at": "2026-10-10T02:08:43+08:00",
@@ -1628,6 +2115,25 @@
     "km": 21.0,
     "label": "21K",
     "name": "半馬組",
+    "quota": null,
+    "start": null,
+    "time_limit": null,
+    "time_limit_text": null
+   }
+  ],
+  "organizer": null,
+  "signup_url": null
+ },
+ "13066": {
+  "brochure_url": null,
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 3.5,
+    "label": "3.5K",
+    "name": "3.5K",
     "quota": null,
     "start": null,
     "time_limit": null,
@@ -1886,6 +2392,25 @@
   "organizer": "新營太子宮太子爺廟管理委員會",
   "signup_url": "https://signup.lohasnet.tw/signup/4260"
  },
+ "13075": {
+  "brochure_url": "https://lohasnet.tw/YuanLinLionsClub2026/",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 350,
+    "gifts": "號碼布(含別針)、紀念衣、摸彩券1張、300萬公共意外險、專屬提袋、運動毛巾、多功能環保碗",
+    "km": 5.0,
+    "label": "5K",
+    "name": "樂活組",
+    "quota": 6500,
+    "start": "07:00",
+    "time_limit": 90,
+    "time_limit_text": "1小時30分"
+   }
+  ],
+  "organizer": "彰化縣員林獅子會",
+  "signup_url": "https://signup.lohasnet.tw/signup/4261"
+ },
  "13076": {
   "brochure_url": null,
   "fetched_at": "2026-10-10T02:08:43+08:00",
@@ -1914,6 +2439,47 @@
    }
   ],
   "organizer": "統一超商股份有限公司",
+  "signup_url": null
+ },
+ "13078": {
+  "brochure_url": "https://www.focusline.com.tw/261018LI",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 1200,
+    "gifts": "活動紀念衣、號碼布(含別針)、成績證明、獎牌、600cc 水、運動毛巾、運動襪、保冷袋",
+    "km": 21.0,
+    "label": "21K",
+    "name": "半馬組",
+    "quota": null,
+    "start": "06:30",
+    "time_limit": 240,
+    "time_limit_text": "４小時"
+   },
+   {
+    "fee": 900,
+    "gifts": "活動紀念衣、號碼布(含別針)、成績證明、獎牌、600cc 水、運動毛巾、運動襪、露營杯",
+    "km": 12.0,
+    "label": "12K",
+    "name": "挑戰組",
+    "quota": null,
+    "start": "06:35",
+    "time_limit": 210,
+    "time_limit_text": "3.5小時"
+   },
+   {
+    "fee": 600,
+    "gifts": "活動紀念衣、號碼布(含別針)、成績證明、獎牌、600cc 水、運動毛巾、運動襪",
+    "km": 5.0,
+    "label": "5K",
+    "name": "親子組",
+    "quota": null,
+    "start": "06:40",
+    "time_limit": 120,
+    "time_limit_text": "2小時"
+   }
+  ],
+  "organizer": "臺東縣達仁鄉公所",
   "signup_url": null
  },
  "13082": {
@@ -1956,6 +2522,58 @@
   ],
   "organizer": "樂敗精品",
   "signup_url": "https://irunner.biji.co/2026Lovebuy/signup"
+ },
+ "13087": {
+  "brochure_url": "https://bao-ming.com/eb/content/7087#33080",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 1100,
+    "gifts": "大會紀念衫、晶片號碼布、寄物卡、完成獎牌、電子證書、運動毛巾、終點餐、完賽禮",
+    "km": 42.0,
+    "label": "42K",
+    "name": "全程馬拉松組",
+    "quota": 1000,
+    "start": "06:00",
+    "time_limit": 420,
+    "time_limit_text": "7小時"
+   },
+   {
+    "fee": 1000,
+    "gifts": "大會紀念衫、晶片號碼布、寄物卡、完成獎牌、電子證書、運動毛巾、終點餐、完賽禮",
+    "km": 21.0,
+    "label": "21K",
+    "name": "半程馬拉松組",
+    "quota": 1000,
+    "start": "06:20",
+    "time_limit": 240,
+    "time_limit_text": "4小時"
+   },
+   {
+    "fee": 900,
+    "gifts": "大會紀念衫、晶片號碼布、寄物卡、完成獎牌、電子證書、運動毛巾、終點餐、完賽禮",
+    "km": 10.0,
+    "label": "10K",
+    "name": "健跑組",
+    "quota": 1000,
+    "start": "06:40",
+    "time_limit": 180,
+    "time_limit_text": "3小時"
+   },
+   {
+    "fee": 700,
+    "gifts": "紀念衫、號碼布、寄物卡、完成獎牌、電子證書、運動毛巾、終點餐、完賽禮",
+    "km": 5.0,
+    "label": "5K",
+    "name": "休閒組",
+    "quota": 500,
+    "start": "06:50",
+    "time_limit": 120,
+    "time_limit_text": "2小時"
+   }
+  ],
+  "organizer": "國立聯合大學",
+  "signup_url": "https://bao-ming.com/eb/content/7087#reg"
  },
  "13095": {
   "brochure_url": "https://bao-ming.com/eb/content/7164#33596",
@@ -2008,6 +2626,36 @@
   ],
   "organizer": "光圈整合行銷有限公司 、 東成醬油 、 府城同濟會",
   "signup_url": "https://bao-ming.com/eb/content/7164#reg"
+ },
+ "13102": {
+  "brochure_url": "https://lohasnet.tw/LaborRun2026/",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 600,
+    "gifts": "號碼布暨摸彩券（含別針、寄物專用卡）、樂活計時晶片、紀念T-SHIRT、電子完賽證書、茄芷袋、擦手巾、運動毛巾、抱枕",
+    "km": 10.0,
+    "label": "10K",
+    "name": "競賽組",
+    "quota": 1600,
+    "start": "06:40",
+    "time_limit": null,
+    "time_limit_text": null
+   },
+   {
+    "fee": 300,
+    "gifts": "號碼布暨摸彩券（含別針、寄物專用卡）、紀念T-SHIRT、電子完賽證書、茄芷袋、擦手巾、小方巾",
+    "km": 3.0,
+    "label": "3K",
+    "name": "休閒組",
+    "quota": 1600,
+    "start": "06:50",
+    "time_limit": null,
+    "time_limit_text": null
+   }
+  ],
+  "organizer": "新北市政府勞工局",
+  "signup_url": "https://signup.lohasnet.tw/signup/4235"
  },
  "13103": {
   "brochure_url": null,
@@ -2142,6 +2790,47 @@
   ],
   "organizer": "神豐國際同濟會",
   "signup_url": "https://signup.lohasnet.tw/signup/4273"
+ },
+ "13108": {
+  "brochure_url": "https://bao-ming.com/eb/content/7035#33185",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 1180,
+    "gifts": null,
+    "km": 21.0,
+    "label": "21K",
+    "name": "21K",
+    "quota": 800,
+    "start": "14:00",
+    "time_limit": 180,
+    "time_limit_text": "3小時"
+   },
+   {
+    "fee": 1080,
+    "gifts": null,
+    "km": 10.0,
+    "label": "10K",
+    "name": "10K",
+    "quota": 2000,
+    "start": "14:15",
+    "time_limit": 140,
+    "time_limit_text": "2小時20分"
+   },
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 4.0,
+    "label": "4K",
+    "name": "4K",
+    "quota": null,
+    "start": "14:30",
+    "time_limit": 70,
+    "time_limit_text": "1小時10分"
+   }
+  ],
+  "organizer": "美麗佳人",
+  "signup_url": "https://bao-ming.com/eb/content/7035#reg"
  },
  "13109": {
   "brochure_url": "https://bao-ming.com/eb/content/7110#33217",
@@ -2575,6 +3264,25 @@
   "organizer": "竹山鎮公所",
   "signup_url": null
  },
+ "13128": {
+  "brochure_url": "https://www.eventpal.com.tw/FOAS/actions/ActivityIndex.action?showTabContent&seqno=6baf90ce-a519-462c-b169-8a708432b37d",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 1180,
+    "gifts": "紀念運動衫、號碼布、摸彩券、完走紀念錢母、完走證書、星光饗宴呷辦桌",
+    "km": 4.0,
+    "label": "4K",
+    "name": "歡樂辦桌組",
+    "quota": 300,
+    "start": "15:00",
+    "time_limit": 120,
+    "time_limit_text": "2小時"
+   }
+  ],
+  "organizer": "聯網國際資訊股份有限公司",
+  "signup_url": "https://www.eventpal.com.tw/FOAS/actions/OnlineApply.action?seqno=0bf7d35b-8b02-4d36-9c50-466b22af6f7e"
+ },
  "13129": {
   "brochure_url": "https://www.taipeicitymarathon.com/breakfastrun.php",
   "fetched_at": "2026-10-10T02:01:27+08:00",
@@ -2604,6 +3312,47 @@
   ],
   "organizer": "臺北市政府 、 中華民國田徑協會 、 中華民國路跑協會",
   "signup_url": "https://www.sportsnet.org.tw/2026_TPE/"
+ },
+ "13132": {
+  "brochure_url": "https://www.ctrun.com.tw/Activity/?EventMain_ID=354&Article_ID=7218",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 880,
+    "gifts": "慢跑上衣、運動毛巾、運動中筒襪、號碼布、計時晶片、電子選手須知、限定托特包、完賽紀念獎牌、完賽電子證書",
+    "km": 21.0,
+    "label": "21K",
+    "name": "半馬組",
+    "quota": null,
+    "start": "06:00",
+    "time_limit": 210,
+    "time_limit_text": "3小時30分"
+   },
+   {
+    "fee": 7800,
+    "gifts": "慢跑上衣、運動毛巾、運動中筒襪、號碼布、計時晶片、電子選手須知、限定托特包、完賽紀念獎牌、完賽電子證書",
+    "km": 10.5,
+    "label": "10.5K",
+    "name": "迷你馬組",
+    "quota": null,
+    "start": "06:10",
+    "time_limit": 150,
+    "time_limit_text": "2小時30分"
+   },
+   {
+    "fee": 580,
+    "gifts": "慢跑上衣、運動毛巾、號碼布、電子選手須知、限定托特包、完賽紀念獎牌、完賽電子證書",
+    "km": 6.0,
+    "label": "6K",
+    "name": "Happy Run休閒組",
+    "quota": null,
+    "start": "06:20",
+    "time_limit": 90,
+    "time_limit_text": "1小時30分"
+   }
+  ],
+  "organizer": "臺灣港務股份有限公司",
+  "signup_url": "https://www.ctrun.com.tw/Activity?EventMain_ID=354&Register=true&ActionStr=Create&Team=false"
  },
  "13135": {
   "brochure_url": null,
@@ -2645,6 +3394,47 @@
   ],
   "organizer": null,
   "signup_url": null
+ },
+ "13136": {
+  "brochure_url": "https://www.focusline.com.tw/261024HY",
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": 1000,
+    "gifts": "活動紀念衣、號碼布、晶片、別針、成績證明、完賽獎牌、完賽餐盒、紀念毛巾、薑黃肥皂、紀念濁水米、紀念袖套、紀念鋼杯、紀念提袋、紀念野餐墊",
+    "km": 21.0,
+    "label": "21K",
+    "name": "松柏勇者組",
+    "quota": null,
+    "start": "06:30",
+    "time_limit": 210,
+    "time_limit_text": "3.5小時"
+   },
+   {
+    "fee": 800,
+    "gifts": "活動紀念衣、號碼布、晶片、別針、成績證明、完賽獎牌、完賽餐盒、紀念毛巾、薑黃肥皂、紀念濁水米、紀念袖套、紀念鋼杯、紀念野餐籃",
+    "km": 11.0,
+    "label": "11K",
+    "name": "茶香挑戰組",
+    "quota": null,
+    "start": "06:40",
+    "time_limit": 150,
+    "time_limit_text": "2.5小時"
+   },
+   {
+    "fee": 600,
+    "gifts": "活動紀念衣、號碼布、晶片、別針、成績證明、完賽獎牌、完賽餐盒、紀念毛巾、薑黃肥皂、紀念濁水米、紀念袖套、紀念鋼杯、紀念野餐籃",
+    "km": 6.0,
+    "label": "6K",
+    "name": "祈福樂跑組",
+    "quota": null,
+    "start": "06:50",
+    "time_limit": 90,
+    "time_limit_text": "1.5小時"
+   }
+  ],
+  "organizer": "名間鄉公所",
+  "signup_url": "https://www.focusline.com.tw/261024HY/personal"
  },
  "13137": {
   "brochure_url": "https://lohasnet.tw/Sunfar2027/",
@@ -4074,6 +4864,25 @@
    }
   ],
   "organizer": "彰化縣體育會 、 台灣柏釧企業股份有限公司",
+  "signup_url": null
+ },
+ "13185": {
+  "brochure_url": null,
+  "fetched_at": "2026-10-10T23:49:48+08:00",
+  "groups": [
+   {
+    "fee": null,
+    "gifts": null,
+    "km": 10.125,
+    "label": "10.125K",
+    "name": "10.125K",
+    "quota": null,
+    "start": null,
+    "time_limit": 80,
+    "time_limit_text": "80分鐘"
+   }
+  ],
+  "organizer": "嘉義縣健康生活館",
   "signup_url": null
  },
  "13188": {
